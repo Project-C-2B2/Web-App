@@ -11,17 +11,17 @@
     <body>
         {% block body %}
             {% block nav %}{% endblock %}
-        {% endblock %}
+            {% endblock %}
         {% block javascripts %}
             <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
             <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>
             <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css" rel="stylesheet" />
             <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
-        {% block scripts %}
-            <script>
-                $('select[data-select="true"]').select2();
-            </script>
-        {% endblock %}
+            {% block scripts %}
+                <script>
+                    $('select[data-select="true"]').select2();
+                </script>
+            {% endblock %}
         {% endblock %}
     </body>
 </html>
