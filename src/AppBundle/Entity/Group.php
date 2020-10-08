@@ -3,13 +3,16 @@
 
 namespace AppBundle\Entity;
 
+
+use AppBundle\Entity\Groups\GroupsInUserAssociation;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
+ * @ORM\Table(name="fos_groups")
  */
-class Meeting
+class Group
 {
     /**
      * @ORM\Id()
@@ -24,29 +27,18 @@ class Meeting
     private $name;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text", nullable=false)
      */
     private $description;
 
     /**
-     * @ORM\Column(type="datetime", nullable=false)
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Groups\GroupsInUserAssociation", mappedBy="groups", cascade={"persist"})
      */
-    private $dateTime;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     */
-    private $location;
-
-    /**
-     * @ORM\OneToMany(targetEntity="User", mappedBy="id", cascade={"persist"})
-     */
-    private $attendees;
-
+    private $groupsInUserAssociation;
 
     public function __construct()
     {
-        $this->attendees = new ArrayCollection();
+        $this->groupsInUserAssociation = new ArrayCollection();
     }
 
     /**
@@ -100,56 +92,28 @@ class Meeting
     /**
      * @return mixed
      */
-    public function getDateTime()
+    public function getGroupsInUserAssociation()
     {
-        return $this->dateTime;
+        return $this->groupsInUserAssociation;
     }
 
     /**
-     * @param mixed $dateTime
+     * @param mixed $chars
      */
-    public function setDateTime($dateTime)
+    public function setGroupsInUserAssociation($groupsInUserAssociation)
     {
-        $this->dateTime = $dateTime;
+        $this->groupsInUserAssociation = $groupsInUserAssociation;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLocation()
+    public function addGroupsInUserAssociation(GroupsInUserAssociation $groupsInUserAssociation)
     {
-        return $this->location;
+        $this->groupsInUserAssociation->add($groupsInUserAssociation);
+        return $this;
     }
 
-    /**
-     * @param mixed $location
-     */
-    public function setLocation($location)
+    public function removeGroupsInUserAssociation(GroupsInUserAssociation $groupsInUserAssociation)
     {
-        $this->location = $location;
+        $this->groupsInUserAssociation->removeElement($groupsInUserAssociation);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAttendees()
-    {
-        return $this->attendees;
-    }
-
-    /**
-     * @param mixed $attendees
-     */
-    public function setAttendees($attendees)
-    {
-        $this->attendees = $attendees;
-    }
-
-    public function addAttendee(User $user) {
-        $this->attendees->add($user);
-    }
-
-    public function removeAttendee(User $user) {
-        $this->attendees->remove($user);
-    }
 }

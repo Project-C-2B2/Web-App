@@ -4,6 +4,7 @@
 namespace AppBundle\Entity;
 
 
+use AppBundle\Entity\Groups\GroupsInUserAssociation;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as FosUser;
@@ -18,12 +19,12 @@ class User extends FosUser
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer", length=25, nullable=false)
      */
-    private $id;
+    protected $id;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Groups\GroupsInUserAssociation", mappedBy="user", cascade={"persist"})
      */
-    private $groups; // TODO NEEDS TO BE REVAMPED and improved ofc
+    private $groupsInUserAssociation;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -36,10 +37,105 @@ class User extends FosUser
      */
     private $lastCourseFollowed;
 
+
     public function __construct()
     {
         Parent::__construct();
 
-        $this->groups = new ArrayCollection();
+        $this->groupsInUserAssociation = new ArrayCollection();
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        $this->setUsername($email);
+        $this->setUsernameCanonical($email);
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGroupsInUserAssociation()
+    {
+        return $this->groupsInUserAssociation;
+    }
+
+    /**
+     * @param mixed $chars
+     */
+    public function setGroupsInUserAssociation($groupsInUserAssociations)
+    {
+        $this->groupsInUserAssociation = $groupsInUserAssociations;
+    }
+
+    public function addGroupsInUserAssociation(GroupsInUserAssociation $groupsInUserAssociation)
+    {
+        $this->groupsInUserAssociation->add($groupsInUserAssociation);
+        return $this;
+    }
+
+    public function removeGroupsInUserAssociation(GroupsInUserAssociation $groupsInUserAssociation)
+    {
+        $this->groupsInUserAssociation->removeElement($groupsInUserAssociation);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastActivityDate()
+    {
+        return $this->lastActivityDate;
+    }
+
+    /**
+     * @param mixed $lastActivityDate
+     */
+    public function setLastActivityDate($lastActivityDate)
+    {
+        $this->lastActivityDate = $lastActivityDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastCourseFollowed()
+    {
+        return $this->lastCourseFollowed;
+    }
+
+    /**
+     * @param mixed $lastCourseFollowed
+     */
+    public function setLastCourseFollowed($lastCourseFollowed)
+    {
+        $this->lastCourseFollowed = $lastCourseFollowed;
     }
 }
