@@ -18,4 +18,14 @@ class EmployeeController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
     }
+    /**
+     * @Route("/employee/login", name="Employee_Login")
+     */
+    public function employeeLoginAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('employeeLogin/login.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        ]);
+    }
 }
