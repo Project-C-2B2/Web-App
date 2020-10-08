@@ -138,4 +138,9 @@ class User extends FosUser
     {
         $this->lastCourseFollowed = $lastCourseFollowed;
     }
+
+    public function __toString()
+    {
+        return $this->getUsername();
+    }
 }

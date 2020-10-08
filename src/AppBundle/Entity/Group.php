@@ -32,7 +32,7 @@ class Group
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Groups\GroupsInUserAssociation", mappedBy="groups", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Groups\GroupsInUserAssociation", mappedBy="group", cascade={"persist"})
      */
     private $groupsInUserAssociation;
 
