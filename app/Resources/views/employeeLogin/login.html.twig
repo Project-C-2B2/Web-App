@@ -1,11 +1,18 @@
-<!DOCTYPE html>
-<html>
-<body>
+{% extends 'base.html.twig' %}
 
-<p style="text-align:center;color:rgba(108, 164, 57, 0.95);font-size:50px;font-family: 'Roboto', sans-serif;">Login</p>
-<username style="color:black;font-size:20px;font-family: 'Roboto', sans-serif;">
+{% block stylesheets %}
+    {{ parent() }}
+{#    <link rel="stylesheet" href="{{ asset('css/loginPage.css') }}">#}
+    <link rel="stylesheet" href="{{ asset('css/testu.css') }}"
+{% endblock %}
 
-    <login>
-    <label for="username">Username/Email:</label><br>
-
-</body>
+{% block body %}
+    <div class="login_title" ><p>CimMeets Sign in</p></div>
+    <div class="row">
+        <div class="col 12">
+            <h1>
+                {{ msg }}
+            </h1>
+        </div>
+    </div>
+{% endblock %}
