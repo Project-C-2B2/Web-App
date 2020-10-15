@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {#    <link rel="stylesheet" href="{{ asset('css/loginPage.css') }}">#}
+    <style>
+
+    </style>
+{% endblock %}
+
+
+{% block body %}
+    {% block header %}
+
+        <div class="title center-align "><p>CimMeets</p></div>
+        <div class="row">
+            <div class="col s3"></div>
+            <form class="col s6">
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <input placeholder="Required" id="first_name" type="text" class="validate">
+                        <label class="active" for="first_name">First Name</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input placeholder="Required" id="last_name" type="text" class="validate">
+                        <label class="active" for="last_name">Last Name</label>
+                    </div>
+                    <div class="input-field col s12 ">
+                        <input placeholder="Required" id="email" type="email" class="validate">
+                        <label class="active" for="email">Email</label>
+                    </div>
+                    <div class="input-field col s12 ">
+                        <input placeholder="Required" id="password" type="password" class="validate">
+                        <label class="active" for="password">Password</label>
+                    </div>
+                    <div class="input-field col s12 ">
+                        <input placeholder="Required" id="password" type="password" class="validate">
+                        <label class="active" for="password">Confirm Password</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+    {% endblock %}
+
+
+
+{% endblock %}
+{% block script %}
+<script>
+    $(document).ready(function() {
+        M.updateTextFields();
+    });
+    M.AutoInit();
+</script>
+{% endblock %}

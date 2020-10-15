@@ -2,17 +2,101 @@
 
 {% block stylesheets %}
     {{ parent() }}
-{#    <link rel="stylesheet" href="{{ asset('css/loginPage.css') }}">#}
-    <link rel="stylesheet" href="{{ asset('css/testu.css') }}"
+    {#    <link rel="stylesheet" href="{{ asset('css/loginPage.css') }}">#}
+    <style>
+        .cim-img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 0%;
+
+            width:200px;
+            height:200px;
+        }
+        .title{
+            color: grey;
+
+            font-family: 'Roboto', sans-serif;
+            font-size: 60px;
+        }
+        .login{
+            color: grey;
+            /*margin-top: 1%;*/
+            font-family: 'Roboto', sans-serif;
+            font-size: 60px;
+        }
+        .btn{
+            background: rgba(108, 164, 57, 0.95);
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            /*margin-top: 5%;*/
+            width:100px;
+            height:40px;
+        }
+        .row_username{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5%;
+            width:1000px;
+            height:40px;
+        }
+        .row_password{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 2%;
+            width:1000px;
+            height:40px;
+        }
+
+
+    </style>
 {% endblock %}
 
+
 {% block body %}
-    <div class="login_title" ><p>CimMeets Sign in</p></div>
+    {% block header %}
+        <div class="title center-align "><p>CimMeets</p></div>
+
+
+    {% endblock %}
+
     <div class="row">
-        <div class="col 12">
-            <h1>
-                {{ msg }}
-            </h1>
+            <div class="col s12">
+                <img class="cim-img" src="https://media.glassdoor.com/sqll/419019/cimsolutions-squarelogo-1562828823772.png">
+            </div>
+        </div>
+    <div class="row">
+        <div class="col s12">
+            <div class="login center-align "><p>Sign in</p></div>
         </div>
     </div>
+    <div class="row">
+        <div class="col s3"></div>
+        <form class="col s6">
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <img style="padding-right: 10px" class="material-icons prefix" src="https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png"></img>
+                    <input id="email" type="email" class="validate">
+                    <label class="active" for="email">Email</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <img style="padding-right: 10px; width: 43px; height:33px"class="material-icons prefix" src="https://cdn.onlinewebfonts.com/svg/img_398183.png"></img>
+{#                    <textarea id="icon_prefix2" class="materialize-textarea"></textarea>#}
+{#                    <label for="icon_prefix2">Password</label>#}
+                    <input id="password" type="password" class="validate">
+                    <label class="active" for="password">Password</label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <div class="btn">Sign in</div>
+        </div>
+    </div>
+
+
 {% endblock %}
