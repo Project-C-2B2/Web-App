@@ -14,17 +14,27 @@ class EmployeeController extends Controller
     public function indexAction(Request $request)
     {
         dump(ini_get('memory_limit'));
-        return $this->render('Employee/index.html.twig', [
+        return $this->render('Employee/homepage.html.twig', [
         ]);
     }
 
     /**
-     * @Route("/User/Meeting", name="employee-meetings")
-     */
+ * @Route("/User/Meetings", name="employee-meetings")
+ */
     public function meetingAction(Request $request)
     {
         dump(ini_get('memory_limit'));
         return $this->render('Employee/meetings.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/User/Agenda", name="employee-agenda")
+     */
+    public function agendaAction(Request $request)
+    {
+        dump(ini_get('memory_limit'));
+        return $this->render('Employee/agenda.html.twig', [
         ]);
     }
 }

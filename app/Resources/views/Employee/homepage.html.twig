@@ -3,35 +3,37 @@
 {% block body %}
     <head>
         <meta charset="UTF-8">
+{#        <meta http-equiv="refresh" content="0; URL='https://www.cimsolutions.nl/'" />#}
         <title>User Dashboard</title>
         <link rel="stylesheet">
     </head>
     <body>
-    <div class="wrapper">
-        <div class="nav-bar">
-            <div class="nav-logo">
-                <a href="{{ path('employee') }}"><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a>
+        <div class="wrapper">
+            <div class="nav-bar">
+                <div class="nav-logo"><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></div>
+                <div class="nav-items">
+                    <ul>
+                        <li><a href="{{ path('employee-meetings') }}">Meetings</a></li>
+                        <li><a href="{{ path('employee-agenda') }}">Agenda</a></li>
+                        <li><a href="#">Groups</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                    <button type="button" class="btn">ACCOUNT</button>
+                </div>
             </div>
-            <div class="nav-items">
-                <ul>
-                    <li><a href="{{ path('employee') }}">Home</a></li>
-                    <li><a href="{{ path('employee-agenda') }}">Agenda</a></li>
-                    <li><a href="#">Groups</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <button type="button" class="btn">ACCOUNT</button>
+            <div class="current-page">
+                <h2>Home</h2>
+            </div>
+            <div class="welcome-text">
+                <h1>Welcome to <span>CimMeets</span>!<br>Learn, create and make it work</h1>
+{#                <button type="button" class="btn" href="https://www.cimsolutions.nl/">LEARN MORE</button>#}
+                <form class="learn-more" action="https://www.cimsolutions.nl/">
+                    <button type="submit" class="btn">Learn more</button>
+                </form>
             </div>
         </div>
-        <div class="current-page">
-            <h2>Meetings</h2>
-        </div>
-        <div class="place-holder">
-            <img src="{{ asset("images/meetings-practice.jpg") }}">
-        </div>
-    </div>
     </body>
-
 
 {% endblock %}
 
@@ -90,15 +92,15 @@
             width: 100%;
         }
         .btn{
-            padding: 10px auto;
-            border: 0;
-            background: #69F0AE;
-            font-weight: bold;
-            cursor: pointer;
-            size: 50px;
+           padding: 10px auto;
+           border: 0;
+           background: #69F0AE;
+           font-weight: bold;
+           cursor: pointer;
+           size: 50px;
         }
         .nav-items .btn{
-            float: right;
+           float: right;
         }
         .welcome-text{
             margin: 80px;
@@ -111,9 +113,7 @@
             margin: 80px;
             color: #69F0AE;
         }
-        .place-holder{
-            margin: 30px;
-        }
     </style>
+
 
 {% endblock %}
