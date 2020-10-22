@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <head>
+        <meta charset="UTF-8">
+        <title>User Dashboard</title>
+        <link rel="stylesheet">
+    </head>
+    <body>
+
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Logo</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="sass.html">Sass</a></li>
+                <li><a href="badges.html">Components</a></li>
+                <li><a href="collapsible.html">JavaScript</a></li>
+            </ul>
+        </div>
+    </nav>
+        <header>
+            <div class="wrapper">
+                <div class="logo">
+                    <img src="{{ asset("images/Logo.png") }}" alt="Logo of cimsolutions">
+                </div>
+                <ul class="navigation">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Account</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </div>
+
+            <div class="welcome-text">
+                <h1>Dashboard</h1>
+            </div>
+        </header>composer require symfony/asset
+    </body>
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{#    <style>#}
+{#        * {#}
+{#            margin: 0;#}
+{#            padding: 0;#}
+{#        }#}
+{#        .wrapper{#}
+{#            width: 1170px;#}
+{#            margin:auto;#}
+
+{#        }#}
+{#        header{#}
+{#            background-color: #0d6aad;#}
+{#            height: 100vh;#}
+{#            -webkit-background-size: cover;#}
+{#            background-size: cover;#}
+{#            background-position: center center;#}
+{#            position: relative;#}
+{#        }#}
+{#        .nav-area{#}
+{#            float: right;#}
+{#            list-style: none;#}
+{#            margin-top: 30px;#}
+{#        }#}
+{#        .nav-area li{#}
+{#            display: inline-block;#}
+{#        }#}
+{#        .nav-area li a{#}
+{#            color: #0d6aad;#}
+{#            text-decoration: none;#}
+{#            padding: 5px 20px;#}
+{#            font-size: 14px;#}
+{#        }#}
+{#    </style>#}
+
+
+{% endblock %}
