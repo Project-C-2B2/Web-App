@@ -9,14 +9,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class EmployeeController extends Controller
 {
     /**
-     * @Route("/User/Dashboard", name="User-Dashboard")
+     * @Route("/User/Dashboard", name="employee")
      */
     public function indexAction(Request $request)
     {
         dump(ini_get('memory_limit'));
-        // replace this example code with whatever you need
-        return $this->render('User-Dashboard/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        return $this->render('Employee/index.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/User/Meeting", name="employee-meetings")
+     */
+    public function meetingAction(Request $request)
+    {
+        dump(ini_get('memory_limit'));
+        return $this->render('Employee/meetings.html.twig', [
         ]);
     }
 }
