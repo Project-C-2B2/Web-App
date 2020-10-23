@@ -25,10 +25,31 @@
             </div>
         </div>
         <div class="current-page">
-            <h2>Evaluatie</h2>
+            <h2>Feedback</h2>
         </div>
-        <div class="Evaluatie">
-
+        <div class="feedback">
+            <form action="#" method="#">
+                <h4>Form</h4>
+{#                <section class="text-question">#}
+{#                    <label for="textq">Type something</label>#}
+{#                    <textarea name="textq" id="textq" rows="" cols="">#}
+{#                </section>#}
+                <section class="slider-question">
+                    <label for="sliderq" >Slide it</label>
+                    <br>
+                    <span>Low</span>
+                    <input type="range" name="sliderq" id="sliderq" value="3" min="1" max="5">
+                    <span>High</span>
+                </section>
+                <section class="choice">
+                    <span>Choose something</span>
+                    <br>
+                    <input type="radio" name="choice" id="yes" value="yes">
+                    <label for="yes">Yes</label>
+                    <input type="radio" name="choice" id="no" value="yes">
+                    <label for="no">No</label>
+                </section>
+            </form>
         </div>
     </div>
     </body>
@@ -112,9 +133,14 @@
             margin: 80px;
             color: #69F0AE;
         }
-        .place-holder{
-            margin: 30px;
+        .feedback{
+            color: #fff;
         }
+        .feedback input[type=range]{
+            width: 200px;
+            height: 20px;
+        }
+        .feedback
     </style>
 
 {% endblock %}

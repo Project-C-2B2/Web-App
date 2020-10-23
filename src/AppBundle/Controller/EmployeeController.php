@@ -69,12 +69,12 @@ class EmployeeController extends Controller
     }
 
     /**
-     * @Route("/User/Evaluatie", name="employee-evaluatie")
+     * @Route("/User/Feedback", name="employee-feedback")
      */
-    public function evaluatieAction(Request $request)
+    public function feedbackAction(Request $request)
     {
         dump(ini_get('memory_limit'));
-        return $this->render('Employee/evaluatie.html.twig', [
+        return $this->render('Employee/feedback.html.twig', [
         ]);
     }
 }
