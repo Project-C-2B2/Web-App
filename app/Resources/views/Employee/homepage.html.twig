@@ -3,7 +3,6 @@
 {% block body %}
     <head>
         <meta charset="UTF-8">
-{#        <meta http-equiv="refresh" content="0; URL='https://www.cimsolutions.nl/'" />#}
         <title>User Dashboard</title>
         <link rel="stylesheet">
     </head>
@@ -15,9 +14,10 @@
                     <ul>
                         <li><a href="{{ path('employee-meetings') }}">Meetings</a></li>
                         <li><a href="{{ path('employee-agenda') }}">Agenda</a></li>
-                        <li><a href="#">Groups</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="{{ path('employee-groups') }}">Groups</a></li>
+                        <li><a href="{{ path('employee-evaluatie') }}">Evaluatie</a></li>
+                        <li><a href="{{ path('employee-about') }}">About</a></li>
+                        <li><a href="{{ path('employee-contact') }}">Contact</a></li>
                     </ul>
                     <button type="button" class="btn">ACCOUNT</button>
                 </div>
@@ -27,10 +27,13 @@
             </div>
             <div class="welcome-text">
                 <h1>Welcome to <span>CimMeets</span>!<br>Learn, create and make it work</h1>
-{#                <button type="button" class="btn" href="https://www.cimsolutions.nl/">LEARN MORE</button>#}
                 <form class="learn-more" action="https://www.cimsolutions.nl/">
                     <button type="submit" class="btn">Learn more</button>
                 </form>
+            </div>
+            <div class="upcoming-meetings">
+                <h2>These are your upcoming <span>Meetings</span>:</h2>
+
             </div>
         </div>
     </body>
@@ -111,6 +114,14 @@
         }
         .current-page{
             margin: 80px;
+            color: #69F0AE;
+        }
+        .upcoming-meetings{
+            margin: 80px;
+            color: #fff;
+        }
+
+        .upcoming-meetings span{
             color: #69F0AE;
         }
     </style>

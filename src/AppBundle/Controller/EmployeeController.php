@@ -37,4 +37,44 @@ class EmployeeController extends Controller
         return $this->render('Employee/agenda.html.twig', [
         ]);
     }
+
+    /**
+     * @Route("/User/Groups", name="employee-groups")
+     */
+    public function groupsAction(Request $request)
+    {
+        dump(ini_get('memory_limit'));
+        return $this->render('Employee/groups.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/User/About", name="employee-about")
+     */
+    public function aboutAction(Request $request)
+    {
+        dump(ini_get('memory_limit'));
+        return $this->render('Employee/about.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/User/Contact", name="employee-contact")
+     */
+    public function contactAction(Request $request)
+    {
+        dump(ini_get('memory_limit'));
+        return $this->render('Employee/contact.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/User/Evaluatie", name="employee-evaluatie")
+     */
+    public function evaluatieAction(Request $request)
+    {
+        dump(ini_get('memory_limit'));
+        return $this->render('Employee/evaluatie.html.twig', [
+        ]);
+    }
 }
