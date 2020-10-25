@@ -29,7 +29,7 @@ class GuestController extends Controller
         dump($this->em->getRepository(Meeting::class)->findAll());
 
         // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
+        return $this->render('default/homepage.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
     }
