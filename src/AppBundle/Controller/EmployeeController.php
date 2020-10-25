@@ -79,7 +79,7 @@ class EmployeeController extends Controller
         ]);
     }
     /**
-     * @Route("/employee/login", name="Employee_Login")
+     * @Route("/employee/login", name="employee_login")
      */
     public function employeeLoginAction(Request $request)
     {
