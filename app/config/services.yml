@@ -33,3 +33,7 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+
+    AppBundle\Form\Type\MeetingType:
+            arguments: ['@doctrine.orm.entity_manager']
+            tags: [form.type]

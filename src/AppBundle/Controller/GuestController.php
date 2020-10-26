@@ -29,9 +29,20 @@ class GuestController extends Controller
         dump($this->em->getRepository(Meeting::class)->findAll());
 
         // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
+        return $this->render('default/homepage.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
+    }
+    /**
+     * @Route("/create/account", name="create_account")
+     */
+    public function createAccountAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('createAccount/createAccount.html.twig', [
+            'msg' => 'here'
+        ]);
+    }
         }
         /**
          * @Route("/guestpage", name="guestpage")
