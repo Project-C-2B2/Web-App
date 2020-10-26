@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\Type\MeetingType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -74,8 +75,10 @@ class EmployeeController extends Controller
      */
     public function feedbackAction(Request $request)
     {
-        dump(ini_get('memory_limit'));
+        $form = $this->createForm(MeetingType::class);
         return $this->render('Employee/feedback.html.twig', [
+            'form' => $form->createView(),
+            'message' => "hallo"
         ]);
     }
     /**
