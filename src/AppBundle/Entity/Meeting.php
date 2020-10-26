@@ -152,4 +152,9 @@ class Meeting
     public function removeAttendee(User $user) {
         $this->attendees->remove($user);
     }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

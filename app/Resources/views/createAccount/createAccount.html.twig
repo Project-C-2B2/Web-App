@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>#}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+
+        body{
+            -webkit-text-fill-color: #646464;
+            font-family: 'Roboto', sans-serif;
+        }
+        input{
+            -webkit-text-fill-color: #646464;
+        }
+        .textCreateAccount{
+            font-size: 40px;
+        }
+        .btn{
+            background: rgba(108, 164, 57, 0.95);
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width:100px;
+            height:40px;
+        }
+
+        .nav-wrapper{
+            background: rgb(196, 196, 196);
+        }
+        .logo-cim-Meets{
+            margin-top: 0.4%;
+            margin-left: 0.5%;
+        }
+
+    </style>
+{% endblock %}
+
+
+{% block body %}
+    <nav>
+        <div class="nav-wrapper">
+            <img src="https://i.ibb.co/hmYS1rD/Logocimmeetsnocaps.png" class="logo-cim-Meets" ></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="{{ path('employee') }}" style="color: #646464; font-weight: bold;">Home</a></li>
+                <li><a href="{{ path('employee_login') }}" style="color: #646464; font-weight: bold;">Sign in</a></li>
+            </ul>
+        </div>
+    </nav>
+    {% block header %}
+
+        <div class="textCreateAccount center-align "><p>Create an account</p></div>
+
+        <div class="row">
+            <div class="col s3"></div>
+            <form class="col s6">
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <input placeholder="Enter your first name" id="first_name" type="text" class="validate">
+                        <label class="active" for="first_name">First Name</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input placeholder="Enter your last name" id="last_name" type="text" class="validate">
+                        <label class="active" for="last_name">Last Name</label>
+                    </div>
+                    <div class="input-field col s12 ">
+                        <input placeholder="Enter a valid e-mail address" id="email" type="email" class="validate">
+                        <label class="active" for="email">Email</label>
+                    </div>
+                    <div class="input-field col s12 ">
+                        <input minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter password" id="password" type="password" name="password" onkeyup='check();' class="validate">
+
+                        <label class="active" for="password">Password</label>
+                        <span class="helper-text">Minimum of 8 characters | Use a mix of upper and lower case characters | Use at least 1 number</span>
+                    </div>
+                    <div class="input-field col s12 ">
+                        <input minlength="8" placeholder="Repeat password" name="confirm_password" id="confirm_password" type="password" onkeyup='check();' class="validate">
+                        <label class="active" for="password">Confirm Password</label>
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="col s12">
+                    <div class="btn">Register</div>
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}
+
+
+
+{% endblock %}
+{% block script %}
+    <script>
+        $(document).ready(function() {
+            M.updateTextFields();
+        });
+        M.AutoInit();
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+{% endblock %}

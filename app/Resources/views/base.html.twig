@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Web-App : Base{% endblock %}</title>
+
         {% block stylesheets %}
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         {% endblock %}
@@ -20,7 +20,12 @@
             {% block scripts %}
                 <script>
                     $('select[data-select="true"]').select2();
+                    $(document).ready(function() {
+                        M.updateTextFields();
+                    });
+
                 </script>
+
             {% endblock %}
         {% endblock %}
     </body>
