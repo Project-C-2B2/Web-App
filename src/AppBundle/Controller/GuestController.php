@@ -39,6 +39,18 @@ class GuestController extends Controller
         return $this->render('default/index.html.twig', [
             'msg' => 'here'
         ]);
+        }
+        /**
+         * @Route("/guestpage", name="guestpage")
+         */
+        public function guestAction(Request $request)
+        {
+        // replace this example code with whatever you need
+        return $this->render('default/index.html.twig', [
+            'msg' => 'here'
+        ]);
+        }
+
     }
 
     /**
