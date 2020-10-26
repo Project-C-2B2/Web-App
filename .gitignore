@@ -8,3 +8,5 @@ var/
 .idea/
 
 app/config/parameters.yml
+
+src/AppBundle/Controller/ManagerController.php
