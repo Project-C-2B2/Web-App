@@ -6,6 +6,7 @@ use AppBundle\Entity\Group;
 use AppBundle\Entity\Meeting;
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -44,17 +45,26 @@ class GuestController extends Controller
             'msg' => 'here'
         ]);
     }
+
+    /**
+     * @Route("/login", name="login")
+     */
     public function loginAction(AuthenticationUtils $authenticationUtils)
     {
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
+//        if (!is_null($this->getUser()))
+//            return $this->redirectToRoute('dashboard');
 
-        // last username entered by the user
+        $authenticationUtils = $this->get('security.authentication_utils');
+
+        $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('guest/login.html.twig', [
-            'last_username' => $lastUsername,
-            'error'         => $error,
-        ]);
+        return $this->render(
+            'guest/login.html.twig',
+            array(
+                'last_username' => $lastUsername,
+                'error' => $error,
+            )
+        );
     }
 }

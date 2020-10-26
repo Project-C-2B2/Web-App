@@ -1,65 +1,6 @@
 {% extends 'base.html.twig' %}
-{% block stylesheets %}
-    {{ parent() }}
-    <style>
-        body{
-            -webkit-text-fill-color: #646464;
-            font-family: 'Roboto', sans-serif;
-        }
-        .cim-img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 5%;
-            width:200px;
-            height:200px;
-        }
-        .title{
-            color: grey;
-            margin-top: -2%;
-            font-family: 'Roboto', sans-serif;
-            font-size: 60px;
-        }
-        .login{
-            color: grey;
-            /*margin-top: 1%;*/
-            font-family: 'Roboto', sans-serif;
-            font-size: 60px;
-        }
-        .btn{
-            background: rgba(108, 164, 57, 0.95);
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            /*margin-top: 5%;*/
-            width:100px;
-            height:40px;
-        }
-        .row_username{
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 5%;
-            width:1000px;
-            height:40px;
-        }
-        .row_password{
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 2%;
-            width:1000px;
-            height:40px;
-        }
-        .nav-wrapper{
-            background: rgb(195, 195, 195);
-        }
-        .logo-cim-Meets{
-            margin-top: 0.4%;
-            margin-left: 0.5%;
-        }
-    </style>
 
+{% block content %}
 {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
@@ -110,4 +51,8 @@
 {#            <div class="btn">Sign in</div>#}
 {#        </div>#}
 {#    </div>#}
+{% endblock %}
+
+    <button type="submit">login</button>
+</form>
 {% endblock %}
