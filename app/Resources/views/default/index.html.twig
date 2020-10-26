@@ -3,26 +3,23 @@
 {% block body %}
     <nav>
         <div class="nav-wrapper">
-            <a class="navbar-brand" href="#"><img src="../web/image/Logocimmeets.png"></a>
+            <a class="navbar-brand" href="index.html.twig"><img style="margin-left: 50px; margin-top: 10px" src="{{ asset("image/Logocimmeets.png") }}"></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="sass.html">Contact</a></li>
-                <li><a class="waves-effect waves-light btn" id="sendmail">Login</a></li>
+                <li><a class="waves-effect waves-light btn" href="../employee/">Login</a></li>
             </ul>
         </div>
     </nav>
 
     <div>
-        <h1 style="margin-left:35%; margin-top: 300px;">
-            WELKOM BIJ
-            CIMEETS
-        </h1>
+        <h1 style="margin-left:35%; margin-top: 300px;">WELKOM BIJ CIMEETS</h1>
     </div>
 
     <div class="row" style="margin-top: 500px">
         <div class="col s6 m3 center"style="margin-left: 10%">
             <div class="card">
                 <div class="card-image">
-                    <img src="../web/image/call.png">
+                    <img src="{{ asset("image/chat.png") }}">
                     <span class="card-title">Call</span>
                 </div>
                 <div class="card-content">
@@ -36,7 +33,7 @@
         <div class="col s6 m3 center">
             <div class="card">
                 <div class="card-image">
-                    <img src="../web/image/meet.png">
+                    <img src="{{ asset("image/meet.png") }}">
                     <span class="card-title">Meet</span>
                 </div>
                 <div class="card-content">
@@ -50,7 +47,7 @@
         <div class="col s6 m3 center">
             <div class="card">
                 <div class="card-image">
-                    <img src="../web/image/chat.png">
+                    <img src="{{ asset("image/call.png") }}">
                     <span class="card-title">Chat</span>
                 </div>
                 <div class="card-content">
