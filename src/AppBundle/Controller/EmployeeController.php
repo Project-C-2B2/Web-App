@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\Type\FeedbackType;
 use AppBundle\Form\Type\MeetingType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -75,12 +76,13 @@ class EmployeeController extends Controller
      */
     public function feedbackAction(Request $request)
     {
-        $form = $this->createForm(MeetingType::class);
+        $form = $this->createForm(FeedbackType::class);
         return $this->render('Employee/feedback.html.twig', [
-            'form' => $form->createView(),
+            'feedbackForm' => $form->createView(),
             'message' => "hallo"
         ]);
     }
+
     /**
      * @Route("/employee/login", name="employee_login")
      */
@@ -91,6 +93,7 @@ class EmployeeController extends Controller
             'msg' => 'here'
         ]);
     }
+
     public function loginAction(AuthenticationUtils $authenticationUtils)
     {
         // get the login error if there is one
@@ -104,4 +107,17 @@ class EmployeeController extends Controller
             'error'         => $error,
         ]);
     }
+
+    /**
+     * @Route("/employee/login", name="employee_login")
+     */
+    public function newAction()
+    {
+        $form = $this->createForm(FeedbackType::class);
+
+        return $this->render('feedback.html.twig', [
+            'feedbackForm' => $form->createView()
+        ]);
+    }
+
 }

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% form_theme form 'form/materialize_form_theme.html.twig' %}
+{#{% form_theme form 'form/materialize_form_theme.html.twig' %}#}
 
 {% block body %}
     <head>
@@ -29,37 +29,18 @@
         <div class="current-page">
             <h2>Feedback</h2>
         </div>
-        <div class="feedback">
-            <div class="questions">
-                {{ form_start(form) }}
-                {{ form_row(form.name) }}
-                {{ form_row(form.description) }}
-                {{ form_label(form.groups) }}
-                {{ form_widget(form.groups) }}
-                {{ form_end(form) }}
+        <div class="feedback"> {# container #}
+            <div class="questions"> {# row #}
+                <div class="col-xs-12">
+                    <h1>Please fill out this form</h1>
+
+                    {{ form_start(feedbackForm) }}
+                        {{ form_widget(feedbackForm) }}
+
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    {{ form_end(feedbackForm) }}
+                </div>
             </div>
-{#            <form action="#" method="#">#}
-{#                <h4>Form</h4>#}
-{#                <section class="text-question">#}
-{#                    <label for="textq">Type something</label>#}
-{#                    <textarea name="textq" id="textq" rows="" cols="">#}
-{#                </section>#}
-{#                <section class="slider-question">#}
-{#                    <label for="sliderq" >Slide it</label>#}
-{#                    <br>#}
-{#                    <span>Low</span>#}
-{#                    <input type="range" name="sliderq" id="sliderq" value="3" min="1" max="5">#}
-{#                    <span>High</span>#}
-{#                </section>#}
-{#                <section class="choice">#}
-{#                    <span>Choose something</span>#}
-{#                    <br>#}
-{#                    <input type="radio" name="choice" id="yes" value="yes">#}
-{#                    <label for="yes">Yes</label>#}
-{#                    <input type="radio" name="choice" id="no" value="yes">#}
-{#                    <label for="no">No</label>#}
-{#                </section>#}
-{#            </form>#}
         </div>
     </div>
     </body>
