@@ -3,10 +3,10 @@
 {% block body %}
     <nav>
         <div class="nav-wrapper">
-            <a class="navbar-brand" href="index.html.twig"><img style="margin-left: 50px; margin-top: 10px" src="{{ asset("image/Logocimmeets.png") }}"></a>
+            <a class="navbar-brand" href="{{ path('guestpage') }}"><img style="margin-left: 50px; margin-top: 10px" src="{{ asset("image/Logocimmeets.png") }}"></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="sass.html">Contact</a></li>
-                <li><a class="waves-effect waves-light btn" href="../employee/">Login</a></li>
+                <li><a class="waves-effect waves-light btn" href="{{  path('employee_login') }}">Login</a></li>
             </ul>
         </div>
     </nav>
@@ -67,19 +67,3 @@
     </div>
 
 {% endblock %}
-
-
-{#    <nav class="navbar navbar-expand-lg navbar-light bg-light">#}
-{#        <div class="container-fluid">#}
-{#            <a class="navbar-brand" href="#"><img src="../image/Logo.png"></a>#}
-{#        </div>#}
-{#        <form class="form-inline my-2 my-lg-0">#}
-{#            <button class="btn btn-outline-success my-2 my-sm-0"  type="submit" formaction="/" >Login</button>#}
-{#        </form>#}
-{#    </nav>#}
-
-{#    <form action="/action_page.php">#}
-{#        <label for="emails">Enter email addresses:</label>#}
-{#        <input type="email" id="emails" name="emails" multiple>#}
-{#        <input type="submit">#}
-{#    </form>#}
