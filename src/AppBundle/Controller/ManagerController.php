@@ -2,9 +2,13 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Meeting;
+use AppBundle\Entity\User;
 use AppBundle\Form\Type\MeetingType;
 use AppBundle\Manager\MeetingManager;
+use http\Env\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ManagerController extends Controller
@@ -71,6 +75,7 @@ class ManagerController extends Controller
     {
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
+
         ]);
     }
 
@@ -89,4 +94,40 @@ class ManagerController extends Controller
         return $this->render('default/index.html.twig', [
         ]);
     }
+
+    /**
+     * @Route("/manager/users/view", name="manager-users-view")
+     */
+    public function userManageAction()
+    {
+        $users = $this->meetingManager->getAllUsers();
+        // replace this example code with whatever you need
+        return $this->render('ManagerAccept/managerUserManage.html.twig', [
+            'users' => $users
+        ]);
+    }
+
+    /**
+     * @Route("/manager/user/enable/{id}", name="manager-user-enable")
+     */
+    public function userEnableAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $enable = $this->meetingManager->getUserId($id)->isEnabled();
+        if ($enable) {
+            $this->meetingManager->getUserId($id)->setEnabled(!$enable);
+            $this->addFlash('succes', 'You have Disabled the user');
+        }
+        else {
+            $this->meetingManager->getUserId($id)->setEnabled(!$enable);
+            $this->addFlash('succes','You have Enabled the user');
+        }
+        $em->flush();
+
+        // replace this example code with whatever you need
+        return $this->redirect($this->generateUrl('manager-users-view'));
+    }
+
+
+
 }
