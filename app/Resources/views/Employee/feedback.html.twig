@@ -29,13 +29,18 @@
         <div class="current-page">
             <h2>Feedback</h2>
         </div>
-        <div class="feedback"> {# container #}
-            <div class="questions"> {# row #}
-                <div class="col-xs-12">
+        <div class="container"> {# container #}
+            <div class="row"> {# row #}
+                <div class="row col-xs-12 white-text">
                     <h1>Please fill out this form</h1>
 
                     {{ form_start(feedbackForm) }}
-                        {{ form_widget(feedbackForm) }}
+                        {{ form_row(feedbackForm.name, {'attr': {'class': 'white-text'}}) }}
+
+                        {{ form_label(feedbackForm.attending) }}
+                        {{ form_widget(feedbackForm.attending, {'attr': {'class': 'white col s12'}}) }}
+
+                        {{ form_row(feedbackForm.funFact, {'attr': {'class': 'white-text'}}) }}
 
                         <button type="submit" class="btn btn-primary">Save</button>
                     {{ form_end(feedbackForm) }}
@@ -51,6 +56,11 @@
 {% block stylesheets %}
     {{ parent() }}
     <style>
+        select {
+            display: block;
+            padding-top: 5px;
+        }
+
         *{
             margin: 0;
             padding: 0;
@@ -127,9 +137,13 @@
         .feedback{
             color: #fff;
         }
+        .feedback input{
+            background-color: ;
+        }
         .feedback input[type=range]{
             width: 200px;
             height: 20px;
+            color: #69F0AE;
         }
         .feedback
     </style>
@@ -142,7 +156,7 @@
     <script>
         $(document).ready(function() {
             M.updateTextFields();
-            $('select').formSelect();
+            // $('select').formSelect();
         });
     </script>
 {% endblock %}

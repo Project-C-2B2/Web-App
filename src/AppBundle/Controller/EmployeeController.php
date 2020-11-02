@@ -77,6 +77,14 @@ class EmployeeController extends Controller
     public function feedbackAction(Request $request)
     {
         $form = $this->createForm(FeedbackType::class);
+
+//        only handles data on POST
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            dump($form->getData());die;
+        }
+
+
         return $this->render('Employee/feedback.html.twig', [
             'feedbackForm' => $form->createView(),
             'message' => "hallo"
