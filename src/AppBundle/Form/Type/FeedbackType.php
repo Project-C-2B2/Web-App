@@ -5,6 +5,7 @@ namespace AppBundle\Form\Type;
 
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,8 +29,13 @@ class FeedbackType extends AbstractType
                 ],
                 'placeholder' => 'Choice',
                 'attr' => ['data-select'=>'true']
-                ])
-            ->add('funFact');
+                ]
+            )
+            -> add('funFact');
+//            ->add('public', CheckboxType::class, [
+//                'label'    => 'Show this entry publicly?',
+//                'required' => false,
+//            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
