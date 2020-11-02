@@ -10,7 +10,8 @@ parameters:
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+#    translator: { fallbacks: ['%locale%'] }
+    translator: { fallbacks: ['en'] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -73,9 +74,15 @@ sensio_framework_extra:
         annotations: false
 
 fos_user:
-     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+     db_driver: orm
      firewall_name: main
-     user_class: UserBundle\Entity\User
+     user_class: AppBundle\Entity\User
      from_email:
-         address: "email@email.com"
-         sender_name: "name"
+         address: "%mailer_user%"
+         sender_name: "%mailer_user%"
+
+sonata_block:
+  default_contexts: [cms]
+  blocks:
+    sonata.admin.block.admin_list:
+      context:  [admin]

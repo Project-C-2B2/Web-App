@@ -51,8 +51,8 @@ class GuestController extends Controller
      */
     public function loginAction(AuthenticationUtils $authenticationUtils)
     {
-//        if (!is_null($this->getUser()))
-//            return $this->redirectToRoute('dashboard');
+        if (!is_null($this->getUser()))
+            return $this->redirectToRoute('dashboard');
 
         $authenticationUtils = $this->get('security.authentication_utils');
 
