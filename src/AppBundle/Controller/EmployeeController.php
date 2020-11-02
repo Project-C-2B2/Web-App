@@ -2,6 +2,10 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Feedback;
+use AppBundle\Form\Type\FeedbackType;
+use AppBundle\Form\Type\MeetingType;
+use AppBundle\Manager\FeedbackManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -9,6 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class EmployeeController extends Controller
 {
+    private $feedbackManager;
+
+    public function __construct(FeedbackManager $feedbackManager)
+    {
+        $this->feedbackManager = $feedbackManager;
+    }
+
     /**
      * @IsGranted("ROLE_EMPLOYEE")
      * @Route("/employee/dashboard", name="employee-dashboard")
@@ -75,7 +86,26 @@ class EmployeeController extends Controller
      */
     public function feedbackAction(Request $request)
     {
-        return $this->render('employee/feedback.html.twig', [
+        $feedback = new Feedback();
+
+        $form = $this->createForm(FeedbackType::class);
+
+//        only handles data on POST
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+//          dump($form->getData());die;
+            $feedback = $form->getData();
+
+            $this->addFlash(
+                'notice',
+                'The form was saved!'
+            );
+            $this->feedbackManager->updateFeedback($feedback);
+        }
+
+
+        return $this->render('Employee/feedback.html.twig', [
+            'feedbackForm' => $form->createView(),
             'message' => "hallo"
         ]);
     }

@@ -27,5 +27,30 @@
                 <h1>Please fill out this form</h1>
             </div>
         </div>
+        <div class="current-page">
+            <h2>Feedback</h2>
+        </div>
+        {% for message in app.flashes('notice') %}
+            <div class="flash-notice">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <div class="container"> {# container #}
+            <div class="row"> {# row #}
+                <div class="row col-xs-12 white-text">
+                    <h1>Please fill out this form</h1>
+
+                    {{ form_start(feedbackForm) }}
+                        {{ form_row(feedbackForm.name, {'attr': {'class': 'white-text'}}) }}
+                        {{ form_label(feedbackForm.attending) }}
+                        {{ form_widget(feedbackForm.attending, {'attr': {'class': 'white col s12'}}) }}
+                        {{ form_row(feedbackForm.feedback,  {'attr': {'class': 'white-text'}}) }}
+{#                        {{ form_row(feedbackForm.checkbox) }}#}
+                        {{ form_row(feedbackForm.rating) }}
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    {{ form_end(feedbackForm) }}
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
