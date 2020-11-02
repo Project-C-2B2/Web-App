@@ -29,4 +29,11 @@ class EmployeeController extends Controller
             'msg' => 'here'
         ]);
     }
+    /**
+     * @Route("/logout", name="employee_logout")
+     */
+    public function logoutAction()
+    {
+        // Left empty intentionally because this will be handled by Symfony.
+    }
 }
