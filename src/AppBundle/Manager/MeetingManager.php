@@ -5,6 +5,7 @@ namespace AppBundle\Manager;
 
 
 use AppBundle\Entity\Meeting;
+use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
 class MeetingManager
@@ -22,5 +23,13 @@ class MeetingManager
 
     public function getUsersByMeeting(Meeting $meeting) {
         return $meeting->getAttendees();
+    }
+
+    public function getAllUsers(){
+        return $this->em->getRepository(User::class)->findAll();
+    }
+
+    public function getUserId($id){
+        return $this->em->getRepository(User::class)->find($id);
     }
 }
