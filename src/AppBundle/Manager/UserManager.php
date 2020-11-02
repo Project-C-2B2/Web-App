@@ -4,6 +4,7 @@
 namespace AppBundle\Manager;
 
 
+use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
 class UserManager
@@ -15,5 +16,7 @@ class UserManager
         $this->em=$em;
     }
 
-
+    public function getUserByEmail($email) {
+        return $this->em->getRepository(User::class)->findOneBy(['email'=>$email]);
+    }
 }
