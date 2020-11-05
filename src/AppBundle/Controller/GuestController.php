@@ -30,10 +30,6 @@ class GuestController extends Controller
      */
     public function indexAction(Request $request)
     {
-        dump($this->em->getRepository(User::class)->findAll());
-        dump($this->em->getRepository(Group::class)->findAll());
-        dump($this->em->getRepository(Meeting::class)->findAll());
-
         if (!is_null($this->getUser())) {
             $this->addFlash(
                 'notice',
@@ -44,6 +40,7 @@ class GuestController extends Controller
             'msg' => 'here'
         ]);
     }
+
     /**
      * @Route("/login", name="login")
      */
@@ -68,6 +65,13 @@ class GuestController extends Controller
                 'error' => $error,
             )
         );
+    }
+
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logoutAction()
+    {
     }
 
 }
