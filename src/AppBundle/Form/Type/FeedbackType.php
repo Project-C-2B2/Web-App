@@ -34,7 +34,7 @@ class FeedbackType extends AbstractType
                 ]
             )
             -> add('feedback', TextType::class, [
-                'label' => 'Wat vond u van deze meeting?',
+                'label' => 'Opmerkingen over deze meeting?',
                 ])
 
 //            -> add('checkbox', CheckboxType::class, [
