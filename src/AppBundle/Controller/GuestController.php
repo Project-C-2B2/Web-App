@@ -26,7 +26,7 @@ class GuestController extends Controller
     }
 
     /**
-     * @Route("/home", name="guestPage")
+     * @Route("/home", name="guestpage")
      */
     public function indexAction(Request $request)
     {
@@ -34,9 +34,19 @@ class GuestController extends Controller
         dump($this->em->getRepository(Group::class)->findAll());
         dump($this->em->getRepository(Meeting::class)->findAll());
 
+        if (!is_null($this->getUser())) {
+            $this->addFlash(
+                'notice',
+                'User successfully logged in!'
+            );
+        }
         // replace this example code with whatever you need
+
+//        return $this->render('default/index.html.twig', [
+//            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+//        ]);
         return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+            'msg' => 'here'
         ]);
     }
     /**
@@ -56,13 +66,11 @@ class GuestController extends Controller
     public function loginAction(AuthenticationUtils $authenticationUtils)
     {
         if (!is_null($this->getUser())) {
-
             $this->addFlash(
                 'notice',
                 'User successfully logged in!'
             );
-            return $this->redirectToRoute('register_redirect');
-
+            return $this->redirectToRoute('homepage');
         }
         $authenticationUtils = $this->get('security.authentication_utils');
 
@@ -82,6 +90,12 @@ class GuestController extends Controller
      */
     public function registerRedirect(Request $request)
     {
+        if (!is_null($this->getUser())) {
+            $this->addFlash(
+                'notice',
+                'User successfully logged in!'
+            );
+        }
         // replace this example code with whatever you need
         return $this->render('guest/registerRedirect.html.twig', [
             'msg' => 'here'
