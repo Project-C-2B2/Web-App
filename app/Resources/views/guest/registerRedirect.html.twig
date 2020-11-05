@@ -31,11 +31,7 @@
 {% endblock %}
 
 {% block body %}
-    {% for message in app.flashes('notice') %}
-        <div class="flash-notice">
-            {{ message }}
-        </div>
-    {% endfor %}
+
     <nav>
         <div class="nav-wrapper">
             <img src="https://i.ibb.co/hmYS1rD/Logocimmeetsnocaps.png" class="logo-cim-Meets" ></a>
@@ -46,6 +42,11 @@
             </ul>
         </div>
     </nav>
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
 
     <div class="col s12" >
         <p class="title center-align">Account created</p>
