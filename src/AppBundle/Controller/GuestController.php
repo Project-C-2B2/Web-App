@@ -40,26 +40,10 @@ class GuestController extends Controller
                 'User successfully logged in!'
             );
         }
-        // replace this example code with whatever you need
-
-//        return $this->render('default/index.html.twig', [
-//            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-//        ]);
         return $this->render('default/index.html.twig', [
             'msg' => 'here'
         ]);
     }
-    /**
-     * @Route("/create/account", name="create_account")
-     */
-    public function createAccountAction(Request $request)
-    {
-        // replace this example code with whatever you need
-        return $this->render('createAccount/createAccount.html.twig', [
-            'msg' => 'here'
-        ]);
-    }
-
     /**
      * @Route("/login", name="login")
      */
@@ -85,57 +69,5 @@ class GuestController extends Controller
             )
         );
     }
-    /**
-     * @Route("/redirect", name="register_redirect")
-     */
-    public function registerRedirect(Request $request)
-    {
-        if (!is_null($this->getUser())) {
-            $this->addFlash(
-                'notice',
-                'User successfully logged in!'
-            );
-        }
-        // replace this example code with whatever you need
-        return $this->render('guest/registerRedirect.html.twig', [
-            'msg' => 'here'
-        ]);
-    }
-    /**
-     * @Route("/register", name="user_registration")
-     */
-    public function registerAction(Request $request)
-    {
-        $msg = null;
-        // 1) build the form
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
 
-        // 2) handle the submit (will only happen on POST)
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            // 3) Encode the password (you could also do this via Doctrine listener)
-
-            $user->addRole('ROLE_EMPLOYEE');
-            $user->setEnabled(true);
-
-            if (!$this->userManager->getUserByEmail($form->getData()->getEmail())) {
-                // 4) save the User!
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($user);
-                $entityManager->flush();
-
-                return $this->redirectToRoute('register_redirect');
-            } else {
-                $msg = 'Already in use';
-            }
-        }
-        return $this->render(
-            'guest/register.html.twig', [
-                'form' => $form->createView(),
-                'msg' => $msg
-            ]
-        );
-    }
 }
