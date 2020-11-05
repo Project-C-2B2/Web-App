@@ -43,7 +43,6 @@ class GuestController extends Controller
             'msg' => 'here'
         ]);
     }
-        }
         /**
          * @Route("/guestpage", name="guestpage")
          */
