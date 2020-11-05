@@ -1,11 +1,24 @@
 # To get started with security, check out the documentation:
 # https://symfony.com/doc/current/security.html
 security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+        AppBundle\Entity\User: bcrypt
 
-    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    role_hierarchy:
+
+        # for convenience, I decided to gather Sonata roles here
+        ROLE_EMPLOYEE:
+          - ROLE_USER
+
+        ROLE_COURSELEADER:      [ROLE_USER, ROLE_EMPLOYEE]
+        ROLE_MANAGER:           [ROLE_COURSELEADER]
+        ROLE_ADMIN:             [ROLE_USER, ROLE_MANAGER]
+        ROLE_SUPER_ADMIN:       [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
     providers:
-        in_memory:
-            memory: ~
+        fos_userbundle:
+            id: fos_user.user_provider.username
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -13,12 +26,37 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        main:
-            anonymous: ~
-            # activate different ways to authenticate
-            logout_on_user_change: true
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
+        admin:
+            pattern:            /admin(.*)
+            context:            user
+            form_login:
+                provider:       fos_userbundle
+                login_path:     admin_login
+                use_forward:    false
+                check_path:     admin_login
+                failure_path:   null
+            logout:
+                path:           admin_logout
+                target:         admin_login
+            anonymous:          true
+            guard:
+                authenticators:
+                    - AppBundle\Security\AdminAuthenticator
 
-            # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
+        main:
+            pattern: ^/
+            user_checker: security.user_checker
+            form_login:
+                provider: fos_userbundle
+                login_path: login
+                check_path: login
+#                csrf_token_generator: security.csrf.token_manager
+            logout:       true
+            anonymous:    true
+
+    access_control:
+        - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }

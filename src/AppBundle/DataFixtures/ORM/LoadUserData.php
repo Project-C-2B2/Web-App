@@ -16,7 +16,7 @@ class LoadUserData extends Fixture implements DependentFixtureInterface
     {
         $user = new User();
         $user->setEmail('frontend@email.com');
-        $user->setPassword('frontend');
+        $user->setPlainPassword('frontend');
         $user->setRoles(['ROLE_EMPLOYEE']);
         $user->setEnabled(true);
         $manager->persist($user);
@@ -24,7 +24,7 @@ class LoadUserData extends Fixture implements DependentFixtureInterface
 
         $user = new User();
         $user->setEmail('frontend2@email.com');
-        $user->setPassword('frontend2');
+        $user->setPlainPassword('frontend2');
         $user->addRole('ROLE_EMPLOYEE');
         $user->setEnabled(true);
         $user->addGroupsInUserAssociation(new GroupsInUserAssociation($user, $manager->getRepository(Group::class)->findOneBy(['name'=>'testFrontend'])));
@@ -33,7 +33,7 @@ class LoadUserData extends Fixture implements DependentFixtureInterface
 
         $user = new User();
         $user->setEmail('frontend3@email.com');
-        $user->setPassword('frontend3');
+        $user->setPlainPassword('frontend3');
         $user->addRole('ROLE_EMPLOYEE');
         $user->setEnabled(true);
         $user->addGroupsInUserAssociation(new GroupsInUserAssociation($user, $manager->getRepository(Group::class)->findOneBy(['name'=>'testFrontend'])));
@@ -43,7 +43,7 @@ class LoadUserData extends Fixture implements DependentFixtureInterface
 
         $user = new User();
         $user->setEmail('frontend4@email.com');
-        $user->setPassword('frontendOther');
+        $user->setPlainPassword('frontendOther');
         $user->addRole('ROLE_EMPLOYEE');
         $user->setEnabled(true);
         $user->addGroupsInUserAssociation(new GroupsInUserAssociation($user, $manager->getRepository(Group::class)->findOneBy(['name'=>'testFrontend'])));
