@@ -19,11 +19,6 @@ class Feedback
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     */
-    private $name;
-
-    /**
      * @ORM\Column(type="boolean", nullable=false)
      */
     private $attending;
@@ -38,6 +33,17 @@ class Feedback
      */
     private $rating;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="id", cascade={"persist"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Meeting", inversedBy="id", cascade={"persist"})
+     * @ORM\JoinColumn(name="meeting_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $meeting;
 
     public function __construct()
     {
@@ -57,22 +63,6 @@ class Feedback
     public function setId($id)
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param mixed $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
     }
 
     /**
@@ -121,6 +111,38 @@ class Feedback
     public function setRating($rating)
     {
         $this->rating = $rating;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user): void
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMeeting()
+    {
+        return $this->meeting;
+    }
+
+    /**
+     * @param mixed $meeting
+     */
+    public function setMeeting($meeting): void
+    {
+        $this->meeting = $meeting;
     }
 
 

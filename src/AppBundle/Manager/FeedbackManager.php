@@ -6,6 +6,7 @@ namespace AppBundle\Manager;
 
 use AppBundle\Entity\Feedback;
 use AppBundle\Entity\Meeting;
+use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
 class FeedbackManager
@@ -20,5 +21,9 @@ class FeedbackManager
     public function updateFeedback(Feedback $feedback){
         $this->em->persist($feedback);
         $this->em->flush();
+    }
+
+    public function getFeedbackByUserAndMeeting(User $user,Meeting $meeting){
+        return $this->em->getRepository(Feedback::class)->findOneBy(array('user'=>$user, 'meeting'=>$meeting));
     }
 }
