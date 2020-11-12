@@ -50,6 +50,7 @@ class GuestController extends Controller
             'msg' => 'here'
         ]);
         }
+<<<<<<< HEAD
 
     }
 
@@ -85,5 +86,17 @@ class GuestController extends Controller
     public function logoutAction()
     {
     }
+=======
+        /**
+         * @Route("/guestpage", name="guestpage")
+         */
+        public function guestAction(Request $request)
+        {
+        // replace this example code with whatever you need
+        return $this->render('default/index.html.twig', [
+            'msg' => 'here'
+        ]);
+        }
+>>>>>>> #27_guestPage
 
 }
