@@ -128,6 +128,31 @@ class ManagerController extends Controller
         return $this->redirect($this->generateUrl('manager-users-view'));
     }
 
+    /**
+     * @Route("/manager/group/view/{id}", name="manager-group-view")
+     */
+    public  function groupAction($id)
+    {
+        $groups = $this->meetingManager->getAllGroups();
+        $groupAssociation = $this->meetingManager->getAllGroupAssociation();
+        $user = $this->meetingManager->getAllUsers();
 
+        return $this->render('ManagerAccept/managerGroupManage.html.twig', [
+            'groups' => $groups,
+            'groupAss' => $groupAssociation,
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * @Route("/manager/group/add/{id}", name="manager-group-add")
+     */
+    public  function userAddGroupAction($groupId)
+    {
+
+
+        return $this->redirect($this->generateUrl('manager-group-view'));
+
+    }
 
 }
