@@ -4,6 +4,8 @@
 namespace AppBundle\Manager;
 
 
+use AppBundle\Entity\Group;
+use AppBundle\Entity\Groups\GroupsInUserAssociation;
 use AppBundle\Entity\Meeting;
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -31,5 +33,13 @@ class MeetingManager
 
     public function getUserId($id){
         return $this->em->getRepository(User::class)->find($id);
+    }
+
+    public function getAllGroups(){
+        return $this->em->getRepository(Group::class)->findAll();
+    }
+
+    public function getAllGroupAssociation(){
+        return $this->em->getRepository(GroupsInUserAssociation::class)->findAll();
     }
 }

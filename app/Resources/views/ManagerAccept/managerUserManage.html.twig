@@ -16,6 +16,7 @@
                 <td>Username</td>
                 <td>Email</td>
                 <td>Enable/Disable</td>
+                <td>Add to Group</td>
             </tr>
         </thead>
         <tbody>
@@ -26,7 +27,7 @@
                     <td>{{ user.email }}</td>
                     <td>
                         {% if user.enabled == 1 %}
-                            <a class="waves-effect waves-red btn" href="{{ path('manager-user-enable', {id: user.id}) }}">
+                            <a class="waves-effect waves-red btn green" href="{{ path('manager-user-enable', {id: user.id}) }}">
                                 Enabled
                             </a>
                         {% else %}
@@ -34,6 +35,9 @@
                                 Disabled
                             </a>
                         {% endif %}
+                    </td>
+                    <td>
+                        <a class="btn blue" href="{{ path('manager-group-add', {id: user.id}) }}">Add</a>
                     </td>
                 </tr>
             {% endfor %}
