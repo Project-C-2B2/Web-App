@@ -23,6 +23,14 @@ class LoadUserData extends Fixture implements DependentFixtureInterface
         $manager->flush();
 
         $user = new User();
+        $user->setEmail('admin@email.com');
+        $user->setPlainPassword('1234');
+        $user->setRoles(['ROLE_ADMIN']);
+        $user->setEnabled(true);
+        $manager->persist($user);
+        $manager->flush();
+
+        $user = new User();
         $user->setEmail('frontend2@email.com');
         $user->setPlainPassword('frontend2');
         $user->addRole('ROLE_EMPLOYEE');
