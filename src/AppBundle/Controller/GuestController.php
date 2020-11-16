@@ -2,13 +2,8 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Group;
-use AppBundle\Entity\Meeting;
-use AppBundle\Entity\User;
-use AppBundle\Form\UserType;
 use AppBundle\Manager\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,7 +21,7 @@ class GuestController extends Controller
     }
 
     /**
-     * @Route("/home", name="guestpage")
+     * @Route("/", name="guestpage")
      */
     public function indexAction(Request $request)
     {
@@ -39,18 +34,7 @@ class GuestController extends Controller
         return $this->render('default/index.html.twig', [
             'msg' => 'here'
         ]);
-        }
-        /**
-         * @Route("/guestpage", name="guestpage")
-         */
-        public function guestAction(Request $request)
-        {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'msg' => 'here'
-        ]);
-        }
-
+    }
 
     /**
      * @Route("/login", name="login")
