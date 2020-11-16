@@ -21,6 +21,7 @@ class EmployeeController extends Controller
     {
         $this->feedbackManager = $feedbackManager;
         $this->meetingManager = $meetingManager;
+
     }
 
     /**
@@ -40,6 +41,7 @@ class EmployeeController extends Controller
     public function meetingAction(Request $request)
     {
         return $this->render('employee/meetings.html.twig', [
+            'meetings' => $this->meetingManager->getAllMeetings()
         ]);
     }
 
