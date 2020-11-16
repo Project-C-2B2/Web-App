@@ -31,7 +31,7 @@ class GuestController extends Controller
                 'User successfully logged in!'
             );
         }
-        return $this->render('default/index.html.twig', [
+        return $this->render('guest/index.html.twig', [
             'msg' => 'here'
         ]);
     }
