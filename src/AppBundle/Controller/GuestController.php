@@ -26,7 +26,7 @@ class GuestController extends Controller
     }
 
     /**
-     * @Route("/home", name="guestpage")
+     * @Route("/", name="guestpage")
      */
     public function indexAction(Request $request)
     {
@@ -51,7 +51,7 @@ class GuestController extends Controller
                 'notice',
                 'User successfully logged in!'
             );
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('employee');
         }
         $authenticationUtils = $this->get('security.authentication_utils');
 
