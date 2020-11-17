@@ -102,8 +102,6 @@ class EmployeeController extends Controller
             return $this->redirectToRoute('employee-dashboard');
         }
 
-        $feedback = new Feedback();
-
         $form = $this->createForm(FeedbackType::class);
 
 //        only handles data on POST
@@ -118,14 +116,12 @@ class EmployeeController extends Controller
                 'The form was saved!'
             );
             $this->feedbackManager->updateFeedback($feedback);
-            return $this->redirectToRoute('employee');
+            return $this->redirectToRoute('employee-dashboard');
         }
 
 
-        return $this->render('employee/feedback.html.twig', [
+        return $this->render('employee/feedbackForm.html.twig', [
             'feedbackForm' => $form->createView(),
-            'message' => "hallo",
-
         ]);
     }
 }
