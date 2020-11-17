@@ -8,6 +8,7 @@ use AppBundle\Form\Type\MeetingType;
 use AppBundle\Manager\FeedbackManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use AppBundle\Manager\MeetingManager;
+use http\Client\Curl\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,7 +42,8 @@ class EmployeeController extends Controller
     public function meetingAction(Request $request)
     {
         return $this->render('employee/meetings.html.twig', [
-            'meetings' => $this->meetingManager->getAllMeetings()
+            'meetings' => $this->meetingManager->getAllMeetings(),
+            'feedbacks' => $this->feedbackManager->getFeedbackByUser($this->getUser())
         ]);
     }
 
@@ -122,7 +124,8 @@ class EmployeeController extends Controller
 
         return $this->render('employee/feedback.html.twig', [
             'feedbackForm' => $form->createView(),
-            'message' => "hallo"
+            'message' => "hallo",
+
         ]);
     }
 }

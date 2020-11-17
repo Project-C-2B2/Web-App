@@ -26,4 +26,8 @@ class FeedbackManager
     public function getFeedbackByUserAndMeeting(User $user,Meeting $meeting){
         return $this->em->getRepository(Feedback::class)->findOneBy(array('user'=>$user, 'meeting'=>$meeting));
     }
+
+    public function getFeedbackByUser(User $user){
+        return $this->em->getRepository(Feedback::class)->findBy(array('user'=>$user));
+    }
 }

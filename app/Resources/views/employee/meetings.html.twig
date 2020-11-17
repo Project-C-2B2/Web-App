@@ -32,8 +32,9 @@
                             {{ meeting }}
                         </td>
                         <td>
-                            {% if getFeedbackByUserAndMeeting() not null %}
-                            <a class="btn" href="{{ path('employee-feedback', {'id':meeting.id}) }}">feedback</a>
+                            {% for feedback in feedbacks %}
+                            <a class="btn {% if feedback.meeting == meeting %}disabled{% endif %}" href="{{ path('employee-feedback', {'id':meeting.id}) }}">feedback</a>
+                            {% endfor %}
                         </td>
                         </tr>
                     {% endfor %}
