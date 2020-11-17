@@ -2,11 +2,6 @@
 
 {% form_theme form 'form/materialize_form_theme.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/meeting.css') }}">
-{% endblock %}
-
 {% block nav %}
     <div class="nav-bar">
         <div class="nav-logo"><a href="{{ path('loginRedirect') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>

@@ -18,10 +18,28 @@ security:
           - ROLE_USER
           - ROLE_FEEDBACK
 
-        ROLE_COURSELEADER:      [ROLE_USER, ROLE_EMPLOYEE]
-        ROLE_MANAGER:           [ROLE_COURSELEADER]
-        ROLE_ADMIN:             [ROLE_USER, ROLE_MANAGER]
-        ROLE_SUPER_ADMIN:       [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_COURSELEADER:
+          - ROLE_USER
+          - ROLE_EMPLOYEE
+
+        ROLE_MANAGER:
+          - ROLE_USER
+          - ROLE_EMPLOYEE
+          - ROLE_COURSELEADER
+
+        ROLE_ADMIN:
+          - ROLE_USER
+          - ROLE_EMPLOYEE
+          - ROLE_COURSELEADER
+          - ROLE_MANAGER
+
+        ROLE_SUPER_ADMIN:
+          - ROLE_USER
+          - ROLE_EMPLOYEE
+          - ROLE_COURSELEADER
+          - ROLE_MANAGER
+          - ROLE_ADMIN
+          - ROLE_ALLOWED_TO_SWITCH
 
     providers:
         fos_userbundle:

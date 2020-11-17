@@ -68,10 +68,14 @@
 .welcome-text span{
     color: #69F0AE;
 }
-.current-page{
+.current-page {
     margin: 80px;
+}
+
+h2 {
     color: #69F0AE;
 }
+
 .upcoming-meetings{
     margin: 80px;
     color: #fff;
