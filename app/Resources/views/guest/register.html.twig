@@ -3,10 +3,9 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>#}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <style>
 
+    <style>
         body{
             -webkit-text-fill-color: #646464;
             font-family: 'Roboto', sans-serif;
@@ -36,7 +35,6 @@
         .input-field_aiu{
             font-size: 25px;
         }
-
     </style>
 {% endblock %}
 
@@ -45,7 +43,7 @@
     <div class="nav-wrapper">
         <img src="https://i.ibb.co/hmYS1rD/Logocimmeetsnocaps.png" class="logo-cim-Meets" ></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            {#                <li><a href="{{ path('employee') }}" style="color: #646464; font-weight: bold;">Home</a></li>#}
+            <li><a href="{{ path('guestpage') }}" style="color: #646464; font-weight: bold;">Guestpage</a></li>
             <li><a href="{{ path('login') }}" style="color: #646464; font-weight: bold;">Sign in</a></li>
         </ul>
     </div>
