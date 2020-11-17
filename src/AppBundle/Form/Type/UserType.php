@@ -20,10 +20,6 @@ class UserType extends AbstractType
             ->add('username', TextType::class)
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'attr' => ['minlength'=>8],
-                'invalid_message' => 'You entered an invalid value, it should include %num% letters',
-                'invalid_message_parameters' => ['%num%' => 8],
-                'invalid_message' => 'The password fields must match.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
                 'first_options'  => ['label' => 'Password'],
