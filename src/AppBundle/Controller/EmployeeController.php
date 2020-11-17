@@ -29,16 +29,6 @@ class EmployeeController extends Controller
 //        ]);
     }
     /**
-     * @Route("/employee/login", name="Employee_Login")
-     */
-    public function employeeLoginAction(Request $request)
-    {
-        // replace this example code with whatever you need
-        return $this->render('employeeLogin/login.html.twig', [
-            'msg' => 'here'
-        ]);
-    }
-    /**
      * @Route("/logout", name="employee_logout")
      */
     public function logoutAction()

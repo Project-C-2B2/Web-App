@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 class GuestController extends Controller
 {
     private $em;
@@ -40,26 +40,10 @@ class GuestController extends Controller
                 'User successfully logged in!'
             );
         }
-        // replace this example code with whatever you need
-
-//        return $this->render('default/index.html.twig', [
-//            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-//        ]);
         return $this->render('default/index.html.twig', [
             'msg' => 'here'
         ]);
     }
-    /**
-     * @Route("/create/account", name="create_account")
-     */
-    public function createAccountAction(Request $request)
-    {
-        // replace this example code with whatever you need
-        return $this->render('createAccount/createAccount.html.twig', [
-            'msg' => 'here'
-        ]);
-    }
-
     /**
      * @Route("/login", name="login")
      */
@@ -118,7 +102,7 @@ class GuestController extends Controller
             // 3) Encode the password (you could also do this via Doctrine listener)
 
             $user->addRole('ROLE_EMPLOYEE');
-            $user->setEnabled(true);
+            $user->setEnabled(false);
 
             if (!$this->userManager->getUserByEmail($form->getData()->getEmail())) {
                 // 4) save the User!
@@ -128,7 +112,7 @@ class GuestController extends Controller
 
                 return $this->redirectToRoute('register_redirect');
             } else {
-                $msg = 'Already in use';
+                $msg = 'Account already in use';
             }
         }
         return $this->render(
