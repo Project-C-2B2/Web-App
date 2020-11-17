@@ -29,10 +29,6 @@ class MeetingManager
         return $meeting->getAttendees();
     }
 
-    public function getMeetingById($id) {
-        return $this->em->getRepository(Meeting::class)->find($id);
-    }
-
     public function removeMeeting(Meeting $meeting) {
         $this->em->remove($meeting);
         $this->em->flush();

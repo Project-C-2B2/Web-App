@@ -99,7 +99,7 @@ class EmployeeController extends Controller
         $meeting = $this->meetingManager->getMeetingById($id);
 
         if ($this->getUser() && $this->feedbackManager->getFeedbackByUserAndMeeting($this->getUser(), $meeting)){
-            return $this->redirectToRoute('employee');
+            return $this->redirectToRoute('employee-dashboard');
         }
 
         $feedback = new Feedback();
