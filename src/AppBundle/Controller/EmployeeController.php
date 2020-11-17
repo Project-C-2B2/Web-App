@@ -2,13 +2,29 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Feedback;
+use AppBundle\Form\Type\FeedbackType;
+use AppBundle\Form\Type\MeetingType;
+use AppBundle\Manager\FeedbackManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use AppBundle\Manager\MeetingManager;
+use http\Client\Curl\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class EmployeeController extends Controller
 {
+    private $feedbackManager;
+    private $meetingManager;
+
+    public function __construct(FeedbackManager $feedbackManager, MeetingManager $meetingManager)
+    {
+        $this->feedbackManager = $feedbackManager;
+        $this->meetingManager = $meetingManager;
+
+    }
+
     /**
      * @IsGranted("ROLE_EMPLOYEE")
      * @Route("/employee/dashboard", name="employee-dashboard")
@@ -26,6 +42,8 @@ class EmployeeController extends Controller
     public function meetingAction(Request $request)
     {
         return $this->render('employee/meetings.html.twig', [
+            'meetings' => $this->meetingManager->getAllMeetings(),
+            'feedbacks' => $this->feedbackManager->getFeedbackByUser($this->getUser())
         ]);
     }
 
@@ -71,12 +89,43 @@ class EmployeeController extends Controller
 
     /**
      * @IsGranted("ROLE_EMPLOYEE")
-     * @Route("/employee/feedback", name="employee-feedback")
+     * @Route("/user/meeting/{id}/feedback", name="employee-feedback")
      */
-    public function feedbackAction(Request $request)
+    public function feedbackAction($id, Request $request)
     {
+        if (!$this->getUser())
+            return $this->redirectToRoute('login');
+
+        $meeting = $this->meetingManager->getMeetingById($id);
+
+        if ($this->getUser() && $this->feedbackManager->getFeedbackByUserAndMeeting($this->getUser(), $meeting)){
+            return $this->redirectToRoute('employee-dashboard');
+        }
+
+        $feedback = new Feedback();
+
+        $form = $this->createForm(FeedbackType::class);
+
+//        only handles data on POST
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $feedback = $form->getData();
+            $feedback->setMeeting($meeting);
+            $feedback->setUser($this->getUser());
+
+            $this->addFlash(
+                'notice',
+                'The form was saved!'
+            );
+            $this->feedbackManager->updateFeedback($feedback);
+            return $this->redirectToRoute('employee');
+        }
+
+
         return $this->render('employee/feedback.html.twig', [
-            'message' => "hallo"
+            'feedbackForm' => $form->createView(),
+            'message' => "hallo",
+
         ]);
     }
 }

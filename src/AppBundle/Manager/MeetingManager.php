@@ -5,6 +5,7 @@ namespace AppBundle\Manager;
 
 
 use AppBundle\Entity\Meeting;
+use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
 class MeetingManager

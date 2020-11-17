@@ -8,7 +8,7 @@
                 <li><a href="{{ path('employee-dashboard') }}">Home</a></li>
                 <li><a href="{{ path('employee-agenda') }}">Agenda</a></li>
                 <li><a href="{{ path('employee-groups') }}">Groups</a></li>
-                <li><a href="{{ path('employee-feedback') }}">Feedback</a></li>
+{#                <li><a href="{{ path('employee-feedback') }}">Feedback</a></li>#}
                 <li><a href="{{ path('employee-about') }}">About</a></li>
                 <li><a href="{{ path('employee-contact') }}">Contact</a></li>
             </ul>
@@ -20,6 +20,27 @@
 {% block content %}
     <div class="current-page">
         <h2>Meetings</h2>
-        <p>Dit zijn al uw meetings:</p>
+    </div>
+    <div class="meeting-feedback">
+        <table>
+            <thead>
+            <tr>
+                <th><h4>Meeting</h4></th>
+                <th><h4>Feedback</h4></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for meeting in meetings %}
+                <tr>
+                    <td class="show-meetings">
+                        {{ meeting }}
+                    </td>
+                    <td>
+                        <a class="btn {% for feedback in feedbacks %}{% if feedback.meeting == meeting %}disabled{% endif %}{% endfor %}" href="{{ path('employee-feedback', {'id':meeting.id}) }}">feedback</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}
