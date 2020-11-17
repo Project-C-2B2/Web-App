@@ -70,22 +70,6 @@ class GuestController extends Controller
         );
     }
     /**
-     * @Route("/redirect", name="register_redirect")
-     */
-    public function registerRedirect(Request $request)
-    {
-        if (!is_null($this->getUser())) {
-            $this->addFlash(
-                'notice',
-                'User successfully logged in!'
-            );
-        }
-        // replace this example code with whatever you need
-        return $this->render('guest/registerRedirect.html.twig', [
-            'msg' => 'here'
-        ]);
-    }
-    /**
      * @Route("/register", name="user_registration")
      */
     public function registerAction(Request $request)
@@ -110,7 +94,11 @@ class GuestController extends Controller
                 $entityManager->persist($user);
                 $entityManager->flush();
 
-                return $this->redirectToRoute('register_redirect');
+                $this->addFlash(
+                    'notice',
+                    'Account is still disabled, The manager needs to enable the account, please wait'
+                );
+                return $this->redirectToRoute('login');
             } else {
                 $msg = 'Account already in use';
             }
