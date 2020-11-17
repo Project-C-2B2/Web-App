@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CourseLeaderController extends Controller
 {
 //    /**
+//     * @IsGranted("ROLE_COURSELEADER")
 //     * @Route("/", name="homepage")
 //     */
 //    public function indexAction(Request $request)
