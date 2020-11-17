@@ -1,0 +1,42 @@
+{% extends 'baseContent.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/meeting.css') }}">
+{% endblock %}
+
+{% block nav %}
+    <div class="nav-bar">
+        <div class="nav-logo"><a href="{{ path('loginRedirect') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
+        <div class="nav-items">
+            <ul>
+                <li><a href="{{ path('manager-meeting-create') }}">Meetings</a></li>
+            </ul>
+            <a class="btn" href="{{ path('login') }}">account</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>Meeting</th>
+                <th>Datum van Meeting</th>
+                <th>Locatie</th>
+                <th>Acties <a class="btn green" style="margin-left: 50px" href="{{ path('manager-meeting-create') }}">New</a></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for meeting in meetings %}
+                <tr>
+                    <td>{{ meeting }}</td>
+                    <td>{{ meeting.dateTime |date("m/d/Y") }}</td>
+                    <td>{{ meeting.location }}</td>
+                    <td><a class="btn green" href="{{ path('manager-meeting-update', {'id':meeting.id}) }}">Update</a><a class="btn red" href="{{ path('manager-meeting-delete', {'id':meeting.id}) }}">Remove</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

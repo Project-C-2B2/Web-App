@@ -8,8 +8,15 @@ security:
     role_hierarchy:
 
         # for convenience, I decided to gather Sonata roles here
+        ROLE_COURSELEADER:
+          - ROLE_MEETING_CREATE
+          - ROLE_MEETING_VIEW
+          - ROLE_MEETING_DELETE
+          - ROLE_MEETING_UPDATE
+
         ROLE_EMPLOYEE:
           - ROLE_USER
+          - ROLE_FEEDBACK
 
         ROLE_COURSELEADER:      [ROLE_USER, ROLE_EMPLOYEE]
         ROLE_MANAGER:           [ROLE_COURSELEADER]
@@ -59,7 +66,7 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/user, role: ROLE_EMPLOYEE }
+        - { path: ^/employee, role: ROLE_EMPLOYEE }
         - { path: ^/clead, role: ROLE_COURSELEADER }
         - { path: ^/manager, role: ROLE_MANAGER }
         - { path: ^/admin/, role: ROLE_ADMIN }

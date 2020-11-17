@@ -2,34 +2,24 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Form\Type\FeedbackType;
-use AppBundle\Form\Type\MeetingType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class EmployeeController extends Controller
 {
     /**
-     * @Route("/user/dashboard", name="employee")
+     * @Route("/employee/dashboard", name="employee-dashboard")
      */
     public function indexAction(Request $request)
     {
-        if (!is_null($this->getUser())) {
-            $this->addFlash(
-                'notice',
-                'User successfully logged in!'
-            );
-        }
-        // replace this example code with whatever you need
-        return $this->render('employee/homepage.html.twig', [
+        return $this->render('Employee/homepage.html.twig', [
         ]);
     }
 
     /**
-     * @Route("/user/meetings", name="employee-meetings")
-     */
+ * @Route("/employee/meetings", name="employee-meetings")
+ */
     public function meetingAction(Request $request)
     {
         return $this->render('employee/meetings.html.twig', [
@@ -37,7 +27,7 @@ class EmployeeController extends Controller
     }
 
     /**
-     * @Route("/user/agenda", name="employee-agenda")
+     * @Route("/employee/agenda", name="employee-agenda")
      */
     public function agendaAction(Request $request)
     {
@@ -46,7 +36,7 @@ class EmployeeController extends Controller
     }
 
     /**
-     * @Route("/user/groups", name="employee-groups")
+     * @Route("/employee/groups", name="employee-groups")
      */
     public function groupsAction(Request $request)
     {
@@ -55,7 +45,7 @@ class EmployeeController extends Controller
     }
 
     /**
-     * @Route("/user/about", name="employee-about")
+     * @Route("/employee/about", name="employee-about")
      */
     public function aboutAction(Request $request)
     {
@@ -64,7 +54,7 @@ class EmployeeController extends Controller
     }
 
     /**
-     * @Route("/user/contact", name="employee-contact")
+     * @Route("/employee/contact", name="employee-contact")
      */
     public function contactAction(Request $request)
     {
@@ -73,7 +63,7 @@ class EmployeeController extends Controller
     }
 
     /**
-     * @Route("/user/feedback", name="employee-feedback")
+     * @Route("/employee/feedback", name="employee-feedback")
      */
     public function feedbackAction(Request $request)
     {

@@ -1,3 +1,25 @@
-/*select {*/
-    /*display: block;*/
-/*}*/
+select {
+    display: block;
+    width: 75%;
+}
+
+.main-section textarea,
+.main-section input,
+.main-section label,
+.main-section {
+    color: white !important;
+}
+
+label {
+    font-size: 15px;
+}
+
+.form_row {
+    margin-top: 5px
+}
+
+.main-section .main {
+    background: rgba(204, 204, 204, 0.2);
+    border-radius: 40px;
+    padding: 20px;
+}

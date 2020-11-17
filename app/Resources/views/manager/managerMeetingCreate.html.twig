@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseContent.html.twig' %}
 
 {% form_theme form 'form/materialize_form_theme.html.twig' %}
 
@@ -7,30 +7,42 @@
     <link rel="stylesheet" href="{{ asset('css/meeting.css') }}">
 {% endblock %}
 
-{% block body %}
-    <div class="row center-align">
-        <div class="col s2"></div>
-        <div class="col s8 main row">
-            {{ form_start(form) }}
-                {{ form_row(form.name) }}
-                {{ form_row(form.description) }}
-                {{ form_label(form.groups) }}
-                {{ form_widget(form.groups) }}
-                {{ form_row(form.location) }}
-                {{ form_label(form.dateTime) }}
-                {{ form_widget(form.dateTime) }}
-            {{ form_end(form) }}
+{% block nav %}
+    <div class="nav-bar">
+        <div class="nav-logo"><a href="{{ path('loginRedirect') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
+        <div class="nav-items">
+            <ul>
+                <li><a href="{{ path('manager-meeting-create') }}">Meetings</a></li>
+            </ul>
+            <a class="btn" href="{{ path('login') }}">account</a>
         </div>
-        <div class="col s2"></div>
     </div>
 {% endblock %}
 
-{% block scripts %}
-    {{ parent() }}
-    <script>
-        $(document).ready(function() {
-            M.updateTextFields();
-            $('select').formSelect();
-        });
-    </script>
+{% block content %}
+            {{ form_start(form) }}
+                <div class="form_row">
+                    {{ form_label(form.name) }}
+                    {{ form_widget(form.name, {'attr': {'class': 'white-text'}}) }}
+                </div>
+                <div class="form_row">
+                    {{ form_label(form.description) }}
+                    {{ form_widget(form.description) }}
+                <div class="form_row" style="height: 60px">
+                    <div class="col s12">
+                        {{ form_label(form.group) }}
+                    </div>
+                    <div class="col s12">
+                        {{ form_widget(form.group) }}
+                    </div>
+                </div>
+                <div class="form_row">
+                    {{ form_label(form.location) }}
+                    {{ form_widget(form.location, {'attr': {'class': 'white-text'}}) }}
+                </div>
+                <div class="form_row">
+                    {{ form_label(form.dateTime) }}
+                    {{ form_widget(form.dateTime, {'attr': {'class': 'white-text'}}) }}
+                </div>
+            {{ form_end(form) }}
 {% endblock %}
