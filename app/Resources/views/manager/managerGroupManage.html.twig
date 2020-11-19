@@ -1,0 +1,29 @@
+{% extends 'baseContent.html.twig' %}
+
+
+{% block content %}
+    <h2 class="center white-text">List of: {{ user.username }} </h2>
+    <table class="container white-text" >
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>User id</td>
+            <td>Group name</td>
+            <td>Group description</td>
+            <td>Add to Group</td>
+        </thead>
+        <tbody>
+        {% for group in groups %}
+            <tr>
+            <td>{{ group.id }}</td>
+            <td>{{ user.id }}</td>
+            <td>{{ group.name }}</td>
+            <td>{{ group.description }}</td>
+            <td>
+                <a class="btn green {% for groupass in groupAss %}{% if groupass.group == group %}disabled{% endif %}{% endfor %}" href="{{ path('manager-group-add', {userid: user.id, groupid: group.id}) }}">Add</a>
+            </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
