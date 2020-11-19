@@ -6,6 +6,12 @@ use AppBundle\Form\Type\MeetingType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use AppBundle\CourseLeader\MeetingCourseLeader;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use AppBundle\Entity\Meeting;
+
+
 
 class CourseLeaderController extends Controller
 {
@@ -20,31 +26,38 @@ class CourseLeaderController extends Controller
 //            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
 //        ]);
 //    }
+    private $meetingCourseleader;
+
+    public function __construct(MeetingCourseLeader $meetingCourseleader)
+    {
+        $this->meetingCourseleader = $meetingCourseleader;
+    }
+
     /**
      * @IsGranted("ROLE_COURSELEADER")
-     * @Route("/manager", name="manager-homepage")
+     * @Route("/clead", name="courseleader-homepage")
      */
     public function indexAction()
     {
         // replace this example code with whatever you need
-        return $this->render('manager/homepage.html.twig', [
+        return $this->render('courseleader/homepage.html.twig', [
         ]);
     }
 
     /**
      * @IsGranted("ROLE_COURSELEADER")
-     * @Route("/manager/meeting/view", name="manager-meeting-view")
+     * @Route("/clead/meeting/view", name="courseleader-meeting-view")
      */
     public function meetingViewAction()
     {
-        return $this->render('manager/managerMeetingView.html.twig', [
-            'meetings' => $this->meetingManager->getAllMeetings()
+        return $this->render('courseleader/courseLeaderMeetingView.html.twig', [
+            'meetings' => $this->meetingCourseleader->getAllMeetings()
         ]);
     }
 
     /**
      * @IsGranted("ROLE_COURSELEADER")
-     * @Route("/manager/meeting/create", name="manager-meeting-create")
+     * @Route("/clead/meeting/create", name="courseleader-meeting-create")
      */
     public function meetingCreateAction(Request $request)
     {
@@ -52,45 +65,45 @@ class CourseLeaderController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
-            $this->meetingManager->updateMeeting($form->getData());
-            return $this->redirectToRoute('manager-meeting-view');
+            $this->meetingCourseleader->updateMeeting($form->getData());
+            return $this->redirectToRoute('courseleader-meeting-view');
         }
 
-        return $this->render('manager/managerMeetingCreate.html.twig', [
+        return $this->render('courseleader/courseLeaderMeetingCreate.html.twig', [
             'form' => $form->createView()
         ]);
     }
 
     /**
      * @IsGranted("ROLE_COURSELEADER")
-     * @Route("/manager/meeting/{id}", name="manager-meeting-detail")
+     * @Route("/clead/meeting/{id}", name="courseleader-meeting-detail")
      */
     public function meetingDetailAction($id)
     {
-        $meeting = $this->meetingManager->getMeetingById($id);
+        $meeting = $this->meetingCourseleader->getMeetingById($id);
 
         // replace this example code with whatever you need
-        return $this->render('manager/homepage.html.twig', [
+        return $this->render('courseleader/homepage.html.twig', [
             'meeting' => $meeting
         ]);
     }
 
     /**
      * @IsGranted("ROLE_COURSELEADER")
-     * @Route("/manager/meeting/{id}/update", name="manager-meeting-update")
+     * @Route("/clead/meeting/{id}/update", name="courseleader-meeting-update")
      */
     public function meetingUpdateAction(Request $request, $id)
     {
-        $meeting = $this->meetingManager->getMeetingById($id);
+        $meeting = $this->meetingCourseleader->getMeetingById($id);
         $form = $this->createForm(MeetingType::class, $meeting);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
-            $this->meetingManager->updateMeeting($meeting);
-            return $this->redirectToRoute('manager-meeting-view');
+            $this->meetingCourseleader->updateMeeting($meeting);
+            return $this->redirectToRoute('courseleader-meeting-view');
         }
 
-        return $this->render('manager/managerMeetingCreate.html.twig', [
+        return $this->render('courseleader/courseLeaderMeetingCreate.html.twig', [
             'form' => $form->createView()
         ]);
     }

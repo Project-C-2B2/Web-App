@@ -1,0 +1,29 @@
+{% extends 'baseUser.html.twig' %}
+
+{% block nav %}
+    <div class="nav-bar">
+        <div class="nav-logo"><a href="{{ path('loginRedirect') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
+        <div class="nav-items">
+            <ul>
+                <li><a href="{{ path('courseleader-meeting-view') }}">Meetings</a></li>
+            </ul>
+            <a class="btn" href="{{ path('login') }}">account</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="current-page">
+        <h2>Home</h2>
+    </div>
+    <div class="welcome-text">
+        <h1>Welcome to <span>CimMeets</span>!<br>Learn, create and make it work</h1>
+        <form class="learn-more" action="https://www.cimsolutions.nl/">
+            <button type="submit" class="btn">Learn more</button>
+        </form>
+    </div>
+    <div class="upcoming-meetings">
+        <h2>These are your upcoming <span>Meetings</span>:</h2>
+
+    </div>
+{% endblock %}
