@@ -96,7 +96,7 @@ class GuestController extends Controller
 
                 $this->addFlash(
                     'notice',
-                    'Account is still disabled, The manager needs to enable the account, please wait'
+                    'Account is created, but the manager needs to enable the account, please wait'
                 );
                 return $this->redirectToRoute('login');
             } else {
