@@ -76,7 +76,7 @@ class GuestController extends Controller
         }
 
         if ($this->isGranted('ROLE_COURSELEADER')) {
-            return $this->redirectToRoute('employee-dashboard');
+            return $this->redirectToRoute('courseleader-homepage');
         }
 
         return $this->redirectToRoute('login');
