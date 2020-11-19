@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Groups\GroupsInUserAssociation;
 use AppBundle\Entity\Meeting;
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\MeetingType;
@@ -108,7 +109,7 @@ class ManagerController extends Controller
     {
         $users = $this->meetingManager->getAllUsers();
         // replace this example code with whatever you need
-        return $this->render('ManagerAccept/managerUserManage.html.twig', [
+        return $this->render('manager/managerUserManage.html.twig', [
             'users' => $users
         ]);
     }
@@ -131,7 +132,7 @@ class ManagerController extends Controller
         $em->flush();
 
         // replace this example code with whatever you need
-        return $this->redirect($this->generateUrl('manager-users-view'));
+        return $this->redirectToRoute('manager-users-view');
     }
 
     /**
@@ -140,25 +141,34 @@ class ManagerController extends Controller
     public  function groupAction($id)
     {
         $groups = $this->meetingManager->getAllGroups();
-        $groupAssociation = $this->meetingManager->getAllGroupAssociation();
-        $user = $this->meetingManager->getAllUsers();
+        $user = $this->meetingManager->getUserId($id);
+        $groupAssociation = $this->meetingManager->getGroupAssociationbyUser($user);
 
-        return $this->render('ManagerAccept/managerGroupManage.html.twig', [
+
+        return $this->render('manager/managerGroupManage.html.twig', [
             'groups' => $groups,
             'groupAss' => $groupAssociation,
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
     /**
-     * @Route("/manager/group/add/{id}", name="manager-group-add")
+     * @Route("/manager/group/add/{userid}/{groupid}", name="manager-group-add")
      */
-    public  function userAddGroupAction($groupId)
+    public  function userAddGroupAction($groupid, $userid)
     {
+        $em = $this->getDoctrine()->getManager();
+        $group = $this->meetingManager->getGroupId($groupid);
+        $user = $this->meetingManager->getUserId($userid);
 
 
-        return $this->redirect($this->generateUrl('manager-group-view'));
+        $groupAssociation = new GroupsInUserAssociation($user, $group);
 
+        $this->addFlash('succes', 'You have add User: ' .$user. ' to Group: ' .$groupid);
+
+        $em->persist($groupAssociation);
+        $em->flush();
+        return $this->redirectToRoute('manager-users-view');
     }
 
 }

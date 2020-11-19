@@ -43,7 +43,20 @@ class MeetingManager
         return $this->em->getRepository(Group::class)->findAll();
     }
 
+    public function getGroupId($id){
+        return $this->em->getRepository(Group::class)->find($id);
+    }
+
     public function getAllGroupAssociation(){
         return $this->em->getRepository(GroupsInUserAssociation::class)->findAll();
     }
+
+    public function getGroupAssociationId($id){
+        return $this->em->getRepository(GroupsInUserAssociation::class)->find($id);
+    }
+
+    public function getGroupAssociationbyUser($user){
+        return $this->em->getRepository(GroupsInUserAssociation::class)->findBy(array('user' => $user));
+    }
+
 }
