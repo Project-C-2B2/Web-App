@@ -3,67 +3,122 @@
 {% block body %}
     <nav>
         <div class="nav-wrapper">
-            <a class="navbar-brand" href="{{ path('guestpage') }}"><img style="margin-left: 50px; margin-top: 10px" src="{{ asset("image/Logocimmeets.png") }}"></a>
+            <a class="navbar-brand"; href="index.html.twig"><img style="margin-left: 50px; margin-top: 10px" src="{{ asset("image/Logocimmeets.png") }}"></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="sass.html">Contact</a></li>
-                <li><a class="waves-effect waves-light btn" href="{{  path('employee_login') }}">Login</a></li>
+                <li><a class="waves-effect waves-light btn" href="{{ path('login') }}">Login</a></li>
             </ul>
         </div>
     </nav>
+    <div class="wrapper">
+        <div>
+            <h1 class="white-text" style="margin-left:35%; margin-top: 300px;">WELKOM BIJ CIMEETS</h1>
+        </div>
 
-    <div>
-        <h1 style="margin-left:35%; margin-top: 300px;">WELKOM BIJ CIMEETS</h1>
-    </div>
+        <div class="row" style="margin-top: 500px">
+            <div class="column">
+                <h2 class="white-text" style="margin-left: 25%">Waarom Cimeets</h2>
+                <h5 class="white-text" style="margin-left: 100px; margin-right: 100px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin suscipit purus eget nisl malesuada commodo sit amet quis mi. Vestibulum cursus sem eu nibh tristique rhoncus eu et nibh. Maecenas non feugiat tortor. Donec ut ante vel quam dignissim scelerisque eu eu dolor. Donec tincidunt mollis urna, ut pellentesque ligula faucibus vitae. Quisque sit amet dolor vel nunc accumsan faucibus. In aliquam euismod maximus. Mauris auctor lorem nec magna congue, eu mattis libero vehicula.</h5>
+            </div>
 
-    <div class="row" style="margin-top: 500px">
-        <div class="col s6 m3 center"style="margin-left: 10%">
-            <div class="card">
-                <div class="card-image">
-                    <img src="{{ asset("image/chat.png") }}">
-                    <span class="card-title">Call</span>
-                </div>
-                <div class="card-content">
-                    <p>I am a very simple card. I am good at containing small bits of information.
-                        I am convenient because I require little markup to use effectively.</p>
-                </div>
-                <div class="card-action">
-                    <a href="#">Learn More</a>                </div>
+            <div class="column">
+                <video controls="controls" controlslist="" style="width: 600px">
+                    <source src="https://www.cimsolutions.nl/sites/default/files/CimSolutions%20Ident%20slogan%20B%20%2B%20audio%20light.m4v" type="video/x-m4v">
+                </video>
             </div>
         </div>
-        <div class="col s6 m3 center">
-            <div class="card">
-                <div class="card-image">
-                    <img src="{{ asset("image/meet.png") }}">
-                    <span class="card-title">Meet</span>
-                </div>
-                <div class="card-content">
-                    <p>I am a very simple card. I am good at containing small bits of information.
-                        I am convenient because I require little markup to use effectively.</p>
-                </div>
-                <div class="card-action">
-                    <a href="#">Learn More</a>                </div>
-            </div>
-        </div>
-        <div class="col s6 m3 center">
-            <div class="card">
-                <div class="card-image">
-                    <img src="{{ asset("image/call.png") }}">
-                    <span class="card-title">Chat</span>
-                </div>
-                <div class="card-content">
-                    <p>I am a very simple card. I am good at containing small bits of information.
-                        I am convenient because I require little markup to use effectively.</p>
-                </div>
-                <div class="card-action">
-                    <a href="#">Learn More</a>
+
+        <div class="row" style="margin-top: 500px">
+            <div class="col s6 m3 center"style="margin-left: 10%">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="{{ asset("image/chat.png") }}">
+                        <span class="card-title">Call</span>
+                    </div>
+                    <div class="card-content">
+                        <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">Learn More</a>                </div>
                 </div>
             </div>
+            <div class="col s6 m3 center">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="{{ asset("image/meet.png") }}">
+                        <span class="card-title">Meet</span>
+                    </div>
+                    <div class="card-content">
+                        <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">Learn More</a>                </div>
+                </div>
+            </div>
+            <div class="col s6 m3 center">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="{{ asset("image/call.png") }}">
+                        <span class="card-title">Chat</span>
+                    </div>
+                    <div class="card-content">
+                        <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div id="welcome">
+            <h1 class="white-text" style="margin-left:35%; margin-top: 300px; margin-bottom: 300px">Hoe werkt CimMeets</h1>
+            <h4 class="white-text" style="margin-left:5%; margin-right: 5%; margin-top: 300px; margin-bottom: 300px">
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus velit, ultrices non maximus a, egestas et ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porttitor elementum metus a porta. Curabitur gravida velit nisl. Donec lobortis egestas tellus eu dignissim. Ut imperdiet risus eu urna lacinia, quis commodo quam commodo. Cras malesuada viverra lorem vitae hendrerit. Quisque metus dui, pellentesque non ex vitae, laoreet euismod purus. In eget erat dapibus, fringilla augue ac, dignissim ex. Integer consectetur elit vitae enim suscipit, at lacinia urna congue. Aliquam a dignissim felis. Nunc imperdiet nisl nec interdum lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque lobortis lorem nunc. Cras cursus odio sit amet lorem lacinia, a congue arcu tempus.
+
+                Pellentesque eleifend malesuada elit sed sollicitudin. Morbi egestas lectus non tincidunt tristique. Suspendisse aliquam facilisis euismod. Nam rutrum, metus sed pretium posuere, justo metus mollis tellus, vel pulvinar orci nisi efficitur ex. Nunc euismod faucibus arcu, non tincidunt ante iaculis laoreet. Morbi viverra et purus mollis pellentesque. Nulla mollis accumsan justo et mollis. Proin eget leo ac erat lacinia pulvinar eu eu tortor. Aliquam vehicula tristique metus vitae tincidunt. Maecenas suscipit sodales libero id scelerisque. Donec pharetra, tortor non laoreet facilisis, ipsum neque viverra mauris, quis cursus nisl orci quis libero. Nulla cursus, leo et elementum rhoncus, nunc turpis bibendum quam, vel iaculis tortor nulla sed est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+
+                Vivamus vel urna lobortis, dignissim velit non, euismod eros. Nam vitae orci at ex suscipit gravida. Aliquam facilisis interdum hendrerit. Donec gravida odio vel felis volutpat pulvinar. Maecenas in mattis metus. Morbi sed auctor sem, ac viverra tortor. Donec posuere nibh mi, eu commodo tellus condimentum a. Vivamus quis egestas massa.
+
+                Curabitur porttitor odio nunc, vitae posuere lacus tristique quis. Ut consequat convallis sapien, in vehicula metus elementum quis. Praesent imperdiet lorem purus, sit amet convallis nisi finibus quis. Praesent at arcu nulla. Curabitur molestie, sapien in semper iaculis, dolor leo lobortis arcu, et pellentesque nunc erat quis sapien. Maecenas pulvinar, orci a aliquam rhoncus, justo metus tempor ligula, a efficitur libero ante vitae diam. Curabitur sed tellus eu lacus molestie mattis pellentesque eu nibh. Donec in tellus ut nulla iaculis mollis vel ac libero.
+
+                Duis porta lacus condimentum risus tempor mollis. Vestibulum imperdiet eget diam et tincidunt. Curabitur maximus odio a tortor elementum, nec auctor orci condimentum. Sed ut ante ut metus fringilla laoreet vitae non lacus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Etiam ac risus id turpis eleifend laoreet at vel dolor. In ac sodales sapien. Duis vel purus ac lectus dignissim vestibulum non vitae magna. Cras et ultricies purus, vel finibus eros.
+            </h4>
         </div>
     </div>
-    <br>
 
-    <div id="welcome">
-        <h1 style="margin-left:35%; margin-top: 300px; margin-bottom: 300px">Hoe werkt CimMeets</h1>
-    </div>
+{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .wrapper{
+            height: 100vh;
+            background-image: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.6)),url("{{ asset("images/4UZAlQ.jpg") }}");
+            background-position: center;
+            background-size: cover;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .nav-wrapper{
+            background: rgb(195, 195, 195);
+        }
+        .column {
+            float: left;
+            width: 50%;
+            padding: 10px;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
 {% endblock %}
