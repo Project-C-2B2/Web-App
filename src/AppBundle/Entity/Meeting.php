@@ -39,6 +39,11 @@ class Meeting
     private $location;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Group", inversedBy="id", cascade={"persist"})
+     */
+    private $group;
+
+    /**
      * @ORM\OneToMany(targetEntity="User", mappedBy="id", cascade={"persist"})
      */
     private $attendees;
@@ -127,6 +132,22 @@ class Meeting
     public function setLocation($location)
     {
         $this->location = $location;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    /**
+     * @param mixed $group
+     */
+    public function setGroup($group): void
+    {
+        $this->group = $group;
     }
 
     /**

@@ -1,120 +1,26 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseUser.html.twig' %}
 
-{% block body %}
-    <head>
-        <meta charset="UTF-8">
-        <title>User Dashboard</title>
-        <link rel="stylesheet">
-    </head>
-    <body>
-    <div class="wrapper">
-        <div class="nav-bar">
-            <div class="nav-logo">
-                <a href="{{ path('employee') }}"><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a>
-            </div>
-            <div class="nav-items">
-                <ul>
-                    <li><a href="{{ path('employee') }}">Home</a></li>
-                    <li><a href="{{ path('employee-meetings') }}">Meetings</a></li>
-                    <li><a href="{{ path('employee-groups') }}">Groups</a></li>
-                    <li><a href="{{ path('employee-feedback') }}">Feedback</a></li>
-                    <li><a href="{{ path('employee-about') }}">About</a></li>
-                    <li><a href="{{ path('employee-contact') }}">Contact</a></li>
-                </ul>
-                <a class="btn" href="{{ path('login') }}">account</a>
-            </div>
-        </div>
-        <div class="current-page">
-            <h2>Agenda</h2>
-        </div>
-        <div class="place-holder">
-            <img src="{{ asset("images/salonized-agenda.png") }}">
+{% block nav %}
+    <div class="nav-bar">
+        <div class="nav-logo"><a href="{{ path('loginRedirect') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
+        <div class="nav-items">
+            <ul>
+                <li><a href="{{ path('employee-dashboard') }}">Home</a></li>
+                <li><a href="{{ path('employee-meetings') }}">Meetings</a></li>
+                <li><a href="{{ path('employee-groups') }}">Groups</a></li>
+                <li><a href="{{ path('employee-about') }}">About</a></li>
+                <li><a href="{{ path('employee-contact') }}">Contact</a></li>
+            </ul>
+            <a class="btn" href="{{ path('login') }}">account</a>
         </div>
     </div>
-    </body>
-
-
 {% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-            font-family: sans-serif;
-        }
-        .wrapper{
-            height: 100vh;
-            background-image: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.6)),url("{{ asset("images/4UZAlQ.jpg") }}");
-            background-position: center;
-            background-size: cover;
-            overflow-x: hidden;
-            position: relative;
-        }
-        .nav-bar{
-            display: flex;
-            padding: 40px 120px;
-        }
-        .nav-logo{
-            /*margin-left: 20px;*/
-            margin-bottom: 20px;
-
-        }
-        .nav-items{
-            flex: 1;
-        }
-        .nav-items ul{
-            margin-left: 50px;
-            display: inline;
-        }
-        .nav-items ul li{
-            list-style: none;
-            display: inline-block;
-            padding: 8px 25px;
-        }
-        .nav-items ul li a{
-            color: #fff;
-            text-decoration: none;
-            font-size: 13px;
-        }
-        .nav-items ul li::after{
-            content:"";
-            width: 0;
-            height: 2px;
-            background: #69F0AE;
-            display: block;
-            margin: auto;
-            transition: .5s;
-        }
-        .nav-items ul li:hover::after{
-            width: 100%;
-        }
-        .btn{
-            padding: 10px auto;
-            border: 0;
-            background: #69F0AE;
-            font-weight: bold;
-            cursor: pointer;
-            size: 50px;
-        }
-        .nav-items .btn{
-            float: right;
-        }
-        .welcome-text{
-            margin: 80px;
-            color: #f9f2f4;
-        }
-        .welcome-text span{
-            color: #69F0AE;
-        }
-        .current-page{
-            margin: 80px;
-            color: #69F0AE;
-        }
-        .place-holder{
-            margin: 30px;
-        }
-    </style>
-
+{% block content %}
+    <div class="current-page">
+        <h2>Agenda</h2>
+    </div>
+    <div class="place-holder">
+        <img src="{{ asset("images/salonized-agenda.png") }}">
+    </div>
 {% endblock %}

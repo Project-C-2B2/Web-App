@@ -1,0 +1,45 @@
+{% extends 'baseContent.html.twig' %}
+
+{% block nav %}
+    <div class="nav-bar">
+        <div class="nav-logo"><a href="{{ path('loginRedirect') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
+        <div class="nav-items">
+            <ul>
+                <li><a href="{{ path('employee-dashboard') }}">Home</a></li>
+                <li><a href="{{ path('employee-meetings') }}">Meetings</a></li>
+                <li><a href="{{ path('employee-agenda') }}">Agenda</a></li>
+                <li><a href="{{ path('employee-groups') }}">Groups</a></li>
+                <li><a href="{{ path('employee-about') }}">About</a></li>
+                <li><a href="{{ path('employee-contact') }}">Contact</a></li>
+            </ul>
+            <a class="btn" href="{{ path('login') }}">account</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="current-page">
+        <h2>Feedback</h2>
+    </div>
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="container"> {# container #}
+        <div class="row"> {# row #}
+            <div class="row col-xs-12 white-text">
+                <h1>Please fill out this form</h1>
+
+                {{ form_start(feedbackForm) }}
+                    {{ form_label(feedbackForm.attending) }}
+                    {{ form_widget(feedbackForm.attending, {'attr': {'class': 'white col s12'}}) }}
+                    <br>
+                    {{ form_row(feedbackForm.feedback, {'attr': {'class': 'white-text'}}) }}
+                    {{ form_row(feedbackForm.rating) }}
+                    <button type="submit" class="btn btn-primary">Save</button>
+                {{ form_end(feedbackForm) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

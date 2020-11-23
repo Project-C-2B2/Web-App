@@ -21,41 +21,48 @@ class ManagerController extends Controller
     }
 
     /**
+     * @IsGranted("ROLE_MANAGER")
      * @Route("/manager", name="manager-homepage")
      */
     public function indexAction()
     {
         // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
+        return $this->render('manager/homepage.html.twig', [
         ]);
     }
 
     /**
+     * @IsGranted("ROLE_MANAGER")
      * @Route("/manager/meeting/view", name="manager-meeting-view")
      */
     public function meetingViewAction()
     {
-        $this->meetingManager->getAllMeetings();
-
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
+        return $this->render('manager/managerMeetingView.html.twig', [
+            'meetings' => $this->meetingManager->getAllMeetings()
         ]);
     }
 
     /**
+     * @IsGranted("ROLE_MANAGER")
      * @Route("/manager/meeting/create", name="manager-meeting-create")
      */
-    public function meetingCreateAction()
+    public function meetingCreateAction(Request $request)
     {
         $form = $this->createForm(MeetingType::class);
 
-        // replace this example code with whatever you need
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $this->meetingManager->updateMeeting($form->getData());
+            return $this->redirectToRoute('manager-meeting-view');
+        }
+
         return $this->render('manager/managerMeetingCreate.html.twig', [
             'form' => $form->createView()
         ]);
     }
 
     /**
+     * @IsGranted("ROLE_MANAGER")
      * @Route("/manager/meeting/{id}", name="manager-meeting-detail")
      */
     public function meetingDetailAction($id)
@@ -63,15 +70,16 @@ class ManagerController extends Controller
         $meeting = $this->meetingManager->getMeetingById($id);
 
         // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
+        return $this->render('manager/homepage.html.twig', [
             'meeting' => $meeting
         ]);
     }
 
     /**
+     * @IsGranted("ROLE_MANAGER")
      * @Route("/manager/meeting/{id}/update", name="manager-meeting-update")
      */
-    public function meetingUpdateAction()
+    public function meetingUpdateAction(Request $request, $id)
     {
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
@@ -80,19 +88,17 @@ class ManagerController extends Controller
     }
 
     /**
+     * @IsGranted("ROLE_MANAGER")
      * @Route("/manager/meeting/{id}/delete", name="manager-meeting-delete")
      */
-    public function meetingDeleteAction()
+    public function meetingDeleteAction($id)
     {
-        if (!is_null($this->getUser())) {
-            $this->addFlash(
-                'notice',
-                'User successfully logged in!'
-            );
-        }
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-        ]);
+        $meeting = $this->meetingManager->getMeetingById($id);
+        $this->meetingManager->removeMeeting($meeting);
+
+        $this->addFlash('notice', 'Meeting deleted');
+
+        return $this->redirectToRoute('manager-meeting-view');
     }
 
     /**

@@ -23,6 +23,10 @@ class MeetingManager
         return $this->em->getRepository(Meeting::class)->findAll();
     }
 
+    public function getMeetingById($id) {
+        return $this->em->getRepository(Meeting::class)->find($id);
+    }
+
     public function getUsersByMeeting(Meeting $meeting) {
         return $meeting->getAttendees();
     }

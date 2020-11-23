@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Form\Type\LoginType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -38,6 +39,7 @@ class AdminController extends Controller
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/admin/logout", name="admin_logout")
      */
     public function logoutAction()

@@ -46,7 +46,7 @@ class GuestController extends Controller
                 'notice',
                 'User successfully logged in!'
             );
-            return $this->redirectToRoute('employee');
+            return $this->redirectToRoute('loginRedirect');
         }
         $authenticationUtils = $this->get('security.authentication_utils');
 
@@ -60,6 +60,26 @@ class GuestController extends Controller
                 'error' => $error,
             )
         );
+    }
+
+    /**
+     * @Route("/login/redirect", name="loginRedirect")
+     */
+    public function loginRedirectAction(AuthenticationUtils $authenticationUtils)
+    {
+        if ($this->isGranted('ROLE_MANAGER')) {
+            return $this->redirectToRoute('manager-homepage');
+        }
+
+        if ($this->isGranted('ROLE_EMPLOYEE')) {
+            return $this->redirectToRoute('employee-dashboard');
+        }
+
+        if ($this->isGranted('ROLE_COURSELEADER')) {
+            return $this->redirectToRoute('courseleader-homepage');
+        }
+
+        return $this->redirectToRoute('login');
     }
 
     /**

@@ -116,4 +116,9 @@ class Group
         $this->groupsInUserAssociation->removeElement($groupsInUserAssociation);
     }
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
 }

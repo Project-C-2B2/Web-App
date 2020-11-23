@@ -5,7 +5,10 @@ namespace AppBundle\Form\Type;
 
 
 use AppBundle\Entity\Group;
+use AppBundle\Entity\Meeting;
+use AppBundle\Form\DataTransformer\GroupsArrayTransformer;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -14,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MeetingType extends AbstractType
 {
@@ -24,13 +28,15 @@ class MeetingType extends AbstractType
         $this->em = $entityManager;
     }
 
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        return $resolver->setDefaults([
+            'data_class' => Meeting::class,
+        ]);
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $groups = $this->em->getRepository(Group::class)->findAll();
-        foreach ($groups as $group) {
-            $groupsArray[$group->getName()] = $group;
-        }
-
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Naam',
@@ -52,10 +58,11 @@ class MeetingType extends AbstractType
                 'attr' => ['class' => 'active'],
                 'required' => true
             ])
-            ->add('groups', ChoiceType::class, [
-                'label' => 'Groepen die aanwezig zijn',
-                'choices' => $groupsArray,
-                'attr' => ['multiple'=>true],
+            ->add('group', EntityType::class, [
+                'class' => Group::class,
+                'placeholder' => 'Kiet een groep',
+                'label' => 'Groep die aanwezig is',
+                'attr' => ['data-select'=>'true'],
                 'required' => true
             ])
             ->add('submit', SubmitType::class, [

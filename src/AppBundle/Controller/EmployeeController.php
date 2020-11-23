@@ -2,42 +2,54 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Feedback;
 use AppBundle\Form\Type\FeedbackType;
 use AppBundle\Form\Type\MeetingType;
+use AppBundle\Manager\FeedbackManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use AppBundle\Manager\MeetingManager;
+use http\Client\Curl\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class EmployeeController extends Controller
 {
+    private $feedbackManager;
+    private $meetingManager;
+
+    public function __construct(FeedbackManager $feedbackManager, MeetingManager $meetingManager)
+    {
+        $this->feedbackManager = $feedbackManager;
+        $this->meetingManager = $meetingManager;
+
+    }
+
     /**
-     * @Route("/user/dashboard", name="employee")
+     * @IsGranted("ROLE_EMPLOYEE")
+     * @Route("/employee/dashboard", name="employee-dashboard")
      */
     public function indexAction(Request $request)
     {
-        if (!is_null($this->getUser())) {
-            $this->addFlash(
-                'notice',
-                'User successfully logged in!'
-            );
-        }
-        // replace this example code with whatever you need
-        return $this->render('employee/homepage.html.twig', [
+        return $this->render('Employee/homepage.html.twig', [
         ]);
     }
 
     /**
-     * @Route("/user/meetings", name="employee-meetings")
+     * @IsGranted("ROLE_EMPLOYEE")
+     * @Route("/employee/meetings", name="employee-meetings")
      */
     public function meetingAction(Request $request)
     {
         return $this->render('employee/meetings.html.twig', [
+            'meetings' => $this->meetingManager->getAllMeetings(),
+            'feedbacks' => $this->feedbackManager->getFeedbackByUser($this->getUser())
         ]);
     }
 
     /**
-     * @Route("/user/agenda", name="employee-agenda")
+     * @IsGranted("ROLE_EMPLOYEE")
+     * @Route("/employee/agenda", name="employee-agenda")
      */
     public function agendaAction(Request $request)
     {
@@ -46,7 +58,8 @@ class EmployeeController extends Controller
     }
 
     /**
-     * @Route("/user/groups", name="employee-groups")
+     * @IsGranted("ROLE_EMPLOYEE")
+     * @Route("/employee/groups", name="employee-groups")
      */
     public function groupsAction(Request $request)
     {
@@ -55,7 +68,8 @@ class EmployeeController extends Controller
     }
 
     /**
-     * @Route("/user/about", name="employee-about")
+     * @IsGranted("ROLE_EMPLOYEE")
+     * @Route("/employee/about", name="employee-about")
      */
     public function aboutAction(Request $request)
     {
@@ -64,7 +78,8 @@ class EmployeeController extends Controller
     }
 
     /**
-     * @Route("/user/contact", name="employee-contact")
+     * @IsGranted("ROLE_EMPLOYEE")
+     * @Route("/employee/contact", name="employee-contact")
      */
     public function contactAction(Request $request)
     {
@@ -73,12 +88,40 @@ class EmployeeController extends Controller
     }
 
     /**
-     * @Route("/user/feedback", name="employee-feedback")
+     * @IsGranted("ROLE_EMPLOYEE")
+     * @Route("/user/meeting/{id}/feedback", name="employee-feedback")
      */
-    public function feedbackAction(Request $request)
+    public function feedbackAction($id, Request $request)
     {
-        return $this->render('employee/feedback.html.twig', [
-            'message' => "hallo"
+        if (!$this->getUser())
+            return $this->redirectToRoute('login');
+
+        $meeting = $this->meetingManager->getMeetingById($id);
+
+        if ($this->getUser() && $this->feedbackManager->getFeedbackByUserAndMeeting($this->getUser(), $meeting)){
+            return $this->redirectToRoute('employee-dashboard');
+        }
+
+        $form = $this->createForm(FeedbackType::class);
+
+//        only handles data on POST
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $feedback = $form->getData();
+            $feedback->setMeeting($meeting);
+            $feedback->setUser($this->getUser());
+
+            $this->addFlash(
+                'notice',
+                'The form was saved!'
+            );
+            $this->feedbackManager->updateFeedback($feedback);
+            return $this->redirectToRoute('employee-dashboard');
+        }
+
+
+        return $this->render('employee/feedbackForm.html.twig', [
+            'feedbackForm' => $form->createView(),
         ]);
     }
 }

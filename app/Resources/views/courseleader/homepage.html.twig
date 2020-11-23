@@ -2,14 +2,10 @@
 
 {% block nav %}
     <div class="nav-bar">
-        <div class="nav-logo"><a href="{{ path('employee-dashboard') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
+        <div class="nav-logo"><a href="{{ path('loginRedirect') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
         <div class="nav-items">
             <ul>
-                <li><a href="{{ path('employee-meetings') }}">Meetings</a></li>
-                <li><a href="{{ path('employee-agenda') }}">Agenda</a></li>
-                <li><a href="{{ path('employee-groups') }}">Groups</a></li>
-                <li><a href="{{ path('employee-about') }}">About</a></li>
-                <li><a href="{{ path('employee-contact') }}">Contact</a></li>
+                <li><a href="{{ path('courseleader-meeting-view') }}">Meetings</a></li>
             </ul>
             <a class="btn" href="{{ path('login') }}">account</a>
         </div>

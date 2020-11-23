@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/content.css') }}">
+{% endblock %}
+
+{% block body %}
+    <head>
+        <meta charset="UTF-8">
+        <title>User Dashboard</title>
+    </head>
+    <body>
+    <div class="wrapper">
+        {% block nav %}
+        <div class="nav-bar">
+            <div class="nav-logo"><a href="{{ path('loginRedirect') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
+            <div class="nav-items">
+                <ul>
+                    <li><a href="{{ path('employee-meetings') }}">Meetings</a></li>
+                    <li><a href="{{ path('employee-agenda') }}">Agenda</a></li>
+                    <li><a href="{{ path('employee-groups') }}">Groups</a></li>
+                    <li><a href="{{ path('employee-about') }}">About</a></li>
+                    <li><a href="{{ path('employee-contact') }}">Contact</a></li>
+                </ul>
+                <a class="btn" href="{{ path('login') }}">account</a>
+            </div>
+        </div>
+        {% endblock %}
+        <div class="main-section">
+            <div class="row center-align">
+                <div class="col s2"></div>
+                <div class="col s8 main row">
+                    {% block content %}{% endblock %}
+                </div>
+                <div class="col s2"></div>
+            </div>
+        </div>
+    </div>
+    </body>
+
+{% endblock %}
