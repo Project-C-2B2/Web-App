@@ -1,17 +1,5 @@
 {% extends 'baseContent.html.twig' %}
 
-{% block nav %}
-    <div class="nav-bar">
-        <div class="nav-logo"><a href="{{ path('loginRedirect') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
-        <div class="nav-items">
-            <ul>
-                <li><a href="{{ path('manager-meeting-view') }}">Meetings</a></li>
-                <li><a href="{{ path('manager-users-view') }}">Users</a></li>
-            </ul>
-            <a class="btn" href="{{ path('login') }}">account</a>
-        </div>
-    </div>
-{% endblock %}
 
 {% block content %}
     {% for message in app.flashes('succes') %}
@@ -33,25 +21,23 @@
         <tbody>
         {% for user in users %}
             <tr>
-                {% if user.roles[0] != "ROLE_MANAGER" %}
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.username }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>
-                        {% if user.enabled == 1 %}
-                            <a class="waves-effect waves-red btn green" href="{{ path('manager-user-enable', {id: user.id}) }}">
-                                Enabled
-                            </a>
-                        {% else %}
-                            <a class="waves-effect waves-green btn red" href="{{ path('manager-user-enable', {id: user.id}) }}">
-                                Disabled
-                            </a>
-                        {% endif %}
-                    </td>
-                    <td>
-                        <a class="btn blue" href="{{ path('manager-group-view', {id: user.id}) }}">Add</a>
-                    </td>
-                {% endif %}
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    {% if user.enabled == 1 %}
+                        <a class="waves-effect waves-red btn green" href="{{ path('manager-user-enable', {id: user.id}) }}">
+                            Enabled
+                        </a>
+                    {% else %}
+                        <a class="waves-effect waves-green btn red" href="{{ path('manager-user-enable', {id: user.id}) }}">
+                            Disabled
+                        </a>
+                    {% endif %}
+                </td>
+                <td>
+                    <a class="btn blue" href="{{ path('manager-group-view', {id: user.id}) }}">Add</a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>
