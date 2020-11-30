@@ -37,6 +37,10 @@ class ManagerController extends Controller
      */
     public function meetingViewAction()
     {
+        foreach($this->meetingManager->getMeetingById(1)->getMeetingsInUserAssociation() as $userAssoc) {
+            dump($userAssoc);
+        }
+
         return $this->render('manager/managerMeetingView.html.twig', [
             'meetings' => $this->meetingManager->getAllMeetings()
         ]);
@@ -52,7 +56,8 @@ class ManagerController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
-            $this->meetingManager->updateMeeting($form->getData());
+            $meeting = $form->getData();
+            $this->meetingManager->updateMeeting($meeting);
             return $this->redirectToRoute('manager-meeting-view');
         }
 

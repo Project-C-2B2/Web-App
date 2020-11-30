@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 
 
 use AppBundle\Entity\Groups\GroupsInUserAssociation;
+use AppBundle\Entity\Meetings\MeetingsInUserAssociation;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as FosUser;
@@ -27,6 +28,11 @@ class User extends FosUser
     private $groupsInUserAssociation;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Meetings\MeetingsInUserAssociation", mappedBy="user", cascade={"persist"})
+     */
+    private $meetingsInUserAssociation;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $lastActivityDate;
@@ -43,6 +49,7 @@ class User extends FosUser
         Parent::__construct();
 
         $this->groupsInUserAssociation = new ArrayCollection();
+        $this->meetingsInUserAssociation = new ArrayCollection();
     }
 
     /**
@@ -105,6 +112,33 @@ class User extends FosUser
     public function removeGroupsInUserAssociation(GroupsInUserAssociation $groupsInUserAssociation)
     {
         $this->groupsInUserAssociation->removeElement($groupsInUserAssociation);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMeetingsInUserAssociation()
+    {
+        return $this->meetingsInUserAssociation;
+    }
+
+    /**
+     * @param mixed $meetingsInUserAssociation
+     */
+    public function setMeetingsInUserAssociation($meetingsInUserAssociation): void
+    {
+        $this->meetingsInUserAssociation = $meetingsInUserAssociation;
+    }
+
+    public function addMeetingsInUserAssociation(MeetingsInUserAssociation $meetingsInUserAssociation)
+    {
+        $this->meetingsInUserAssociation->add($meetingsInUserAssociation);
+        return $this;
+    }
+
+    public function removeMeetingsInUserAssociation(MeetingsInUserAssociation $meetingsInUserAssociation)
+    {
+        $this->meetingsInUserAssociation->removeElement($meetingsInUserAssociation);
     }
 
     /**
