@@ -71,13 +71,11 @@ class GuestController extends Controller
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
 
-        if ($this->isGranted('ROLE_EMPLOYEE')) {
-            return $this->redirectToRoute('employee-dashboard');
-        }
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
 
-        if ($this->isGranted('ROLE_COURSELEADER')) {
-            return $this->redirectToRoute('courseleader-homepage');
-        }
+            // 3) Encode the password (you could also do this via Doctrine listener)
 
             $user->addRole('ROLE_EMPLOYEE');
             $user->setEnabled(false);
@@ -95,8 +93,6 @@ class GuestController extends Controller
                 $msg = 'Account already in use';
             }
         }
-
-
         return $this->render(
             'guest/register.html.twig', [
                 'form' => $form->createView(),
@@ -104,14 +100,5 @@ class GuestController extends Controller
             ]
         );
     }
-
-    /**
-     * @Route("/logout", name="logout")
-     */
-    public function logoutAction()
-    {
-    }
-
-
 }
 
