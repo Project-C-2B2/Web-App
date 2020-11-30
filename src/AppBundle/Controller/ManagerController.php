@@ -104,6 +104,7 @@ class ManagerController extends Controller
     }
 
     /**
+     * @IsGranted("ROLE_MANAGER")
      * @Route("/manager/users/view", name="manager-users-view")
      */
     public function userManageAction()
@@ -116,6 +117,7 @@ class ManagerController extends Controller
     }
 
     /**
+     * @IsGranted("ROLE_MANAGER")
      * @Route("/manager/user/enable/{id}", name="manager-user-enable")
      */
     public function userEnableAction($id)
@@ -137,6 +139,7 @@ class ManagerController extends Controller
     }
 
     /**
+     * @IsGranted("ROLE_MANAGER")
      * @Route("/manager/group/view/{id}", name="manager-group-view")
      */
     public  function groupAction($id)
@@ -154,6 +157,7 @@ class ManagerController extends Controller
     }
 
     /**
+     * @IsGranted("ROLE_MANAGER")
      * @Route("/manager/group/add/{userid}/{groupid}", name="manager-group-add")
      */
     public  function userAddGroupAction($groupid, $userid)
