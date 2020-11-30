@@ -3,6 +3,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Meetings\MeetingsInUserAssociation;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -11,6 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Meeting
 {
+    const MEETING_DECLINED = -1;
+    const MEETING_INVITED = 0;
+    const MEETING_ACCEPTED = 1;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -44,14 +49,14 @@ class Meeting
     private $group;
 
     /**
-     * @ORM\OneToMany(targetEntity="User", mappedBy="id", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Meetings\MeetingsInUserAssociation", mappedBy="meeting", cascade={"persist"})
      */
-    private $attendees;
+    private $meetingsInUserAssociation;
 
 
     public function __construct()
     {
-        $this->attendees = new ArrayCollection();
+        $this->meetingsInUserAssociation = new ArrayCollection();
     }
 
     /**
@@ -153,25 +158,28 @@ class Meeting
     /**
      * @return mixed
      */
-    public function getAttendees()
+    public function getMeetingsInUserAssociation()
     {
-        return $this->attendees;
+        return $this->meetingsInUserAssociation;
     }
 
     /**
-     * @param mixed $attendees
+     * @param mixed $meetingsInUserAssociation
      */
-    public function setAttendees($attendees)
+    public function setMeetingsInUserAssociation($meetingsInUserAssociation): void
     {
-        $this->attendees = $attendees;
+        $this->meetingsInUserAssociation = $meetingsInUserAssociation;
     }
 
-    public function addAttendee(User $user) {
-        $this->attendees->add($user);
+    public function addMeetingsInUserAssociation(MeetingsInUserAssociation $meetingsInUserAssociation)
+    {
+        $this->meetingsInUserAssociation->add($meetingsInUserAssociation);
+        return $this;
     }
 
-    public function removeAttendee(User $user) {
-        $this->attendees->remove($user);
+    public function removeMeetingsInUserAssociation(MeetingsInUserAssociation $meetingsInUserAssociation)
+    {
+        $this->meetingsInUserAssociation->removeElement($meetingsInUserAssociation);
     }
 
     public function __toString()

@@ -6,6 +6,7 @@ namespace AppBundle\Manager;
 
 use AppBundle\Entity\Meeting;
 use AppBundle\Entity\User;
+use AppBundle\Entity\Meetings\MeetingsInUserAssociation;
 use Doctrine\ORM\EntityManagerInterface;
 
 class MeetingManager
@@ -35,7 +36,21 @@ class MeetingManager
     }
 
     public function updateMeeting(Meeting $meeting) {
+        $this->getAttendeesFromGroupByMeeting($meeting);
         $this->em->persist($meeting);
         $this->em->flush();
+    }
+
+
+    public function getAttendeesFromGroupByMeeting(Meeting $meeting) {
+        foreach ($meeting->getGroup()->getGroupsInUserAssociation() as $userAssoc) {
+            $meetingInUser = $this->em->getRepository(MeetingsInUserAssociation::class)->findOneBy(['user'=>$userAssoc->getUser(),'meeting'=>$meeting]);
+            if (!$meetingInUser)
+                $meetingInUser = new MeetingsInUserAssociation($userAssoc->getUser(), $meeting);
+            $meeting->addMeetingsInUserAssociation($meetingInUser);
+            $this->em->persist($meetingInUser);
+            $this->em->persist($meeting);
+            $this->em->flush();
+        }
     }
 }
