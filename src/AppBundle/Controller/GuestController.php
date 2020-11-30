@@ -90,9 +90,7 @@ class GuestController extends Controller
 
             if (!$this->userManager->getUserByEmail($form->getData()->getEmail())) {
                 // 4) save the User!
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($user);
-                $entityManager->flush();
+                $this->userManager->updateUser($user);
 
                 $this->addFlash(
                     'notice',
