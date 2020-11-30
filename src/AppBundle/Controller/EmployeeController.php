@@ -2,13 +2,11 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Feedback;
+use AppBundle\Entity\Meeting;
 use AppBundle\Form\Type\FeedbackType;
-use AppBundle\Form\Type\MeetingType;
 use AppBundle\Manager\FeedbackManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use AppBundle\Manager\MeetingManager;
-use http\Client\Curl\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,10 +39,40 @@ class EmployeeController extends Controller
      */
     public function meetingAction(Request $request)
     {
+        $meetings = $this->meetingManager->getMeetingByUser($this->getUser());
+
         return $this->render('employee/meetings.html.twig', [
-            'meetings' => $this->meetingManager->getAllMeetings(),
+            'meetings' => $meetings,
             'feedbacks' => $this->feedbackManager->getFeedbackByUser($this->getUser())
         ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_EMPLOYEE")
+     * @Route("/employee/meeting/{id}/accept", name="employee-meeting-accept")
+     */
+    public function meetingAcceptAction($id)
+    {
+        $meeting = $this->meetingManager->getMeetingById($id);
+        $meetingInUser = $this->meetingManager->getMeetingInUser($this->getUser(), $meeting);
+        $meetingInUser->setState(Meeting::MEETING_ACCEPTED);
+        $this->meetingManager->updateMeetingInUser($meetingInUser);
+
+        return $this->redirectToRoute('employee-meetings');
+    }
+
+    /**
+     * @IsGranted("ROLE_EMPLOYEE")
+     * @Route("/employee/meeting/{id}/decline", name="employee-meeting-decline")
+     */
+    public function meetingDeclineAction($id, Request $request)
+    {
+        $meeting = $this->meetingManager->getMeetingById($id);
+        $meetingInUser = $this->meetingManager->getMeetingInUser($this->getUser(), $meeting);
+        $meetingInUser->setState(Meeting::MEETING_DECLINED);
+        $this->meetingManager->updateMeetingInUser($meetingInUser);
+
+        return $this->redirectToRoute('employee-meetings');
     }
 
     /**

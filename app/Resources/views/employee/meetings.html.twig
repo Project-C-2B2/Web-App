@@ -26,6 +26,7 @@
             <tr>
                 <th><h4>Meeting</h4></th>
                 <th><h4>Feedback</h4></th>
+                <th><h4>Actions</h4></th>
             </tr>
             </thead>
             <tbody>
@@ -36,6 +37,10 @@
                     </td>
                     <td>
                         <a class="btn {% for feedback in feedbacks %}{% if feedback.meeting == meeting %}disabled{% endif %}{% endfor %}" href="{{ path('employee-feedback', {'id':meeting.id}) }}">feedback</a>
+                    </td>
+                    <td>
+                        <a class="btn" href="{{ path('employee-meeting-accept', {'id':meeting.id}) }}">accept</a>
+                        <a class="btn red" href="{{ path('employee-meeting-decline', {'id':meeting.id}) }}">decline</a>
                     </td>
                 </tr>
             {% endfor %}

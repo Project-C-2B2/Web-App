@@ -26,6 +26,19 @@ class MeetingManager
         return $this->em->getRepository(Meeting::class)->find($id);
     }
 
+    public function getMeetingByUser(User $user) {
+        $array = [];
+        $meetingAssocs =  $this->em->getRepository(MeetingsInUserAssociation::class)->findBy(['user'=>$user]);
+        foreach ($meetingAssocs as $meetingAssoc) {
+            $array[] = $meetingAssoc->getMeetings();
+        }
+        return $array;
+    }
+
+    public function getMeetingInUser(User $user, Meeting $meeting) {
+        return $this->em->getRepository(MeetingsInUserAssociation::class)->findOneBy(['user'=>$user, 'meeting'=>$meeting]);
+    }
+
     public function getUsersByMeeting(Meeting $meeting) {
         return $meeting->getAttendees();
     }
@@ -38,6 +51,11 @@ class MeetingManager
     public function updateMeeting(Meeting $meeting) {
         $this->getAttendeesFromGroupByMeeting($meeting);
         $this->em->persist($meeting);
+        $this->em->flush();
+    }
+
+    public function updateMeetingInUser(MeetingsInUserAssociation $meetingsInUserAssociation) {
+        $this->em->persist($meetingsInUserAssociation);
         $this->em->flush();
     }
 
