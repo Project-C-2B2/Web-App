@@ -2,8 +2,13 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Group;
+use AppBundle\Entity\Meeting;
+use AppBundle\Entity\User;
+use AppBundle\Form\UserType;
 use AppBundle\Manager\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,9 +36,28 @@ class GuestController extends Controller
                 'User successfully logged in!'
             );
         }
-        return $this->render('default/index.html.twig', [
+        return $this->render('guest/index.html.twig', [
             'msg' => 'here'
         ]);
+    }
+    /**
+     * @Route("/login/redirect", name="loginRedirect")
+     */
+    public function loginRedirectAction(AuthenticationUtils $authenticationUtils)
+    {
+        if ($this->isGranted('ROLE_MANAGER')) {
+            return $this->redirectToRoute('manager-homepage');
+        }
+
+        if ($this->isGranted('ROLE_EMPLOYEE')) {
+            return $this->redirectToRoute('employee-dashboard');
+        }
+
+        if ($this->isGranted('ROLE_COURSELEADER')) {
+            return $this->redirectToRoute('courseleader-homepage');
+        }
+
+        return $this->redirectToRoute('login');
     }
     /**
      * @Route("/login", name="login")
@@ -60,6 +84,13 @@ class GuestController extends Controller
             )
         );
     }
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logoutAction()
+    {
+    }
+
 
     /**
      * @Route("/register", name="user_registration")

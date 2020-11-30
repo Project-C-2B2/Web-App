@@ -1,66 +1,31 @@
 {# app/Resources/views/registration/register.html.twig #}
-{% extends 'base.html.twig' %}
+{% extends 'baseUser.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-    <style>
-        body{
-            -webkit-text-fill-color: #646464;
-            font-family: 'Roboto', sans-serif;
-        }
-        input{
-            -webkit-text-fill-color: #646464;
-        }
-        .textCreateAccount{
-            font-size: 40px;
-        }
-        .btn{
-            background: rgba(108, 164, 57, 0.95);
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width:100px;
-            height:40px;
-        }
-
-        .nav-wrapper{
-            background: rgb(196, 196, 196);
-        }
-        .logo-cim-Meets{
-            margin-top: 0.4%;
-            margin-left: 0.5%;
-        }
-        .input-field_aiu{
-            font-size: 25px;
-        }
-    </style>
+{% block nav %}
+    <div class="nav-bar">
+        <div class="nav-logo"><a href="{{ path('employee-dashboard') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
+        <div class="nav-items">
+            <ul>
+                {#                <li><a href="#">Contact</a></li>#}
+            </ul>
+            <a class="btn" href="{{ path('login') }}">Login</a>
+            <a class="btn" style="margin-right: 2%" href="{{ path('guestpage') }}">Home</a>
+        </div>
+    </div>
 {% endblock %}
 
-{% block body %}
-<nav>
-    <div class="nav-wrapper">
-        <img src="https://i.ibb.co/hmYS1rD/Logocimmeetsnocaps.png" class="logo-cim-Meets" ></a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="{{ path('guestpage') }}" style="color: #646464; font-weight: bold;">Guestpage</a></li>
-            <li><a href="{{ path('login') }}" style="color: #646464; font-weight: bold;">Sign in</a></li>
-        </ul>
-    </div>
-</nav>
-
-<div class="textCreateAccount center-align "><p>Create an account</p></div>
-
-
+{% block content %}
+<div class="textCreateAccount center-align white-text"><p>Create an account</p></div>
 {{form_start(form) }}
-<div class="row">
+<div class="row white-text">
     <div class="col s3"></div>
     <div class="col s6">
         <div class="row">
             <div class="input-field col s12 m6">
                 {{ form_row(form.username) }}
             </div>
-            <div class="input-field col s12 m6">
+            <div class="input-field col s12 m6 ">
                 {{ form_row(form.email) }}
             </div>
             <div class="input-field col s12 m6 form_row" >
@@ -69,7 +34,7 @@
             <div class="input-field col s12 m6">
                 {{ form_row(form.plainPassword.second) }}
             </div>
-            <div class="input-field col s12">
+            <div class="input-field col s12" >
                 {{ form_row(form.submit) }}
             </div>
 
@@ -83,17 +48,30 @@
             {{ msg }}
             </div>
         {% endif %}
+{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
 
+    <style>
+        body{
 
+            font-family: 'Roboto', sans-serif;
+        }
+        .textCreateAccount{
+            font-size: 40px;
+        }
+        .btn{
+            background: rgba(108, 164, 57, 0.95);
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width:100px;
+            height:40px;
+        }
 
-    {% endblock %}
-
-    {% block scripts %}
-        <script>
-            $(document).ready(function() {
-                M.updateTextFields();
-            });
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    {% endblock %}
+        .input-field_aiu{
+            font-size: 25px;
+        }
+    </style>
+{% endblock %}

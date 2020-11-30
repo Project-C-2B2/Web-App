@@ -1,25 +1,30 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseUser.html.twig' %}
 
-{% block body %}
-
-    <nav>
-        <div class="nav-wrapper">
-            <img src="https://i.ibb.co/hmYS1rD/Logocimmeetsnocaps.png" class="logo-cim-Meets" ></a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="{{ path('guestpage') }}" style="color: #646464; font-weight: bold;">Guestpage</a></li>
-                <li><a href="{{ path('user_registration') }}" style="color: #646464; font-weight: bold;">Register</a></li>
+{% block nav %}
+    <div class="nav-bar">
+        <div class="nav-logo"><a href="{{ path('employee-dashboard') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
+        <div class="nav-items">
+            <ul>
+{#                <li><a href="#">Contact</a></li>#}
             </ul>
+            <a class="btn" href="{{ path('user_registration') }}">Register</a>
+            <a class="btn" style="margin-right: 2%" href="{{ path('guestpage') }}">Home</a>
         </div>
-    </nav>
+    </div>
+{% endblock %}
+
+{% block content %}
+
 
     <div class="row">
         <div class="col s12">
-            <img class="cim-img" src="https://media.glassdoor.com/sqll/419019/cimsolutions-squarelogo-1562828823772.png">
+{#            <img class="cim-img" src="https://media.glassdoor.com/sqll/419019/cimsolutions-squarelogo-1562828823772.png">#}
+            <img class="cim-img" src="{{ asset("images/logocs.png") }}">
         </div>
     </div>
     <div class="row">
         <div class="col s12">
-            <div class="login center-align "><p>Sign in</p></div>
+            <div class="login center-align"><p class="login-text">Sign in</p></div>
         </div>
     </div>
     {% if error %}
@@ -35,15 +40,15 @@
         <div class="col s3"></div>
         <form class="col s6" action="{{ path('login') }}" method="post">
             <div class="row">
-                <div class="input-field col s12 m6">
-                    <img style="padding-right: 10px" class="material-icons prefix" src="https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png"></img>
-                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
-                    <label for="username">Username</label>
+                <div style="color: #00a7d0" class="input-field col s12 m6">
+                    <img style="padding-right: 10px" class="material-icons prefix filterImg" src="https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png"></img>
+                    <input class="white-text" type="text" id="username" name="_username" value="{{ last_username }}" />
+                    <label class="white-text" for="username">Username</label>
                 </div>
                 <div class="input-field col s12 m6">
-                    <img style="padding-right: 10px; width: 43px; height:33px"class="material-icons prefix" src="https://cdn.onlinewebfonts.com/svg/img_398183.png"></img>
-                    <input type="password" id="password" name="_password" />
-                    <label for="password">Password</label>
+                    <img style="padding-right: 10px; width: 43px; height:33px"class="material-icons prefix filterImg" src="https://cdn.onlinewebfonts.com/svg/img_398183.png"></img>
+                    <input class="white-text" type="password" id="password" name="_password" />
+                    <label class="white-text" for="password">Password</label>
                 </div>
                 <div class="col s12">
                     <input type="hidden" name="_target_path" value="/login/redirect"/>
@@ -57,12 +62,8 @@
 
 {% block stylesheets %}
     {{ parent() }}
-
     <style>
-        body{
-            -webkit-text-fill-color: #646464;
-            font-family: 'Roboto', sans-serif;
-        }
+
         .cim-img {
             display: block;
             margin-left: auto;
@@ -71,14 +72,8 @@
             width:200px;
             height:200px;
         }
-        .title{
-            color: grey;
-            margin-top: -2%;
-            font-family: 'Roboto', sans-serif;
-            font-size: 60px;
-        }
         .login{
-            color: grey;
+            color: white;
             font-family: 'Roboto', sans-serif;
             font-size: 60px;
         }
@@ -90,12 +85,8 @@
             width:100px;
             height:40px;
         }
-        .nav-wrapper{
-            background: rgb(195, 195, 195);
-        }
-        .logo-cim-Meets{
-            margin-top: 0.4%;
-            margin-left: 0.5%;
+        .filterImg{
+            filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(127deg) brightness(100%) contrast(101%);
         }
 
     </style>
