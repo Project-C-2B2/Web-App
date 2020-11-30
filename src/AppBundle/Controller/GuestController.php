@@ -82,6 +82,25 @@ class GuestController extends Controller
         return $this->redirectToRoute('login');
     }
 
+            if (!$this->userManager->getUserByEmail($form->getData()->getEmail())) {
+                // 4) save the User!
+                $this->userManager->updateUser($user);
+
+                $this->addFlash(
+                    'notice',
+                    'Account is created, but the manager needs to enable the account, please wait'
+                );
+                return $this->redirectToRoute('login');
+            } else {
+                $msg = 'Account already in use';
+            }
+        }
+        return $this->render(
+            'guest/register.html.twig', [
+                'form' => $form->createView(),
+                'msg' => $msg
+            ]
+        );
     /**
      * @Route("/logout", name="logout")
      */
