@@ -21,23 +21,25 @@
         <tbody>
         {% for user in users %}
             <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.email }}</td>
-                <td>
-                    {% if user.enabled == 1 %}
-                        <a class="waves-effect waves-red btn green" href="{{ path('manager-user-enable', {id: user.id}) }}">
-                            Enabled
-                        </a>
-                    {% else %}
-                        <a class="waves-effect waves-green btn red" href="{{ path('manager-user-enable', {id: user.id}) }}">
-                            Disabled
-                        </a>
-                    {% endif %}
-                </td>
-                <td>
-                    <a class="btn blue" href="{{ path('manager-group-view', {id: user.id}) }}">Add</a>
-                </td>
+                {% if user.roles[0] != "ROLE_MANAGER" %}
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        {% if user.enabled == 1 %}
+                            <a class="waves-effect waves-red btn green" href="{{ path('manager-user-enable', {id: user.id}) }}">
+                                Enabled
+                            </a>
+                        {% else %}
+                            <a class="waves-effect waves-green btn red" href="{{ path('manager-user-enable', {id: user.id}) }}">
+                                Disabled
+                            </a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a class="btn blue" href="{{ path('manager-group-view', {id: user.id}) }}">Add</a>
+                    </td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>
