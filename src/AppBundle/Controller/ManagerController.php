@@ -37,6 +37,10 @@ class ManagerController extends Controller
      */
     public function meetingViewAction()
     {
+        foreach($this->meetingManager->getMeetingById(1)->getMeetingsInUserAssociation() as $userAssoc) {
+            dump($userAssoc);
+        }
+
         return $this->render('manager/managerMeetingView.html.twig', [
             'meetings' => $this->meetingManager->getAllMeetings()
         ]);
