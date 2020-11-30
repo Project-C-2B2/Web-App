@@ -24,7 +24,13 @@
     </div>
     {% if error %}
         <div class="col s12 center-align" >{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div class=" center-align"><p>The manager needs to enable the account, please wait</p></div>
     {% endif %}
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice center-align">
+            {{ message }}
+        </div>
+    {% endfor %}
     <div class="row">
         <div class="col s3"></div>
         <form class="col s6" action="{{ path('login') }}" method="post">

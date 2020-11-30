@@ -31,11 +31,10 @@ class GuestController extends Controller
                 'User successfully logged in!'
             );
         }
-        return $this->render('guest/index.html.twig', [
+        return $this->render('default/index.html.twig', [
             'msg' => 'here'
         ]);
     }
-
     /**
      * @Route("/login", name="login")
      */
@@ -63,13 +62,14 @@ class GuestController extends Controller
     }
 
     /**
-     * @Route("/login/redirect", name="loginRedirect")
+     * @Route("/register", name="user_registration")
      */
-    public function loginRedirectAction(AuthenticationUtils $authenticationUtils)
+    public function registerAction(Request $request)
     {
-        if ($this->isGranted('ROLE_MANAGER')) {
-            return $this->redirectToRoute('manager-homepage');
-        }
+        $msg = null;
+        // 1) build the form
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
 
         if ($this->isGranted('ROLE_EMPLOYEE')) {
             return $this->redirectToRoute('employee-dashboard');
@@ -79,19 +79,21 @@ class GuestController extends Controller
             return $this->redirectToRoute('courseleader-homepage');
         }
 
-        return $this->redirectToRoute('login');
+            $user->addRole('ROLE_EMPLOYEE');
+            $user->setEnabled(false);
 
-        if (!$this->userManager->getUserByEmail($form->getData()->getEmail())) {
-            // 4) save the User!
-            $this->userManager->updateUser($user);
+            if (!$this->userManager->getUserByEmail($form->getData()->getEmail())) {
+                // 4) save the User!
+                $this->userManager->updateUser($user);
 
-            $this->addFlash(
-                'notice',
-                'Account is created, but the manager needs to enable the account, please wait'
-            );
-            return $this->redirectToRoute('login');
-        } else {
-            $msg = 'Account already in use';
+                $this->addFlash(
+                    'notice',
+                    'Account is created, but the manager needs to enable the account, please wait'
+                );
+                return $this->redirectToRoute('login');
+            } else {
+                $msg = 'Account already in use';
+            }
         }
 
 
