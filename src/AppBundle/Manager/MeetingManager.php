@@ -4,6 +4,8 @@
 namespace AppBundle\Manager;
 
 
+use AppBundle\Entity\Group;
+use AppBundle\Entity\Groups\GroupsInUserAssociation;
 use AppBundle\Entity\Meeting;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Meetings\MeetingsInUserAssociation;
@@ -43,15 +45,18 @@ class MeetingManager
         return $meeting->getAttendees();
     }
 
-    public function removeMeeting(Meeting $meeting) {
-        $this->em->remove($meeting);
-        $this->em->flush();
+    public function getAllUsers(){
+        return $this->em->getRepository(User::class)->findAll();
     }
 
     public function updateMeeting(Meeting $meeting) {
         $this->getAttendeesFromGroupByMeeting($meeting);
         $this->em->persist($meeting);
         $this->em->flush();
+    }
+    
+    public function getUserId($id){
+        return $this->em->getRepository(User::class)->find($id);
     }
 
     public function updateMeetingInUser(MeetingsInUserAssociation $meetingsInUserAssociation) {
@@ -71,4 +76,25 @@ class MeetingManager
             $this->em->flush();
         }
     }
+
+    public function getAllGroups(){
+        return $this->em->getRepository(Group::class)->findAll();
+    }
+
+    public function getGroupId($id){
+        return $this->em->getRepository(Group::class)->find($id);
+    }
+
+    public function getAllGroupAssociation(){
+        return $this->em->getRepository(GroupsInUserAssociation::class)->findAll();
+    }
+
+    public function getGroupAssociationId($id){
+        return $this->em->getRepository(GroupsInUserAssociation::class)->find($id);
+    }
+
+    public function getGroupAssociationbyUser($user){
+        return $this->em->getRepository(GroupsInUserAssociation::class)->findBy(array('user' => $user));
+    }
+
 }

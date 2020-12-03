@@ -49,13 +49,13 @@ class GroupsInUserAssociation
         return $this;
     }
 
-    public function setGroups(Group $group = null)
+    public function setGroup(Group $group = null)
     {
         $this->group = $group;
         return $this;
     }
 
-    public function getGroups()
+    public function getGroup()
     {
         return $this->group;
     }

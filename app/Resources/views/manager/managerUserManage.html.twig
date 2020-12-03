@@ -1,0 +1,60 @@
+{% extends 'baseContent.html.twig' %}
+
+{% block nav %}
+    <div class="nav-bar">
+        <div class="nav-logo"><a href="{{ path('loginRedirect') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
+        <div class="nav-items">
+            <ul>
+                <li><a href="{{ path('manager-meeting-view') }}">Meetings</a></li>
+                <li><a href="{{ path('manager-users-view') }}">Users</a></li>
+            </ul>
+            <a class="btn" href="{{ path('login') }}">account</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    {% for message in app.flashes('succes') %}
+        <div class="green" style="margin-left: 50px; margin-right: 50%" >
+            {{ message }}
+        </div>
+    {% endfor %}
+    <h2 class="white-text" style="margin-top: 100px">List of all users</h2>
+    <table class="table table-striped white-text" style="margin-left: 50px">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Username</td>
+            <td>Email</td>
+            <td>Enable/Disable</td>
+            <td>Add to Group</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                {% if user.roles[0] != "ROLE_MANAGER" %}
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        {% if user.enabled == 1 %}
+                            <a class="waves-effect waves-red btn green" href="{{ path('manager-user-enable', {id: user.id}) }}">
+                                Enabled
+                            </a>
+                        {% else %}
+                            <a class="waves-effect waves-green btn red" href="{{ path('manager-user-enable', {id: user.id}) }}">
+                                Disabled
+                            </a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a class="btn blue" href="{{ path('manager-group-view', {id: user.id}) }}">Add</a>
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
