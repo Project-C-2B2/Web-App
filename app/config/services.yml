@@ -34,6 +34,10 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
+    AppBundle\Twig\MeetingExtension:
+        public: true
+        tags: ['twig,extension']
+
     AppBundle\Form\Type\MeetingType:
             arguments: ['@doctrine.orm.entity_manager']
             tags: [form.type]

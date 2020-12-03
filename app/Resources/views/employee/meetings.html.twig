@@ -1,5 +1,10 @@
 {% extends 'baseContent.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock %}
+
 {% block nav %}
     <div class="nav-bar">
         <div class="nav-logo"><a href="{{ path('loginRedirect') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
@@ -39,8 +44,23 @@
                         <a class="btn {% for feedback in feedbacks %}{% if feedback.meeting == meeting %}disabled{% endif %}{% endfor %}" href="{{ path('employee-feedback', {'id':meeting.id}) }}">feedback</a>
                     </td>
                     <td>
-                        <a class="btn" href="{{ path('employee-meeting-accept', {'id':meeting.id}) }}">accept</a>
-                        <a class="btn red" href="{{ path('employee-meeting-decline', {'id':meeting.id}) }}">decline</a>
+                        {% set meetingState = getMeetingState(meeting, app.user) %}
+                        {% if meetingState is null %}
+                            <a class="btn" href="{{ path('employee-meeting-accept', {'id':meeting.id}) }}">accept</a>
+                            <a class="btn red" href="{{ path('employee-meeting-decline', {'id':meeting.id}) }}">decline</a>
+                        {% else %}
+                            {% if meetingState == 1 %}
+                                <p>
+                                    Meeting Accepted
+                                    <i class="material-icons">check</i>
+                                </p>
+                            {% elseif meetingState == -1 %}
+                                <p>
+                                    Meeting Accepted
+                                    <i class="material-icons">close</i>
+                                </p>
+                            {% endif %}
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
