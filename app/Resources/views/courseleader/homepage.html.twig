@@ -2,12 +2,12 @@
 
 {% block nav %}
     <div class="nav-bar">
-        <div class="nav-logo"><a href="{{ path('loginRedirect') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
+        <div class="nav-logo"><a href="{{ path('courseleader-homepage') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
         <div class="nav-items">
             <ul>
                 <li><a href="{{ path('courseleader-meeting-view') }}">Meetings</a></li>
             </ul>
-            <a class="btn" href="{{ path('login') }}">account</a>
+            <a class="btn" href="{{ path('logout') }}">Logout</a>
         </div>
     </div>
 {% endblock %}
