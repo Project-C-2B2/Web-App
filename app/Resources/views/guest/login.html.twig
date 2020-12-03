@@ -14,8 +14,6 @@
 {% endblock %}
 
 {% block content %}
-
-
     <div class="row">
         <div class="col s12">
 {#            <img class="cim-img" src="https://media.glassdoor.com/sqll/419019/cimsolutions-squarelogo-1562828823772.png">#}
@@ -28,11 +26,11 @@
         </div>
     </div>
     {% if error %}
-        <div class="col s12 center-align" >{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        <div class=" center-align"><p>The manager needs to enable the account, please wait</p></div>
+        <div class="col s12 center-align white-text" >{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div class=" center-align white-text"><p>The manager needs to enable the account, please wait</p></div>
     {% endif %}
     {% for message in app.flashes('notice') %}
-        <div class="flash-notice center-align">
+        <div class="flash-notice center-align white-text">
             {{ message }}
         </div>
     {% endfor %}
