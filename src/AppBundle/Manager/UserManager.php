@@ -5,6 +5,7 @@ namespace AppBundle\Manager;
 
 
 use AppBundle\Entity\User;
+
 use Doctrine\ORM\EntityManagerInterface;
 
 class UserManager
@@ -18,5 +19,10 @@ class UserManager
 
     public function getUserByEmail($email) {
         return $this->em->getRepository(User::class)->findOneBy(['email'=>$email]);
+    }
+
+    public function updateUser(User $user) {
+        $this->em->persist($user);
+        $this->em->flush();
     }
 }

@@ -2,13 +2,18 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Group;
+use AppBundle\Entity\Meeting;
+use AppBundle\Entity\User;
+use AppBundle\Form\UserType;
 use AppBundle\Manager\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 class GuestController extends Controller
 {
     private $em;
@@ -35,7 +40,25 @@ class GuestController extends Controller
             'msg' => 'here'
         ]);
     }
+    /**
+     * @Route("/login/redirect", name="loginRedirect")
+     */
+    public function loginRedirectAction(AuthenticationUtils $authenticationUtils)
+    {
+        if ($this->isGranted('ROLE_MANAGER')) {
+            return $this->redirectToRoute('manager-homepage');
+        }
 
+        if ($this->isGranted('ROLE_EMPLOYEE')) {
+            return $this->redirectToRoute('employee-dashboard');
+        }
+
+        if ($this->isGranted('ROLE_COURSELEADER')) {
+            return $this->redirectToRoute('courseleader-homepage');
+        }
+
+        return $this->redirectToRoute('login');
+    }
     /**
      * @Route("/login", name="login")
      */
@@ -61,27 +84,6 @@ class GuestController extends Controller
             )
         );
     }
-
-    /**
-     * @Route("/login/redirect", name="loginRedirect")
-     */
-    public function loginRedirectAction(AuthenticationUtils $authenticationUtils)
-    {
-        if ($this->isGranted('ROLE_MANAGER')) {
-            return $this->redirectToRoute('manager-homepage');
-        }
-
-        if ($this->isGranted('ROLE_EMPLOYEE')) {
-            return $this->redirectToRoute('employee-dashboard');
-        }
-
-        if ($this->isGranted('ROLE_COURSELEADER')) {
-            return $this->redirectToRoute('courseleader-homepage');
-        }
-
-        return $this->redirectToRoute('login');
-    }
-
     /**
      * @Route("/logout", name="logout")
      */
@@ -90,4 +92,44 @@ class GuestController extends Controller
     }
 
 
+    /**
+     * @Route("/register", name="user_registration")
+     */
+    public function registerAction(Request $request)
+    {
+        $msg = null;
+        // 1) build the form
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // 3) Encode the password (you could also do this via Doctrine listener)
+
+            $user->addRole('ROLE_EMPLOYEE');
+            $user->setEnabled(false);
+
+            if (!$this->userManager->getUserByEmail($form->getData()->getEmail())) {
+                // 4) save the User!
+                $this->userManager->updateUser($user);
+
+                $this->addFlash(
+                    'notice',
+                    'Account is created, but the manager needs to enable the account, please wait'
+                );
+                return $this->redirectToRoute('login');
+            } else {
+                $msg = 'Account already in use';
+            }
+        }
+        return $this->render(
+            'guest/register.html.twig', [
+                'form' => $form->createView(),
+                'msg' => $msg
+            ]
+        );
+    }
 }
+
