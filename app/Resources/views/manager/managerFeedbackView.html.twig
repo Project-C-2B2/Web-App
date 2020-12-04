@@ -1,0 +1,28 @@
+{% extends 'baseContentManager.html.twig' %}
+
+{% block content %}
+    <h2 class="center white-text">List of feedbacks </h2>
+    <table class="container white-text" >
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>User id</td>
+            <td>Meeting id</td>
+            <td>Attending</td>
+            <td>Feedback</td>
+            <td>Rating</td>
+        </thead>
+        <tbody>
+        {% for feedback in feedbacks %}
+            <tr>
+                <td>{{ feedback.id }}</td>
+                <td>{{ feedback.user }}</td>
+                <td>{{ feedback.meeting }}</td>
+                <td>{{ feedback.attending }}</td>
+                <td>{{ feedback.feedback }}</td>
+                <td>{{ feedback.rating }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

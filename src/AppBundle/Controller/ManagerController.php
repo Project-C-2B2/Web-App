@@ -6,6 +6,7 @@ use AppBundle\Entity\Groups\GroupsInUserAssociation;
 use AppBundle\Entity\Meeting;
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\MeetingType;
+use AppBundle\Manager\FeedbackManager;
 use AppBundle\Manager\MeetingManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -16,6 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ManagerController extends Controller
 {
     private $meetingManager;
+    private $feedbackManager;
 
     public function __construct(MeetingManager $meetingManager)
     {
@@ -183,6 +185,19 @@ class ManagerController extends Controller
         $em->persist($groupAssociation);
         $em->flush();
         return $this->redirectToRoute('manager-users-view');
+    }
+
+    /**
+     * @IsGranted("ROLE_MANAGER")
+     * @Route("/manager/feedback/view", name="manager-feedback-view")
+     */
+    public function managerFeedbackView()
+    {
+        $feedbacks = $this->meetingManager->getAllFeedbacks();
+
+        return $this->render('manager/managerFeedbackView.html.twig', [
+            'feedbacks' => $feedbacks,
+        ]);
     }
 
 }

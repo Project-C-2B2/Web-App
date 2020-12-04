@@ -4,6 +4,7 @@
 namespace AppBundle\Manager;
 
 
+use AppBundle\Entity\Feedback;
 use AppBundle\Entity\Group;
 use AppBundle\Entity\Groups\GroupsInUserAssociation;
 use AppBundle\Entity\Meeting;
@@ -95,6 +96,10 @@ class MeetingManager
 
     public function getGroupAssociationbyUser($user){
         return $this->em->getRepository(GroupsInUserAssociation::class)->findBy(array('user' => $user));
+    }
+
+    public function getAllFeedbacks(){
+        return $this->em->getRepository(Feedback::class)->findAll();
     }
 
 }
