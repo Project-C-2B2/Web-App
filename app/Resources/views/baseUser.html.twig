@@ -12,17 +12,7 @@
     </head>
     <body>
     <div class="wrapper">
-        {% block nav %}
-            <div class="nav-bar">
-                <div class="nav-logo"><a href="{{ path('employee-dashboard') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
-                <div class="nav-items">
-                    <ul>
-{#                        <li><a href="#">Contact</a></li>#}
-                    </ul>
-                    <a class="btn" href="{{ path('login') }}">Login</a>
-                </div>
-            </div>
-        {% endblock %}
+        {% include 'include/navBar.html.twig' %}
         <div class="main-section"> {% block content %}{% endblock %} </div>
     </div>
     </body>
