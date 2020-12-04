@@ -50,8 +50,14 @@
                             <a class="btn" href="{{ path('employee-meeting-accept', {'id':meeting.id}) }}">accept</a>
                             <a class="btn red" href="{{ path('employee-meeting-decline', {'id':meeting.id}) }}">decline</a>
                         {% else %}
+{#                            {% for message in app.flashes('noticeFull') %}#}
+{#                                <div class="red" style="margin-left: 50px; margin-right: 50%" >#}
+{#                                    {{ message }}#}
+{#                                </div>#}
+{#                            {% endfor %}#}
                             {% if meetingState == 1 %}
                                 <p>
+
                                     Meeting Accepted
                                     <i class="material-icons">check</i>
                                 </p>
