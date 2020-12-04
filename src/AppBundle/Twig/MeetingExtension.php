@@ -12,6 +12,7 @@ class MeetingExtension extends AbstractExtension
 {
     private $meetingManager;
 
+
     public function __construct(MeetingManager $meetingManager)
     {
         $this->meetingManager = $meetingManager;
@@ -41,7 +42,15 @@ class MeetingExtension extends AbstractExtension
 
     public function checkMeetingAvailability(Meeting $meeting)
     {
-        if (count($this->meetingManager->getUsersByMeeting($meeting))>=$this->meetingManager->getUsersMaxCap($meeting))
+        $count = 0;
+        foreach($this->meetingManager->getUsersByMeeting($meeting) as $meetingAss)
+        {
+            if($meetingAss->getState()==1)
+            {
+                $count += 1;
+            }
+        }
+        if ($count>=$this->meetingManager->getUsersMaxCap($meeting))
         {
             return false;
         }

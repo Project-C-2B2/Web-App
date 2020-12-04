@@ -19,7 +19,6 @@
             </tr>
             </thead>
             <tbody>
-
             {% for meeting in meetings %}
                 <tr>
                     <td class="show-meetings">
@@ -29,15 +28,13 @@
                         <a class="btn {% for feedback in feedbacks %}{% if feedback.meeting == meeting %}disabled{% endif %}{% endfor %}" href="{{ path('employee-feedback', {'id':meeting.id}) }}">feedback</a>
                     </td>
                     <td>
-
-                        {% set checkMeeting = checkMeetingAvailability(meeting) %}
                         {% set meetingState = getMeetingState(meeting, app.user) %}
-                        {% if meetingState is null %}
-
-                            {% if checkMeeting %}
-                                <a class="btn" href="{{ path('employee-meeting-accept', {'id':meeting.id}) }}">accept</a>
-                                <a class="btn red" href="{{ path('employee-meeting-decline', {'id':meeting.id}) }}">decline</a>
-                            {% elseif checkMeeting == false %}
+                        {% set checkMeeting = checkMeetingAvailability(meeting) %}
+                        {% if meetingState is null and checkMeeting%}
+                            <a class="btn" href="{{ path('employee-meeting-accept', {'id':meeting.id}) }}">accept</a>
+                            <a class="btn red" href="{{ path('employee-meeting-decline', {'id':meeting.id}) }}">decline</a>
+                        {% else %}
+                            {% if checkMeeting == false %}
                                 <p>
                                     Meeting full, Capacity reached
                                 </p>
@@ -52,7 +49,6 @@
                                     <i class="material-icons">close</i>
                                 </p>
                             {% endif %}
-
                         {% endif %}
                     </td>
                 </tr>
