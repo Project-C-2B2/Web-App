@@ -84,9 +84,17 @@ class ManagerController extends Controller
      */
     public function meetingUpdateAction(Request $request, $id)
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
+        $meeting = $this->meetingManager->getMeetingById($id);
+        $form = $this->createForm(MeetingType::class, $meeting);
 
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $this->meetingManager->updateMeeting($meeting);
+            return $this->redirectToRoute('manager-meeting-view');
+        }
+
+        return $this->render('manager/managerMeetingCreate.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 
