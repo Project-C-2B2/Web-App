@@ -53,16 +53,10 @@ class EmployeeController extends Controller
      */
     public function meetingAcceptAction($id)
     {
-        if ($this->meetingManager->getUsersByMeeting($id)>=$this->meetingManager->getUsersMaxCap())
+        $meeting = $this->meetingManager->getMeetingById($id);
+
+        if (count($this->meetingManager->getUsersByMeeting($meeting))<$this->meetingManager->getUsersMaxCap($meeting))
         {
-            $this->addFlash(
-                'noticeFull',
-                'The meeting is full, capacity is reached'
-            );
-        }
-        elseif ()$this->meetingManager->getUsersByMeeting($id)<$this->meetingManager->getUsersMaxCap())
-        {
-            $meeting = $this->meetingManager->getMeetingById($id);
             $meetingInUser = $this->meetingManager->getMeetingInUser($this->getUser(), $meeting);
             $meetingInUser->setState(Meeting::MEETING_ACCEPTED);
             $this->meetingManager->updateMeetingInUser($meetingInUser);

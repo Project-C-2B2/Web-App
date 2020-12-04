@@ -42,11 +42,7 @@ class MeetingManager
     }
 
     public function getUsersByMeeting(Meeting $meeting) {
-        return $this->em->getRepository(MeetingsInUserAssociation::class)->findOneBy(['meeting'=>$meeting]);
-    }
-
-    public function getUsersByMeetingInt(Meeting $meeting) {
-        return $meeting->getAttendeesInt();
+        return $this->em->getRepository(MeetingsInUserAssociation::class)->findBy(['meeting'=>$meeting]);
     }
 
     public function getUsersMaxCap(Meeting $meeting) {
