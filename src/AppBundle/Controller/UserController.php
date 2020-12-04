@@ -21,7 +21,9 @@ class UserController extends Controller
 
     /**
      * @IsGranted("ROLE_USER")
-     * @Route("/user/notifications", name="user-notifications")
+     * @Route("/employee/notifications", name="employee-notifications")
+     * @Route("/manager/notifications", name="manager-notifications")
+     * @Route("/clead/notifications", name="courseleader-notifications")
      */
     public function notificationAction(Request $request)
     {

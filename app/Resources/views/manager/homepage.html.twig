@@ -1,19 +1,5 @@
 {% extends 'baseUser.html.twig' %}
 
-{% block nav %}
-    <div class="nav-bar">
-        <div class="nav-logo"><a href="{{ path('loginRedirect') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
-        <div class="nav-items">
-            <ul>
-                <li><a href="{{ path('manager-meeting-view') }}">Meetings</a></li>
-                <li><a href="{{ path('manager-users-view') }}">Users</a></li>
-            </ul>
-            <a class="btn" href="{{ path('logout') }}">Logout</a>
-            <a class="btn-floating btn {% if getNotificationReadState(app.user) %}pulse{% endif %}" href="{{ path('user-notifications') }}"><i class="material-icons">chat</i></a>
-        </div>
-    </div>
-{% endblock %}
-
 {% block content %}
     <div class="current-page">
         <h2>Home</h2>
