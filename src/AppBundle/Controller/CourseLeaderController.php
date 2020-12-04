@@ -3,6 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Form\Type\MeetingType;
+use AppBundle\Manager\MeetingManager;
+use AppBundle\Service\NotificationService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,22 +17,13 @@ use AppBundle\Entity\Meeting;
 
 class CourseLeaderController extends Controller
 {
-//    /**
-//     * @IsGranted("ROLE_COURSELEADER")
-//     * @Route("/", name="homepage")
-//     */
-//    public function indexAction(Request $request)
-//    {
-//        // replace this example code with whatever you need
-//        return $this->render('default/homepage.html.twig', [
-//            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-//        ]);
-//    }
-    private $meetingCourseleader;
+    private $meetingManager;
+    private $notificationService;
 
-    public function __construct(MeetingCourseLeader $meetingCourseleader)
+    public function __construct(MeetingManager $meetingManager, NotificationService $notificationService)
     {
-        $this->meetingCourseleader = $meetingCourseleader;
+        $this->meetingManager = $meetingManager;
+        $this->notificationService = $notificationService;
     }
 
     /**
@@ -51,7 +44,7 @@ class CourseLeaderController extends Controller
     public function meetingViewAction()
     {
         return $this->render('courseleader/courseLeaderMeetingView.html.twig', [
-            'meetings' => $this->meetingCourseleader->getAllMeetings()
+            'meetings' => $this->meetingManager->getAllMeetings()
         ]);
     }
 
@@ -65,7 +58,8 @@ class CourseLeaderController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
-            $this->meetingCourseleader->updateMeeting($form->getData());
+            $this->meetingManager->updateMeeting($form->getData());
+            $this->notificationService->sentInvitationNotification($form->getData());
             return $this->redirectToRoute('courseleader-meeting-view');
         }
 
@@ -80,7 +74,7 @@ class CourseLeaderController extends Controller
      */
     public function meetingDetailAction($id)
     {
-        $meeting = $this->meetingCourseleader->getMeetingById($id);
+        $meeting = $this->meetingManager->getMeetingById($id);
 
         // replace this example code with whatever you need
         return $this->render('courseleader/homepage.html.twig', [
@@ -94,12 +88,13 @@ class CourseLeaderController extends Controller
      */
     public function meetingUpdateAction(Request $request, $id)
     {
-        $meeting = $this->meetingCourseleader->getMeetingById($id);
+        $meeting = $this->meetingManager->getMeetingById($id);
         $form = $this->createForm(MeetingType::class, $meeting);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
-            $this->meetingCourseleader->updateMeeting($meeting);
+            $this->meetingManager->updateMeeting($meeting);
+            $this->notificationService->sentUpdateNotification($meeting);
             return $this->redirectToRoute('courseleader-meeting-view');
         }
 

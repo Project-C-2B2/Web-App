@@ -1,35 +1,39 @@
 {% if app.request.get('_route') starts with 'manager' %}
 
     <div class="nav-bar">
-        <div class="nav-logo"><a href="{{ path('manager-homepage') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
+        <div class="nav-logo"><a href="{{ path('loginRedirect') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
         <div class="nav-items">
             <ul>
-                <li><a href="{{ path('manager-homepage') }}">Home</a></li>
+                <li><a href="{{ path('loginRedirect') }}">Home</a></li>
                 <li><a href="{{ path('manager-meeting-view') }}">Meetings</a></li>
                 <li><a href="{{ path('manager-users-view') }}">Users</a></li>
             </ul>
             <a class="btn" href="{{ path('logout') }}">Logout</a>
+            <a class="btn-floating btn {% if getNotificationReadState(app.user) %}pulse{% endif %}" href="{{ path('manager-notifications') }}"><i class="material-icons">chat</i></a>
         </div>
     </div>
 {% elseif app.request.get('_route') starts with 'courseleader' %}
     <div class="nav-bar">
-        <div class="nav-logo"><a href="{{ path('courseleader-homepage') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
+        <div class="nav-logo"><a href="{{ path('loginRedirect') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
         <div class="nav-items">
             <ul>
+                <li><a href="{{ path('loginRedirect') }}">Home</a></li>
                 <li><a href="{{ path('courseleader-meeting-view') }}">Meetings</a></li>
             </ul>
             <a class="btn" href="{{ path('logout') }}">Logout</a>
+            <a class="btn-floating btn {% if getNotificationReadState(app.user) %}pulse{% endif %}" href="{{ path('user-notifications') }}"><i class="material-icons">chat</i></a>
         </div>
     </div>
 {% elseif app.request.get('_route') starts with 'employee' %}
     <div class="nav-bar">
-        <div class="nav-logo"><a href="{{ path('employee-dashboard') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
+        <div class="nav-logo"><a href="{{ path('loginRedirect') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
         <div class="nav-items">
             <ul>
-                <li><a href="{{ path('employee-dashboard') }}">Home</a></li>
+                <li><a href="{{ path('loginRedirect') }}">Home</a></li>
                 <li><a href="{{ path('employee-meetings') }}">Meetings</a></li>
             </ul>
             <a class="btn" href="{{ path('logout') }}">logout</a>
+            <a class="btn-floating btn {% if getNotificationReadState(app.user) %}pulse{% endif %}" href="{{ path('employee-notifications') }}"><i class="material-icons">chat</i></a>
         </div>
     </div>
 {% elseif app.request.get('_route') starts with 'login' %}
@@ -44,7 +48,7 @@
     </div>
 {% else %}
     <div class="nav-bar">
-        <div class="nav-logo"><a href="{{ path('employee-dashboard') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
+        <div class="nav-logo"><a href="{{ path('guestpage') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
         <div class="nav-items">
             <ul>
                 <li><a href="{{ path('guestpage') }}">Home</a></li>
