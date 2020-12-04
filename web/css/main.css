@@ -1,4 +1,3 @@
-
 *{
     margin: 0;
     padding: 0;
@@ -50,6 +49,8 @@
 .nav-items ul li:hover::after{
     width: 100%;
 }
+
+.btn-floating,
 .btn{
     padding: 10px auto;
     border: 0;
@@ -58,8 +59,11 @@
     cursor: pointer;
     size: 50px;
 }
+
+.nav-items .btn-floating,
 .nav-items .btn{
     float: right;
+    margin-right: 20px;
 }
 .welcome-text{
     margin: 80px;
@@ -83,4 +87,11 @@ h2 {
 
 .upcoming-meetings span{
     color: #69F0AE;
+}
+
+span.badge.new,
+span.badge {
+    background-color: #69F0AE;
+    line-height: 20px;
+    height: 20px;
 }

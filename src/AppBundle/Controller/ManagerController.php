@@ -7,6 +7,7 @@ use AppBundle\Entity\Meeting;
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\MeetingType;
 use AppBundle\Manager\MeetingManager;
+use AppBundle\Service\NotificationService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,10 +17,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class ManagerController extends Controller
 {
     private $meetingManager;
+    private $notificationService;
 
-    public function __construct(MeetingManager $meetingManager)
+    public function __construct(MeetingManager $meetingManager, NotificationService $notificationService)
     {
         $this->meetingManager = $meetingManager;
+        $this->notificationService = $notificationService;
     }
 
     /**
@@ -56,6 +59,7 @@ class ManagerController extends Controller
         if ($form->isSubmitted() && $form->isValid()){
             $meeting = $form->getData();
             $this->meetingManager->updateMeeting($meeting);
+            $this->notificationService->sentInvitationNotification($meeting);
             return $this->redirectToRoute('manager-meeting-view');
         }
 
@@ -90,6 +94,7 @@ class ManagerController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             $this->meetingManager->updateMeeting($meeting);
+            $this->notificationService->sentUpdateNotification($meeting);
             return $this->redirectToRoute('manager-meeting-view');
         }
 
@@ -105,6 +110,7 @@ class ManagerController extends Controller
     public function meetingDeleteAction($id)
     {
         $meeting = $this->meetingManager->getMeetingById($id);
+        $this->notificationService->sentCancelledNotification($meeting);
         $this->meetingManager->removeMeeting($meeting);
 
         $this->addFlash('notice', 'Meeting deleted');

@@ -1,0 +1,43 @@
+{% extends 'baseUser.html.twig' %}
+
+{% block nav %}
+    <div class="nav-bar">
+        <div class="nav-logo"><a href="{{ path('loginRedirect') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
+        <div class="nav-items">
+            <ul>
+                <li><a href="{{ path('loginRedirect') }}">Home</a></li>
+            </ul>
+            <a class="btn" href="{{ path('logout') }}">Logout</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+    <div class="col s3"></div>
+        <div class="col s6">
+            <ul class="collection">
+                {% for notification in notifications %}
+                    <li class="collection-item avatar">
+                        {% if notification.notificationType == 'invitation' %}
+                            <i class="material-icons circle green">insert_invitation</i>
+                            <span class="title">Invitation</span>
+                        {% elseif notification.notificationType == 'reminder' %}
+                            <i class="material-icons circle">access_alarms</i>
+                            <span class="title">Reminder</span>
+                        {% elseif notification.notificationType == 'updated' %}
+                            <i class="material-icons circle orange">announcement</i>
+                            <span class="title">Updated</span>
+                        {% elseif notification.notificationType == 'cancelled' %}
+                            <i class="material-icons circle red">cancel</i>
+                            <span class="title">Cancelled</span>
+                        {% endif %}
+                        <p>{{ notification.message }}<br>
+                           {{ notification.dateTime|date("d/m/Y") }}
+                        </p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
