@@ -42,7 +42,7 @@ class MeetingManager
     }
 
     public function getUsersByMeeting(Meeting $meeting) {
-        return $meeting->getAttendees();
+        return $this->em->getRepository(MeetingsInUserAssociation::class)->findOneBy(['meeting'=>$meeting]);
     }
 
     public function getAllUsers(){
