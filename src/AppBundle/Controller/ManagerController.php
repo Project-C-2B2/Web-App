@@ -127,11 +127,11 @@ class ManagerController extends Controller
         $enable = $this->meetingManager->getUserId($id)->isEnabled();
         if ($enable) {
             $this->meetingManager->getUserId($id)->setEnabled(!$enable);
-            $this->addFlash('succes', 'You have Disabled the user');
+            $this->addFlash('succesDIS', 'You have Disabled the user');
         }
         else {
             $this->meetingManager->getUserId($id)->setEnabled(!$enable);
-            $this->addFlash('succes','You have Enabled the user');
+            $this->addFlash('succesEN','You have Enabled the user');
         }
         $em->flush();
 
