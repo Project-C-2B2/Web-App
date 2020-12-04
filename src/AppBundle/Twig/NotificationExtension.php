@@ -31,7 +31,6 @@ class NotificationExtension extends AbstractExtension
     {
         $notifications = $this->notificationManager->getNotificationsByUser($user);
         foreach ($notifications as $notification) {
-            dump(!$notification->getReadState());
             if (!$notification->getReadState()) {
                 return true;
             }
