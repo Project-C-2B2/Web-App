@@ -19,6 +19,7 @@ class LoadUserData extends Fixture implements DependentFixtureInterface
         $user->setPlainPassword('frontend');
         $user->setRoles(['ROLE_EMPLOYEE']);
         $user->setEnabled(true);
+        $user->addGroupsInUserAssociation(new GroupsInUserAssociation($user, $manager->getRepository(Group::class)->findOneBy(['name'=>'testFrontend'])));
         $manager->persist($user);
         $manager->flush();
 

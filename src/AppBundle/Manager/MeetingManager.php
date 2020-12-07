@@ -32,7 +32,8 @@ class MeetingManager
         $array = [];
         $meetingAssocs =  $this->em->getRepository(MeetingsInUserAssociation::class)->findBy(['user'=>$user]);
         foreach ($meetingAssocs as $meetingAssoc) {
-            $array[] = $meetingAssoc->getMeetings();
+            if ($meetingAssoc->getMeetings())
+                $array[] = $meetingAssoc->getMeetings();
         }
         return $array;
     }
