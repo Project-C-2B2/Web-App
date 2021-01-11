@@ -188,4 +188,49 @@ class ManagerController extends Controller
         return $this->redirectToRoute('manager-users-view');
     }
 
+    /**
+     * @IsGranted("ROLE_MANAGER")
+     * @Route("/manager/meeting/{id}/attendance", name="manager-meeting-attendance")
+     */
+    public function meetingAttendaceAction($id){
+        $meeting = $this->meetingManager->getMeetingById($id);
+        $attendees = $this->meetingManager->getUsersByMeeting($meeting);
+
+        return $this->render('manager/managerMeetingAttendance.html.twig', [
+            'meeting' => $meeting,
+            'attendees' => $attendees,
+
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_MANAGER")
+     * @Route("/manager/meeting/{id}/{userid}/accept", name="manager-meeting-accept")
+     */
+    public function managerMeetingAcceptAction($id, $userid)
+    {
+        $user = $this->meetingManager->getUserId($userid);
+        $meeting = $this->meetingManager->getMeetingById($id);
+        $meetingInUser = $this->meetingManager->getMeetingInUser($user, $meeting);
+        $meetingInUser->setState(Meeting::MEETING_ACCEPTED);
+        $this->meetingManager->updateMeetingInUser($meetingInUser);
+
+        return $this->redirectToRoute('manager-meeting-attendance', ['id'=>$id]);
+    }
+
+    /**
+     * @IsGranted("ROLE_MANAGER")
+     * @Route("/manager/meeting/{id}/{userid}/decline", name="manager-meeting-decline")
+     */
+    public function managerMeetingDeclineAction($id, $userid)
+    {
+        $user = $this->meetingManager->getUserId($userid);
+        $meeting = $this->meetingManager->getMeetingById($id);
+        $meetingInUser = $this->meetingManager->getMeetingInUser($user, $meeting);
+        $meetingInUser->setState(Meeting::MEETING_DECLINED);
+        $this->meetingManager->updateMeetingInUser($meetingInUser);
+
+        return $this->redirectToRoute('manager-meeting-attendance', ['id'=>$id]);
+    }
+
 }

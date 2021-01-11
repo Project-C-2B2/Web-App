@@ -1,0 +1,27 @@
+{% extends 'baseContentManager.html.twig' %}
+
+{% block content %}
+
+    <h5>{{ meeting }}</h5>
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Attendance</th>
+                <th>Acceptance</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for attendee in attendees %}
+                <tr>
+                    <td>{{ attendee.user }}</td>
+                    <td><a class="btn green" href="{{ path("manager-meeting-accept", {id:meeting.id, userid:attendee.user.id}) }}">Present</a><a class="btn red" href="{{ path("manager-meeting-decline", {id:meeting.id, userid:attendee.user.id}) }}">Absent</a></td>
+                    {% if attendee.state == 1 %}<td>accepted</td>
+                    {% else %}<td>declined</td>
+                        {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

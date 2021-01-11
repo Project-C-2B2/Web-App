@@ -103,4 +103,5 @@ class MeetingManager
         return $this->em->getRepository(GroupsInUserAssociation::class)->findBy(array('user' => $user));
     }
 
+
 }
