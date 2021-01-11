@@ -46,15 +46,13 @@ security:
 
         main:
             pattern: .*
-            context:            user
             user_checker: security.user_checker
             form_login:
                 provider: fos_userbundle
                 login_path: login
                 check_path: login
 #                csrf_token_generator: security.csrf.token_manager
-            logout:
-                path: fos_user_security_logout
+            logout:       true
             anonymous:    true
 
     access_control:

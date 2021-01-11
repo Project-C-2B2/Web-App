@@ -7,34 +7,51 @@ use AppBundle\Entity\Group;
 use AppBundle\Entity\Meeting;
 use AppBundle\Entity\Meetings\MeetingsInUserAssociation;
 use AppBundle\Entity\User;
+use AppBundle\Manager\MeetingManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class LoadMeetingData extends Fixture implements DependentFixtureInterface
 {
+    private $meetingManager;
+
+    public function __construct(MeetingManager $meetingManager)
+    {
+        $this->meetingManager = $meetingManager;
+    }
+
     public function load(ObjectManager $manager)
     {
         $meeting = new Meeting();
-        $meeting->setName('meeting1Hour');
-        $meeting->setDescription('This meeting starts in a hour from creation');
+        $meeting->setName('Demonstratie Kennis Meeting');
+        $meeting->setDescription('Deze meeting is voor de demonstratie');
         $dateTime = new \DateTime(date('Y-m-d H:i:s',strtotime('+1 hour',strtotime(date("Y-m-d H:i:s")))));
         $meeting->setDateTime($dateTime);
         $meeting->setLocation('Online');
-        $meeting->setGroup($manager->getRepository(Group::class)->findOneByName("testFrontend"));
+        $meeting->setGroup($manager->getRepository(Group::class)->findOneByName("Locatie: Wijnhaven 99"));
 
-        $meetingInUserAssoc = new MeetingsInUserAssociation($manager->getRepository(User::class)->findOneByEmail("frontend@email.com"), $meeting);
-        $meeting->addMeetingsInUserAssociation($meetingInUserAssoc);
-        $manager->persist($meetingInUserAssoc);
+        foreach ($this->meetingManager->getUsersByGroup($meeting->getGroup()) as $user) {
+            $meetingInUserAssoc = new MeetingsInUserAssociation($user->getUser(), $meeting);
+            $meeting->addMeetingsInUserAssociation($meetingInUserAssoc);
+            $manager->persist($meetingInUserAssoc);
+        }
+        $manager->persist($meeting);
+        $manager->flush();
 
-        $meetingInUserAssoc = new MeetingsInUserAssociation($manager->getRepository(User::class)->findOneByEmail("frontend2@email.com"), $meeting);
-        $meeting->addMeetingsInUserAssociation($meetingInUserAssoc);
-        $manager->persist($meetingInUserAssoc);
+        $meeting = new Meeting();
+        $meeting->setName('Stressmanagement Meeting');
+        $meeting->setDescription('Deze meeting is voor de stress');
+        $dateTime = new \DateTime(date('Y-m-d H:i:s',strtotime('-8 hour',strtotime(date("Y-m-d H:i:s")))));
+        $meeting->setDateTime($dateTime);
+        $meeting->setLocation('Online');
+        $meeting->setGroup($manager->getRepository(Group::class)->findOneByName("Locatie: Wijnhaven 107"));
 
-        $meetingInUserAssoc = new MeetingsInUserAssociation($manager->getRepository(User::class)->findOneByEmail("frontend4@email.com"), $meeting);
-        $meeting->addMeetingsInUserAssociation($meetingInUserAssoc);
-        $manager->persist($meetingInUserAssoc);
-
+        foreach ($this->meetingManager->getUsersByGroup($meeting->getGroup()) as $user) {
+            $meetingInUserAssoc = new MeetingsInUserAssociation($user->getUser(), $meeting);
+            $meeting->addMeetingsInUserAssociation($meetingInUserAssoc);
+            $manager->persist($meetingInUserAssoc);
+        }
         $manager->persist($meeting);
         $manager->flush();
     }

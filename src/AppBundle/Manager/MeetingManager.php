@@ -46,6 +46,10 @@ class MeetingManager
         return $this->em->getRepository(MeetingsInUserAssociation::class)->findBy(['meeting'=>$meeting]);
     }
 
+    public function getUsersByGroup(Group $group) {
+        return $this->em->getRepository(GroupsInUserAssociation::class)->findBy(['group'=>$group]);
+    }
+
     public function getAllUsers(){
         return $this->em->getRepository(User::class)->findAll();
     }

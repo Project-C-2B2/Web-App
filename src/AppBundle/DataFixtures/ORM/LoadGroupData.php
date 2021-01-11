@@ -12,14 +12,38 @@ class LoadGroupData extends Fixture
     public function load(ObjectManager $manager)
     {
         $group = new Group();
-        $group->setName('testFrontend');
-        $group->setDescription('Testing Frontend');
+        $group->setName('Dev Groep');
+        $group->setDescription('Het geweldige dev team');
         $manager->persist($group);
         $manager->flush();
 
         $group = new Group();
-        $group->setName('testDiffrentGroup');
-        $group->setDescription('Testing another Frontend');
+        $group->setName('Leraar Groep');
+        $group->setDescription('De leraren...');
+        $manager->persist($group);
+        $manager->flush();
+
+        $group = new Group();
+        $group->setName('Locatie: Wijnhaven 99');
+        $group->setDescription('Locatie: Wijnhaven 99');
+        $manager->persist($group);
+        $manager->flush();
+
+        $group = new Group();
+        $group->setName('Locatie: Wijnhaven 107');
+        $group->setDescription('Locatie: Wijnhaven 107');
+        $manager->persist($group);
+        $manager->flush();
+
+        $group = new Group();
+        $group->setName('Locatie: Amsterdam');
+        $group->setDescription('Locatie: Amsterdam');
+        $manager->persist($group);
+        $manager->flush();
+
+        $group = new Group();
+        $group->setName('Locatie: Berlijn');
+        $group->setDescription('Locatie: Berlijn');
         $manager->persist($group);
         $manager->flush();
     }
