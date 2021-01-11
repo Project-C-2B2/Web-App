@@ -193,8 +193,6 @@ class ManagerController extends Controller
         $meeting = $this->meetingManager->getMeetingById($id);
         $attendees = $this->meetingManager->getUsersByMeeting($meeting);
 
-
-
         return $this->render('manager/managerMeetingAttendance.html.twig', [
             'meeting' => $meeting,
             'attendees' => $attendees,
