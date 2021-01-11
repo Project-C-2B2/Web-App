@@ -6,40 +6,17 @@ security:
         AppBundle\Entity\User: bcrypt
 
     role_hierarchy:
-
-        # for convenience, I decided to gather Sonata roles here
         ROLE_COURSELEADER:
           - ROLE_MEETING_CREATE
           - ROLE_MEETING_VIEW
           - ROLE_MEETING_DELETE
           - ROLE_MEETING_UPDATE
 
-        ROLE_EMPLOYEE:
-          - ROLE_USER
-          - ROLE_FEEDBACK
-
-        ROLE_COURSELEADER:
-          - ROLE_USER
-          - ROLE_EMPLOYEE
-
-        ROLE_MANAGER:
-          - ROLE_USER
-          - ROLE_EMPLOYEE
-          - ROLE_COURSELEADER
-
-        ROLE_ADMIN:
-          - ROLE_USER
-          - ROLE_EMPLOYEE
-          - ROLE_COURSELEADER
-          - ROLE_MANAGER
-
-        ROLE_SUPER_ADMIN:
-          - ROLE_USER
-          - ROLE_EMPLOYEE
-          - ROLE_COURSELEADER
-          - ROLE_MANAGER
-          - ROLE_ADMIN
-          - ROLE_ALLOWED_TO_SWITCH
+        ROLE_EMPLOYEE : [ROLE_USER, ROLE_FEEDBACK]
+        ROLE_COURSELEADER : [ROLE_USER, ROLE_EMPLOYEE]
+        ROLE_MANAGER : [ROLE_USER, ROLE_EMPLOYEE, ROLE_COURSELEADER]
+        ROLE_ADMIN : [ROLE_USER, ROLE_EMPLOYEE, ROLE_COURSELEADER, ROLE_MANAGER]
+        ROLE_SUPER_ADMIN : [ROLE_USER, ROLE_EMPLOYEE, ROLE_MANAGER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
         fos_userbundle:
@@ -53,7 +30,6 @@ security:
 
         admin:
             pattern:            /admin(.*)
-            context:            user
             form_login:
                 provider:       fos_userbundle
                 login_path:     admin_login
@@ -69,22 +45,29 @@ security:
                     - AppBundle\Security\AdminAuthenticator
 
         main:
-            pattern: ^/
+            pattern: .*
+            context:            user
             user_checker: security.user_checker
             form_login:
                 provider: fos_userbundle
                 login_path: login
                 check_path: login
 #                csrf_token_generator: security.csrf.token_manager
-            logout:       true
+            logout:
+                path: fos_user_security_logout
             anonymous:    true
 
     access_control:
         - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        - { path: ^/admin/, role: ROLE_ADMIN }
+
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/employee, role: ROLE_EMPLOYEE }
-        - { path: ^/clead, role: ROLE_COURSELEADER }
-        - { path: ^/manager, role: ROLE_MANAGER }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/employee/, role: ROLE_EMPLOYEE }
+        - { path: ^/clead/, role: ROLE_COURSELEADER }
+        - { path: ^/manager/, role: ROLE_MANAGER }

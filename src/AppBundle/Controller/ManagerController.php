@@ -3,15 +3,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Groups\GroupsInUserAssociation;
-use AppBundle\Entity\Meeting;
-use AppBundle\Entity\User;
 use AppBundle\Form\Type\MeetingType;
 use AppBundle\Manager\MeetingManager;
 use AppBundle\Service\NotificationService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ManagerController extends Controller

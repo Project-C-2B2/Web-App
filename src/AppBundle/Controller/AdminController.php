@@ -4,6 +4,7 @@
 namespace AppBundle\Controller;
 
 
+//use AppBundle\Form\Type\LoginType;
 use AppBundle\Form\Type\LoginType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

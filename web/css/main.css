@@ -95,3 +95,17 @@ span.badge {
     line-height: 20px;
     height: 20px;
 }
+
+.dropdown-content {
+    border-radius: 8px;
+}
+
+.nav-items .dropdown-content li a {
+    color: #69F0AE;
+    padding-left: 0px;
+}
+
+.dropdown-content li:hover a {
+    color: #69F0AE;
+    padding-left: 0px;
+}
