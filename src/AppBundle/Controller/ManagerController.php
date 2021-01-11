@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Groups\GroupsInUserAssociation;
+use AppBundle\Entity\Meeting;
 use AppBundle\Form\Type\MeetingType;
 use AppBundle\Manager\MeetingManager;
 use AppBundle\Service\NotificationService;
