@@ -30,4 +30,7 @@ class FeedbackManager
     public function getFeedbackByUser(User $user){
         return $this->em->getRepository(Feedback::class)->findBy(array('user'=>$user));
     }
+    public function getAllFeedback(){
+        return $this->em->getRepository(Feedback::class)->findAll();
+    }
 }

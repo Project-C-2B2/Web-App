@@ -1,0 +1,32 @@
+{% extends 'baseContent.html.twig' %}
+
+{% block content %}
+    <h2 class="center white-text">Feedback </h2>
+    <table class="container white-text" >
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Attending</td>
+            <td>Feedback</td>
+            <td>Rating</td>
+            <td>User</td>
+            <td>Meeting</td>
+        </thead>
+        <tbody>
+        {% for feedback in feedbacks %}
+            <tr>
+                <td>{{ feedback.id }}</td>
+                {% if feedback.attending == 1%}
+                    <td>Present</td>
+                {% else%}
+                    <td>Absent</td>
+                {% endif %}
+                <td>{{ feedback.feedback }}</td>
+                <td>{{ feedback.rating }}</td>
+                <td>{{ feedback.user.username }}</td>
+                <td>{{ feedback.meeting.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

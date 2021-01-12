@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Groups\GroupsInUserAssociation;
 use AppBundle\Entity\Meeting;
 use AppBundle\Form\Type\MeetingType;
+use AppBundle\Form\Type\GroupType;
 use AppBundle\Manager\MeetingManager;
+use AppBundle\Manager\FeedbackManager;
 use AppBundle\Service\NotificationService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -16,12 +18,74 @@ class ManagerController extends Controller
 {
     private $meetingManager;
     private $notificationService;
+    private $feedbackManager;
 
-    public function __construct(MeetingManager $meetingManager, NotificationService $notificationService)
+    public function __construct(MeetingManager $meetingManager, NotificationService $notificationService, FeedbackManager $feedbackManager)
     {
         $this->meetingManager = $meetingManager;
         $this->notificationService = $notificationService;
+        $this->feedbackManager = $feedbackManager;
     }
+
+    /**
+     * @IsGranted("ROLE_MANAGER")
+     * @Route("/manager/users/view/group/{groupid}", name="manager-users-view-group")
+     */
+    public function managerUsersViewInGroup($groupid)
+    {
+        $group = $this->meetingManager->getGroupId($groupid);
+        $groups = $this->meetingManager->getGroupAssociationByGroup($group);
+
+        return $this->render('manager/managerUsersViewInGroup.html.twig', [
+            'groupsAssociations' => $groups,
+        ]);
+    }
+    /**
+    * @IsGranted("ROLE_MANAGER")
+    * @Route("/manager/group/view", name="manager-group-view")
+    */
+    public function managerGroupView()
+    {
+        $groups = $this->meetingManager->getAllGroups();
+
+        return $this->render('manager/managerGroupView.html.twig', [
+            'groups' => $groups,
+        ]);
+    }
+
+    /**
+    * @IsGranted("ROLE_MANAGER")
+    * @Route("/manager/feedback/view/{user}", name="manager-feedback-view")
+    */
+    public function managerFeedbackView($user)
+    {
+        $user = $this->meetingManager->getUserId($user);
+        $feedback = $this->feedbackManager->getFeedbackByUser($user);
+
+        return $this->render('manager/managerFeedbackView.html.twig', [
+            'feedbacks' => $feedback,
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_MANAGER")
+     * @Route("/manager/group/create", name="manager-group-create")
+     */
+    public function groupCreateAction(Request $request)
+    {
+        $form = $this->createForm(GroupType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $group = $form->getData();
+            $this->meetingManager->updateGroup($group);
+            return $this->redirectToRoute('manager-users-view');
+        }
+        return $this->render('manager/managerGroupCreate.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
 
     /**
      * @IsGranted("ROLE_MANAGER")
@@ -151,23 +215,23 @@ class ManagerController extends Controller
         return $this->redirectToRoute('manager-users-view');
     }
 
-    /**
-     * @IsGranted("ROLE_MANAGER")
-     * @Route("/manager/group/view/{id}", name="manager-group-view")
-     */
-    public  function groupAction($id)
-    {
-        $groups = $this->meetingManager->getAllGroups();
-        $user = $this->meetingManager->getUserId($id);
-        $groupAssociation = $this->meetingManager->getGroupAssociationbyUser($user);
-
-
-        return $this->render('manager/managerGroupManage.html.twig', [
-            'groups' => $groups,
-            'groupAss' => $groupAssociation,
-            'user' => $user,
-        ]);
-    }
+//    /**
+//     * @IsGranted("ROLE_MANAGER")
+//     * @Route("/manager/group/view/{id}", name="manager-group-view")
+//     */
+//    public  function groupAction($id)
+//    {
+//        $groups = $this->meetingManager->getAllGroups();
+//        $user = $this->meetingManager->getUserId($id);
+//        $groupAssociation = $this->meetingManager->getGroupAssociationbyUser($user);
+//
+//
+//        return $this->render('manager/managerGroupManage.html.twig', [
+//            'groups' => $groups,
+//            'groupAss' => $groupAssociation,
+//            'user' => $user,
+//        ]);
+//    }
 
     /**
      * @IsGranted("ROLE_MANAGER")
@@ -196,11 +260,12 @@ class ManagerController extends Controller
     public function meetingAttendaceAction($id){
         $meeting = $this->meetingManager->getMeetingById($id);
         $attendees = $this->meetingManager->getUsersByMeeting($meeting);
+        $feedbacks = $this->feedbackManager->getAllFeedback();
 
         return $this->render('manager/managerMeetingAttendance.html.twig', [
             'meeting' => $meeting,
             'attendees' => $attendees,
-
+            'feedbacks' => $feedbacks
         ]);
     }
 
