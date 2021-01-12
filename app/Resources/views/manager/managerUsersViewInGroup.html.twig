@@ -1,0 +1,22 @@
+{% extends 'baseContent.html.twig' %}
+
+{% block content %}
+    <table>
+        <h2 class="center white-text">List of Users</h2>
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for groupAssociation in groupsAssociations %}
+            <tr>
+                <td>{{ groupAssociation.user.username }}</td>
+                <td>{{ groupAssociation.user.email }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

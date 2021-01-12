@@ -1,0 +1,16 @@
+{% extends 'baseContent.html.twig' %}
+
+{% form_theme form 'form/materialize_form_theme.html.twig' %}
+
+{% block content %}
+    {{ form_start(form) }}
+    <div class="form_row">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name, {'attr': {'class': 'white-text'}}) }}
+    </div>
+    <div class="form_row">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description) }}
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
