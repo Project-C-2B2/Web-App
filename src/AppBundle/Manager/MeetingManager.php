@@ -74,6 +74,9 @@ class MeetingManager
         $this->em->flush();
     }
 
+    public function getGroupAssociationbyGroup(Group $group){
+        return $this->em->getRepository(GroupsInUserAssociation::class)->findBy(array('group' => $group));
+    }
 
     public function getAttendeesFromGroupByMeeting(Meeting $meeting) {
         foreach ($meeting->getGroup()->getGroupsInUserAssociation() as $userAssoc) {
@@ -85,6 +88,13 @@ class MeetingManager
             $this->em->persist($meeting);
             $this->em->flush();
         }
+    }
+
+    public function updateGroup(Group $group){
+        $group->setName($group->getName());
+        $group->setDescription($group->getDescription());
+        $this->em->persist($group);
+        $this->em->flush();
     }
 
     public function getAllGroups(){
