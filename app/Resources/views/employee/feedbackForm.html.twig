@@ -9,18 +9,15 @@
             {{ message }}
         </div>
     {% endfor %}
-    <div class="container"> {# container #}
-        <div class="row"> {# row #}
+    <div class="container">
+        <div class="row">
             <div class="row col-xs-12 white-text">
                 <h1>Gelieve dit formulier invullen</h1>
 
                 {{ form_start(feedbackForm) }}
-                    {{ form_label(feedbackForm.attending) }}
-                    {{ form_widget(feedbackForm.attending, {'attr': {'class': 'white col s12'}}) }}
-                    <br>
-                    {{ form_row(feedbackForm.feedback, {'attr': {'class': 'white-text'}}) }}
                     {{ form_label(feedbackForm.rating) }}
                     {{ form_widget(feedbackForm.rating) }}
+                    {{ form_row(feedbackForm.feedback, {'attr': {'class': 'white-text'}}) }}
                     <button type="submit" class="btn btn-primary" style="margin-top: 20px">Opslaan</button>
                 {{ form_end(feedbackForm) }}
             </div>

@@ -1,34 +1,34 @@
 {% if is_granted('ROLE_MANAGER') %}
     <ul id="dropdown1" class="dropdown-content">
-        <li><a href="{{ path('employee-meetings') }}">Meetings</a></li>
+        <li><a href="{{ path('employee-meetings') }}">Vergadering</a></li>
     </ul>
     <div class="nav-bar">
         <div class="nav-logo"><a href="{{ path('loginRedirect') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
         <div class="nav-items">
             <ul>
                 <li><a href="{{ path('loginRedirect') }}">Home</a></li>
-                <li><a href="{{ path('manager-meeting-view') }}">Meetings</a></li>
-                <li><a href="{{ path('manager-users-view') }}">Users</a></li>
-                <li><a href="{{ path('manager-group-view') }}">Group</a></li>
-                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Employee<i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a href="{{ path('manager-meeting-view') }}">Vergaderingen</a></li>
+                <li><a href="{{ path('manager-users-view') }}">Gebruikers</a></li>
+                <li><a href="{{ path('manager-group-view') }}">Groepen</a></li>
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Medewerker<i class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
-            <a class="btn" href="{{ path('logout') }}">Logout</a>
+            <a class="btn" href="{{ path('logout') }}">Afmelden</a>
             <a class="btn-floating btn {% if getNotificationReadState(app.user) %}pulse{% endif %}" href="{{ path('user-notifications') }}"><i class="material-icons">chat</i></a>
         </div>
     </div>
 {% elseif is_granted('ROLE_COURSELEADER') %}
     <ul id="dropdown1" class="dropdown-content">
-        <li><a href="{{ path('employee-meetings') }}">Meetings</a></li>
+        <li><a href="{{ path('employee-meetings') }}">Vergadering</a></li>
     </ul>
     <div class="nav-bar">
         <div class="nav-logo"><a href="{{ path('loginRedirect') }}" ><img src="{{ asset("images/logocs.png") }}" width="75" height="75" alt="logo"></a></div>
         <div class="nav-items">
             <ul>
                 <li><a href="{{ path('loginRedirect') }}">Home</a></li>
-                <li><a href="{{ path('courseleader-meeting-view') }}">Meetings</a></li>
-                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Employee<i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a href="{{ path('courseleader-meeting-view') }}">Vergaderingen</a></li>
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Medewerker<i class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
-            <a class="btn" href="{{ path('logout') }}">Logout</a>
+            <a class="btn" href="{{ path('logout') }}">Afmelden</a>
             <a class="btn-floating btn {% if getNotificationReadState(app.user) %}pulse{% endif %}" href="{{ path('user-notifications') }}"><i class="material-icons">chat</i></a>
         </div>
     </div>
@@ -38,9 +38,9 @@
         <div class="nav-items">
             <ul>
                 <li><a href="{{ path('loginRedirect') }}">Home</a></li>
-                <li><a href="{{ path('employee-meetings') }}">Meetings</a></li>
+                <li><a href="{{ path('employee-meetings') }}">Vergaderingen</a></li>
             </ul>
-            <a class="btn" href="{{ path('logout') }}">logout</a>
+            <a class="btn" href="{{ path('logout') }}">Afmelden</a>
             <a class="btn-floating btn {% if getNotificationReadState(app.user) %}pulse{% endif %}" href="{{ path('user-notifications') }}"><i class="material-icons">chat</i></a>
         </div>
     </div>
@@ -51,7 +51,7 @@
             <ul>
                 <li><a href="{{ path('guestpage') }}">Home</a></li>
             </ul>
-            <a class="btn" href="{{ path('user_registration') }}">Register</a>
+            <a class="btn" href="{{ path('user_registration') }}">Registreren</a>
         </div>
     </div>
 {% else %}
@@ -61,7 +61,7 @@
             <ul>
                 <li><a href="{{ path('guestpage') }}">Home</a></li>
             </ul>
-            <a class="btn" href="{{ path('login') }}">Login</a>
+            <a class="btn" href="{{ path('login') }}">Aanmelden</a>
         </div>
     </div>
 

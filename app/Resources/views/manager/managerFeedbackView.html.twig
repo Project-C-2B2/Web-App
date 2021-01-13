@@ -1,7 +1,7 @@
 {% extends 'baseContent.html.twig' %}
 
 {% block content %}
-    <h2>Feedback</h2>
+    <h2>Evaluatie</h2>
     <table class="container white-text" >
         <tbody>
             <tr>
@@ -13,12 +13,12 @@
                 {% endif %}
             </tr>
             <tr>
-                <td>Feedback :</td>
-                <td>{{ feedback.feedback }}</td>
-            </tr>
-            <tr>
                 <td>Beoordeling :</td>
                 <td>{{ feedback.rating }} van de 10</td>
+            </tr>
+            <tr>
+                <td style="width: 25%">Beschrijving van beoordeling :</td>
+                <td>{{ feedback.feedback }}</td>
             </tr>
             <tr>
                 <td>Gebruiker :</td>
