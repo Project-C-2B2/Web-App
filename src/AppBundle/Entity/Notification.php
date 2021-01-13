@@ -14,10 +14,10 @@ class Notification
     const TYPE_UPDATED = 'updated';
     const TYPE_CANCELLED = 'cancelled';
 
-    const MESSAGE_INVITATION = "There is a invitation waiting for you! \n For %1!";
-    const MESSAGE_REMINDER = 'Meeting %1 will start next day!';
-    const MESSAGE_UPDATED = 'Meeting %1 has been updated!';
-    const MESSAGE_CANCELLED = 'Meeting %1 has been cancelled!';
+    const MESSAGE_INVITATION = "Er staat een uitnodiging klaar \n voor %1!";
+    const MESSAGE_REMINDER = 'Vergadering %1 staat gepland voor de volgende dag!';
+    const MESSAGE_UPDATED = 'Vergadering %1 is gewijzigd!';
+    const MESSAGE_CANCELLED = 'Vergadering %1 is geannuleerd!';
 
     /**
      * @ORM\Id()
