@@ -8,6 +8,7 @@
             <tr>
                 <th>User</th>
                 <th>Attendance</th>
+                <th>Feedback</th>
                 <th>Acceptance</th>
             </tr>
         </thead>
@@ -16,6 +17,7 @@
             {% for attendee in attendees %}
                 <tr>
                     <td>{{ attendee.user }}</td>
+                    <td><a class="btn green" href="{{ path("manager-meeting-accept", {id:meeting.id, userid:attendee.user.id}) }}">Present</a><a class="btn red" href="{{ path("manager-meeting-decline", {id:meeting.id, userid:attendee.user.id}) }}">Absent</a></td>
                     <td><a class=" btn blue {% for feedback in feedbacks %}{% if feedback.user.id == attendee.user.id %}enabled{% endif %}{% endfor %}" href="{{ path('manager-feedback-view', {user: attendee.user.id}) }}">Feedback</a></td>
                     {% if attendee.state == 1 %}<td>accepted</td>
                     {% else %}<td>declined</td>
