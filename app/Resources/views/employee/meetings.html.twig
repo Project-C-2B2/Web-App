@@ -37,7 +37,7 @@
                         {% endif %}
                     </td>
                     <td>
-                            <a class="btn {% if checkMeeting == false %}disabled{% endif %}" href="{{ path('employee-meeting-accept', {'id':meeting.id}) }}">accepteren</a>
+                            <a class="btn {% if checkMeeting == false or meetingState != 0 %}disabled{% endif %}" href="{{ path('employee-meeting-accept', {'id':meeting.id}) }}">accepteren</a>
                             <a class="btn red" href="{{ path('employee-meeting-decline', {'id':meeting.id}) }}">afwijzen</a>
                     </td>
                     <td>
