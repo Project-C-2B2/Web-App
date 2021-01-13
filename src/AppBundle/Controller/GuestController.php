@@ -113,7 +113,7 @@ class GuestController extends Controller
 
                 $this->addFlash(
                     'notice',
-                    'Account is aangemaakt, maar moet nog geactiveerd worden door een maanger, wacht a.u.b.'
+                    'Account is aangemaakt, maar moet nog geactiveerd worden door een manager, wacht a.u.b.'
                 );
                 return $this->redirectToRoute('login');
             } else {
