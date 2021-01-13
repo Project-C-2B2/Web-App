@@ -7,7 +7,7 @@
                 <th>Meeting</th>
                 <th>Datum van Meeting</th>
                 <th>Locatie</th>
-                <th>Acties <a class="btn green" style="margin-left: 50px" href="{{ path('courseleader-meeting-create') }}">New</a></th>
+                <th>Acties <a class="btn green" style="margin-left: 50px" href="{{ path('courseleader-meeting-create') }}">Nieuwe Meeting</a></th>
             </tr>
         </thead>
 
@@ -17,7 +17,7 @@
                     <td>{{ meeting }}</td>
                     <td>{{ meeting.dateTime |date("d/m/Y") }}</td>
                     <td>{{ meeting.location }}</td>
-                    <td><a class="btn green" href="{{ path('courseleader-meeting-update', {'id':meeting.id}) }}">Update</a></td>
+                    <td><a class="btn green" href="{{ path('courseleader-meeting-update', {'id':meeting.id}) }}">Wijzigen</a></td>
                 </tr>
             {% endfor %}
         </tbody>

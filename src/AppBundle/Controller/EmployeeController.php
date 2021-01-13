@@ -77,46 +77,6 @@ class EmployeeController extends Controller
 
     /**
      * @IsGranted("ROLE_EMPLOYEE")
-     * @Route("/employee/agenda", name="employee-agenda")
-     */
-    public function agendaAction(Request $request)
-    {
-        return $this->render('employee/agenda.html.twig', [
-        ]);
-    }
-
-    /**
-     * @IsGranted("ROLE_EMPLOYEE")
-     * @Route("/employee/groups", name="employee-groups")
-     */
-    public function groupsAction(Request $request)
-    {
-        return $this->render('employee/groups.html.twig', [
-        ]);
-    }
-
-    /**
-     * @IsGranted("ROLE_EMPLOYEE")
-     * @Route("/employee/about", name="employee-about")
-     */
-    public function aboutAction(Request $request)
-    {
-        return $this->render('employee/about.html.twig', [
-        ]);
-    }
-
-    /**
-     * @IsGranted("ROLE_EMPLOYEE")
-     * @Route("/employee/contact", name="employee-contact")
-     */
-    public function contactAction(Request $request)
-    {
-        return $this->render('employee/contact.html.twig', [
-        ]);
-    }
-
-    /**
-     * @IsGranted("ROLE_EMPLOYEE")
      * @Route("/user/meeting/{id}/feedback", name="employee-feedback")
      */
     public function feedbackAction($id, Request $request)

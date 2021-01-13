@@ -35,12 +35,17 @@
                             {% if meetingState == 1 %}
                                 <p>
                                     Meeting Accepted
+
                                     <i class="material-icons">check</i>
+                                    <a class="btn" href="{{ path('employee-meeting-accept', {'id':meeting.id}) }}">accept</a>
+                                    <a class="btn red" href="{{ path('employee-meeting-decline', {'id':meeting.id}) }}">decline</a>
                                 </p>
                             {% elseif meetingState == -1 %}
                                 <p>
-                                    Meeting Accepted
+                                    Meeting Declined
                                     <i class="material-icons">close</i>
+                                    <a class="btn" href="{{ path('employee-meeting-accept', {'id':meeting.id}) }}">accept</a>
+                                    <a class="btn red" href="{{ path('employee-meeting-decline', {'id':meeting.id}) }}">decline</a>
                                 </p>
                             {% endif %}
                         {% endif %}
