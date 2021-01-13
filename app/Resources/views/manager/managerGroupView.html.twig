@@ -2,12 +2,15 @@
 
 {% block content %}
     <table>
+        <h2>Groepen</h2>
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Descroption</th>
-            <th>Users in group</th>
-            <a class="btn green" href="{{ path('manager-group-create')}}">Create</a>
+            <th>Groep Naam</th>
+            <th>Groep Beschrijving</th>
+            <th>Gebruikers in Groep</th>
+            <th>
+            <a class="btn green" href="{{ path('manager-group-create')}}">Aanmaken</a>
+            </th>
         </tr>
         </thead>
 
@@ -17,7 +20,7 @@
                 <td>{{ group.name }}</td>
                 <td>{{ group.description }}</td>
                 <td>
-                    <a class="btn green" href="{{ path('manager-users-view-group', {groupid: group.id}) }}">Users</a>
+                    <a class="btn green" href="{{ path('manager-users-view-group', {groupid: group.id}) }}">Gebruikers</a>
                 </td>
             </tr>
         {% endfor %}
