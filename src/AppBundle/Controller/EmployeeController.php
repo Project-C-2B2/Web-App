@@ -54,10 +54,13 @@ class EmployeeController extends Controller
     public function meetingAcceptAction($id)
     {
         $meeting = $this->meetingManager->getMeetingById($id);
-        $meetingInUser = $this->meetingManager->getMeetingInUser($this->getUser(), $meeting);
-        $meetingInUser->setState(Meeting::MEETING_ACCEPTED);
-        $this->meetingManager->updateMeetingInUser($meetingInUser);
 
+        if (count($this->meetingManager->getUsersByMeeting($meeting))<$this->meetingManager->getUsersMaxCap($meeting))
+        {
+            $meetingInUser = $this->meetingManager->getMeetingInUser($this->getUser(), $meeting);
+            $meetingInUser->setState(Meeting::MEETING_ACCEPTED);
+            $this->meetingManager->updateMeetingInUser($meetingInUser);
+        }
         return $this->redirectToRoute('employee-meetings');
     }
 

@@ -33,6 +33,10 @@ class MeetingAdmin extends AbstractAdmin
             ->add('location', 'text', array(
                 'label' => 'Location'
             ))
+            ->add('maxAttendees', 'number', array(
+                'label' => 'Attendees max'
+            ))
+
 //            ->add('attendees', 'entity', array(
 //                'label' => 'Attendees',
 //                'class' => User::class,
