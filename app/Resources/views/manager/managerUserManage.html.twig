@@ -11,15 +11,15 @@
             {{ message }}
         </div>
     {% endfor %}
-    <h2 class="white-text" style="margin-top: 100px">List of all users</h2>
     <table class="table table-striped white-text" style="margin-left: 50px">
+        <h2>Gebruikers</h2>
         <thead>
         <tr>
             <td>ID</td>
-            <td>Username</td>
+            <td>Gebruikersnaam</td>
             <td>Email</td>
-            <td>Enable/Disable</td>
-            <td>Add to Group</td>
+            <td>Bevoegdheid geven aan gebruiker om inteloggen</td>
+            <td>Voeg toe aan groep</td>
         </tr>
         </thead>
         <tbody>
@@ -32,11 +32,11 @@
                     <td>
                         {% if user.enabled == 1 %}
                             <a class="waves-effect waves-red btn green" href="{{ path('manager-user-enable', {id: user.id}) }}">
-                                Enabled
+                                Geaccepteerd
                             </a>
                         {% else %}
                             <a class="waves-effect waves-green btn red" href="{{ path('manager-user-enable', {id: user.id}) }}">
-                                Disabled
+                                Geblokkeert
                             </a>
                         {% endif %}
                     </td>

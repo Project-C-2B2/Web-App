@@ -39,34 +39,34 @@ class MeetingType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Name',
+                'label' => 'Naam',
                 'attr' => ['class' => 'active'],
                 'required' => true
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description',
+                'label' => 'Beschrijving',
                 'required' => false
             ])
             ->add('dateTime', DateTimeType::class, [
                 'widget' => 'single_text',
-                'label' => 'Date and Time',
+                'label' => 'Datum en Tijd',
                 'attr' => ['class' => 'datepicker'],
                 'required' => true
             ])
             ->add('location', TextType::class, [
-                'label' => 'Location',
+                'label' => 'Locatie',
                 'attr' => ['class' => 'active'],
                 'required' => true
             ])
             ->add('group', EntityType::class, [
                 'class' => Group::class,
-                'placeholder' => 'Kiet een groep',
-                'label' => 'Group that will be present',
+                'placeholder' => 'Kies een groep',
+                'label' => 'Groep aanwezig in vergadering',
                 'attr' => ['data-select'=>'true'],
                 'required' => true
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Save'
+                'label' => 'Opslaan'
             ])
         ;
     }

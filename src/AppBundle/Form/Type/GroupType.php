@@ -39,16 +39,16 @@ class GroupType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Name',
+                'label' => 'Naam',
                 'attr' => ['class' => 'active'],
                 'required' => true
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description',
+                'label' => 'Beschrijving',
                 'required' => false
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Save'
+                'label' => 'Opslaan'
             ])
         ;
     }
