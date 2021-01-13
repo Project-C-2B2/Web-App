@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div class="col s12">
-            <div class="login center-align"><p class="login-text">Sign in</p></div>
+            <div class="login center-align"><p class="login-text">Aanmelden</p></div>
         </div>
     </div>
     {% if error %}
@@ -25,16 +25,16 @@
                 <div style="color: #00a7d0" class="input-field col s12 m6">
                     <img style="padding-right: 10px" class="material-icons prefix filterImg" src="https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png"></img>
                     <input class="white-text" type="text" id="username" name="_username" value="{{ last_username }}" />
-                    <label class="white-text" for="username">Username</label>
+                    <label class="white-text" for="username">Gebruikersnaam</label>
                 </div>
                 <div class="input-field col s12 m6">
                     <img style="padding-right: 10px; width: 43px; height:33px"class="material-icons prefix filterImg" src="https://cdn.onlinewebfonts.com/svg/img_398183.png"></img>
                     <input class="white-text" type="password" id="password" name="_password" />
-                    <label class="white-text" for="password">Password</label>
+                    <label class="white-text" for="password">Wachtwoord</label>
                 </div>
                 <div class="col s12">
                     <input type="hidden" name="_target_path" value="/login/redirect"/>
-                    <button class="btn" type="submit">Sign In</button>
+                    <button class="btn login-btn" type="submit">Aanmelden</button>
                 </div>
             </div>
 
@@ -66,6 +66,10 @@
             margin-right: auto;
             width:100px;
             height:40px;
+
+        }
+        .login-btn{
+            width: 130px;
         }
         .filterImg{
             filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(127deg) brightness(100%) contrast(101%);
