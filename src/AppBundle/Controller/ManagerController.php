@@ -176,8 +176,6 @@ class ManagerController extends Controller
         $this->notificationService->sentCancelledNotification($meeting);
         $this->meetingManager->removeMeeting($meeting);
 
-        $this->addFlash('notice', 'Meeting deleted');
-
         return $this->redirectToRoute('manager-meeting-view');
     }
 

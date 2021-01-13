@@ -18,7 +18,11 @@
                     <td>{{ meeting }}</td>
                     <td>{{ meeting.dateTime |date("H:i d-m-Y") }}</td>
                     <td>{{ meeting.location }}</td>
-                    <td><a class="btn green" href="{{ path('manager-meeting-update', {'id':meeting.id}) }}">Wijzigen</a><a class="btn red" href="{{ path('manager-meeting-delete', {'id':meeting.id}) }}">Verwijderen</a><a class="btn blue" href="{{ path('manager-meeting-attendance' ,{'id':meeting.id}) }}">Aanwezigheid</a></td>
+                    <td>
+                        <a class="btn green" href="{{ path('manager-meeting-update', {'id':meeting.id}) }}">Wijzigen</a>
+                        <a class="btn red" href="{{ path('manager-meeting-delete', {'id':meeting.id}) }}">Verwijderen</a>
+                        <a class="btn blue" href="{{ path('manager-meeting-attendance' ,{'id':meeting.id}) }}">Aanwezigheid</a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
