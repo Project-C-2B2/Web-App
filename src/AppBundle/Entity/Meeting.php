@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 
 use AppBundle\Entity\Meetings\MeetingsInUserAssociation;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -53,6 +54,10 @@ class Meeting
      */
     private $meetingsInUserAssociation;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $maxAttendees;
 
     public function __construct()
     {
@@ -181,6 +186,23 @@ class Meeting
     {
         $this->meetingsInUserAssociation->removeElement($meetingsInUserAssociation);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getMaxAttendees()
+    {
+        return $this->maxAttendees;
+    }
+
+    /**
+     * @param mixed $maxAttendees
+     */
+    public function setMaxAttendees($maxAttendees): void
+    {
+        $this->maxAttendees = $maxAttendees;
+    }
+
 
     public function __toString()
     {

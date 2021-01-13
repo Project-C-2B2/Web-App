@@ -13,6 +13,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -57,6 +58,11 @@ class MeetingType extends AbstractType
                 'label' => 'Locatie',
                 'attr' => ['class' => 'active'],
                 'required' => true
+            ])
+            ->add('maxAttendees', NumberType::class, [
+                'label' => 'Aanwezigen max',
+                'attr' => ['class' => 'active'],
+                'required' => false
             ])
             ->add('group', EntityType::class, [
                 'class' => Group::class,

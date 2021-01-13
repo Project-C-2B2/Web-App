@@ -66,6 +66,7 @@ class EmployeeController extends Controller
     public function meetingAcceptAction($id)
     {
         $meeting = $this->meetingManager->getMeetingById($id);
+
         $meetingInUser = $this->meetingManager->getMeetingInUser($this->getUser(), $meeting);
         $meetingInUser->setState(Meeting::MEETING_ACCEPTED);
         $this->meetingManager->updateMeetingInUser($meetingInUser);
@@ -107,8 +108,11 @@ class EmployeeController extends Controller
 //        only handles data on POST
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $meetingInUser = $this->meetingManager->getMeetingInUser($this->getUser(), $meeting);
+
             $feedback = $form->getData();
             $feedback->setMeeting($meeting);
+            $feedback->setAttending($meetingInUser->getState());
             $feedback->setUser($this->getUser());
 
             $this->addFlash(

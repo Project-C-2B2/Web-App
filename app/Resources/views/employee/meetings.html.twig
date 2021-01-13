@@ -18,6 +18,8 @@
             <tbody>
             {% for meeting in meetings %}
                 {% set feedback = getFeedbackByUserMeeting(app.user, meeting) %}
+                {% set meetingState = getMeetingState(meeting, app.user) %}
+                {% set checkMeeting = checkMeetingAvailability(meeting) %}
                 <tr>
                     <td class="show-meetings">
                         <a href="{{ path('employee-meeting-view', {'id':meeting.id}) }}">{{ meeting }}</a>
@@ -26,18 +28,20 @@
                         {{ meeting.dateTime|date("H:i d-m-Y") }}
                     </td>
                     <td>
-                        {% if feedback is defined or feedback is not null %}
-                            <a class="btn disabled">Evaluatie Afgerond</a>
-                            {% else %}
-                                <a class="btn" href="{{ path('employee-feedback', {'id':meeting.id}) }}">Evaluatie</a>
+                        {% if meetingState is not null and meetingState == 1 and feedback is null %}
+                            <a class="btn" href="{{ path('employee-feedback', {'id':meeting.id}) }}">Evaluatie</a>
+                        {% elseif feedback is defined and feedback is not null %}
+                            <p class="btn disabled">Evaluatie Afgerond</p>
+                        {% else %}
+                            <p class="btn disabled">Niet Deelgenomen</p>
                         {% endif %}
                     </td>
                     <td>
-                        {% set meetingState = getMeetingState(meeting, app.user) %}
-                            <a class="btn" href="{{ path('employee-meeting-accept', {'id':meeting.id}) }}">accepteren</a>
+                            <a class="btn {% if checkMeeting == false %}disabled{% endif %}" href="{{ path('employee-meeting-accept', {'id':meeting.id}) }}">accepteren</a>
                             <a class="btn red" href="{{ path('employee-meeting-decline', {'id':meeting.id}) }}">afwijzen</a>
                     </td>
                     <td>
+
                         {% if meetingState == 1 %}
                             <p>
                                 Geaccepteerd
@@ -49,10 +53,16 @@
                                 <i class="material-icons">close</i>
                             </p>
                         {% else %}
-                            <p>
-                                Uitgenodigd
-                                <i class="material-icons">email</i>
-                            </p>
+                            {% if checkMeeting == false %}
+                                <p>
+                                    Vergadering zit vol
+                                </p>
+                            {% else %}
+                                <p>
+                                    Uitgenodigd
+                                    <i class="material-icons">email</i>
+                                </p>
+                            {% endif %}
                         {% endif %}
                     </td>
                 </tr>

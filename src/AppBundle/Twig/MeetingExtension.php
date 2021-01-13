@@ -24,8 +24,10 @@ class MeetingExtension extends AbstractExtension
     {
         return array(
             new TwigFunction('getMeetingState', array($this, 'getMeetingState')),
+            new TwigFunction('checkMeetingAvailability', array($this, 'checkMeetingAvailability')),
             new TwigFunction('getFeedbackByUserMeeting', array($this, 'getFeedbackByUserMeeting')),
         );
+
     }
 
     public function getMeetingState(Meeting $meeting, User $user)
@@ -41,7 +43,26 @@ class MeetingExtension extends AbstractExtension
         }
     }
 
+
     public function getFeedbackByUserMeeting(User $user, Meeting $meeting) {
         return $this->feedbackManager->getFeedbackByUserAndMeeting($user, $meeting);
     }
+
+    public function checkMeetingAvailability(Meeting $meeting)
+    {
+        $count = 0;
+        foreach($this->meetingManager->getUsersByMeeting($meeting) as $meetingAss)
+        {
+            if($meetingAss->getState()==1)
+            {
+                $count += 1;
+            }
+        }
+        if ($count>=$this->meetingManager->getUsersMaxCap($meeting))
+        {
+            return false;
+        }
+        return true;
+    }
+
 }
