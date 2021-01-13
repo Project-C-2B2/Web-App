@@ -215,23 +215,23 @@ class ManagerController extends Controller
         return $this->redirectToRoute('manager-users-view');
     }
 
-//    /**
-//     * @IsGranted("ROLE_MANAGER")
-//     * @Route("/manager/group/view/{id}", name="manager-group-view")
-//     */
-//    public  function groupAction($id)
-//    {
-//        $groups = $this->meetingManager->getAllGroups();
-//        $user = $this->meetingManager->getUserId($id);
-//        $groupAssociation = $this->meetingManager->getGroupAssociationbyUser($user);
-//
-//
-//        return $this->render('manager/managerGroupManage.html.twig', [
-//            'groups' => $groups,
-//            'groupAss' => $groupAssociation,
-//            'user' => $user,
-//        ]);
-//    }
+    /**
+     * @IsGranted("ROLE_MANAGER")
+     * @Route("/manager/group/view/{id}", name="manager-group-action")
+     */
+    public function groupAction($id)
+    {
+        $groups = $this->meetingManager->getAllGroups();
+        $user = $this->meetingManager->getUserId($id);
+        $groupAssociation = $this->meetingManager->getGroupAssociationbyUser($user);
+
+
+        return $this->render('manager/managerGroupManage.html.twig', [
+            'groups' => $groups,
+            'groupAss' => $groupAssociation,
+            'user' => $user,
+        ]);
+    }
 
     /**
      * @IsGranted("ROLE_MANAGER")
