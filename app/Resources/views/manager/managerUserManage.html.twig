@@ -18,7 +18,7 @@
             <td>ID</td>
             <td>Gebruikersnaam</td>
             <td>Email</td>
-            <td>Bevoegdheid geven aan gebruiker om inteloggen</td>
+            <td>Actief/Geblokkeerd</td>
             <td>Voeg toe aan groep</td>
         </tr>
         </thead>
@@ -32,7 +32,7 @@
                     <td>
                         {% if user.enabled == 1 %}
                             <a class="waves-effect waves-red btn green" href="{{ path('manager-user-enable', {id: user.id}) }}">
-                                Geaccepteerd
+                                Geactiveerd
                             </a>
                         {% else %}
                             <a class="waves-effect waves-green btn red" href="{{ path('manager-user-enable', {id: user.id}) }}">
