@@ -55,15 +55,16 @@ class ManagerController extends Controller
 
     /**
     * @IsGranted("ROLE_MANAGER")
-    * @Route("/manager/feedback/view/{user}", name="manager-feedback-view")
+    * @Route("/manager/meeting/{meetingId}/feedback/view/{user}", name="manager-feedback-view")
     */
-    public function managerFeedbackView($user)
+    public function managerFeedbackView($meetingId, $user)
     {
         $user = $this->meetingManager->getUserId($user);
-        $feedback = $this->feedbackManager->getFeedbackByUser($user);
+        $meeting = $this->meetingManager->getMeetingById($meetingId);
+        $feedback = $this->feedbackManager->getFeedbackByUserAndMeeting($user, $meeting);
 
         return $this->render('manager/managerFeedbackView.html.twig', [
-            'feedbacks' => $feedback,
+            'feedback' => $feedback,
         ]);
     }
 
@@ -260,12 +261,10 @@ class ManagerController extends Controller
     public function meetingAttendaceAction($id){
         $meeting = $this->meetingManager->getMeetingById($id);
         $attendees = $this->meetingManager->getUsersByMeeting($meeting);
-        $feedbacks = $this->feedbackManager->getAllFeedback();
 
         return $this->render('manager/managerMeetingAttendance.html.twig', [
             'meeting' => $meeting,
-            'attendees' => $attendees,
-            'feedbacks' => $feedbacks
+            'attendees' => $attendees
         ]);
     }
 

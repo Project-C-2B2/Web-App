@@ -3,30 +3,31 @@
 {% block content %}
     <h2 class="center white-text">Feedback </h2>
     <table class="container white-text" >
-        <thead>
-        <tr>
-            <td>ID</td>
-            <td>Attending</td>
-            <td>Feedback</td>
-            <td>Rating</td>
-            <td>User</td>
-            <td>Meeting</td>
-        </thead>
         <tbody>
-        {% for feedback in feedbacks %}
             <tr>
-                <td>{{ feedback.id }}</td>
+                <td>Attending :</td>
                 {% if feedback.attending == 1%}
-                    <td>Present</td>
+                    <td style="color: #69F0AE;">Present</td>
                 {% else%}
-                    <td>Absent</td>
+                    <td style="color: red;">Absent</td>
                 {% endif %}
+            </tr>
+            <tr>
+                <td>Feedback :</td>
                 <td>{{ feedback.feedback }}</td>
-                <td>{{ feedback.rating }}</td>
+            </tr>
+            <tr>
+                <td>Rating :</td>
+                <td>{{ feedback.rating }} van de 10</td>
+            </tr>
+            <tr>
+                <td>User :</td>
                 <td>{{ feedback.user.username }}</td>
+            </tr>
+            <tr>
+                <td>Meeting :</td>
                 <td>{{ feedback.meeting.name }}</td>
             </tr>
-        {% endfor %}
         </tbody>
     </table>
 {% endblock %}
