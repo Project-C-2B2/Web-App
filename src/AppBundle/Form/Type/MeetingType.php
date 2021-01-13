@@ -60,7 +60,7 @@ class MeetingType extends AbstractType
                 'required' => true
             ])
             ->add('maxAttendees', NumberType::class, [
-                'label' => 'Aanwezigen max',
+                'label' => 'Maximale capaciteit aanwezigen',
                 'attr' => ['class' => 'active'],
                 'required' => false
             ])

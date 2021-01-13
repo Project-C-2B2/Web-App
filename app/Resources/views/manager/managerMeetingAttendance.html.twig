@@ -8,7 +8,7 @@
             <tr>
                 <th>Gebruikersnaam</th>
                 <th>Aanwezigheid</th>
-                <th>Feedback</th>
+                <th>Evaluatie</th>
                 <th>Acceptatie</th>
             </tr>
         </thead>
@@ -19,7 +19,7 @@
                 <tr>
                     <td>{{ attendee.user }}</td>
                     <td><a class="btn green" href="{{ path("manager-meeting-accept", {id:meeting.id, userid:attendee.user.id}) }}">Aanwezig</a><a class="btn red" href="{{ path("manager-meeting-decline", {id:meeting.id, userid:attendee.user.id}) }}">Afwezig</a></td>
-                    <td><a class="btn blue {% if feedback is not defined or feedback is null %}disabled{% endif %}" href="{{ path('manager-feedback-view', {meetingId: meeting.id, user: attendee.user.id}) }}">Feedback</a></td>
+                    <td><a class="btn blue {% if feedback is not defined or feedback is null %}disabled{% endif %}" href="{{ path('manager-feedback-view', {meetingId: meeting.id, user: attendee.user.id}) }}">Evaluatie</a></td>
                     {% if attendee.state == 1 %}<td>Aanwezig</td>
                     {% else %}<td>Afwezig</td>
                         {% endif %}
