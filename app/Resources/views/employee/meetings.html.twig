@@ -17,15 +17,20 @@
             </thead>
             <tbody>
             {% for meeting in meetings %}
+                {% set feedback = getFeedbackByUserMeeting(app.user, meeting) %}
                 <tr>
                     <td class="show-meetings">
-                        {{ meeting }}
+                        <a href="{{ path('employee-meeting-view', {'id':meeting.id}) }}">{{ meeting }}</a>
                     </td>
                     <td class="show-meetings">
                         {{ meeting.dateTime|date("H:i d-m-Y") }}
                     </td>
                     <td>
-                        <a class="btn {% for feedback in feedbacks %}{% if feedback.meeting == meeting %}disabled{% endif %}{% endfor %}" href="{{ path('employee-feedback', {'id':meeting.id}) }}">feedback</a>
+                        {% if feedback is defined or feedback is not null %}
+                            <a class="btn disabled">Evaluatie Afgerond</a>
+                            {% else %}
+                                <a class="btn" href="{{ path('employee-feedback', {'id':meeting.id}) }}">Evaluatie</a>
+                        {% endif %}
                     </td>
                     <td>
                         {% set meetingState = getMeetingState(meeting, app.user) %}
@@ -42,6 +47,11 @@
                             <p>
                                 Afgewezen
                                 <i class="material-icons">close</i>
+                            </p>
+                        {% else %}
+                            <p>
+                                Uitgenodigd
+                                <i class="material-icons">email</i>
                             </p>
                         {% endif %}
                     </td>

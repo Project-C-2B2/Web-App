@@ -43,7 +43,19 @@ class EmployeeController extends Controller
 
         return $this->render('employee/meetings.html.twig', [
             'meetings' => $meetings,
-            'feedbacks' => $this->feedbackManager->getFeedbackByUser($this->getUser())
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_EMPLOYEE")
+     * @Route("/employee/meeting/{id}", name="employee-meeting-view")
+     */
+    public function meetingViewAction($id)
+    {
+        $meeting = $this->meetingManager->getMeetingById($id);
+
+        return $this->render('employee/meetingDetail.html.twig', [
+            'meeting' => $meeting,
         ]);
     }
 

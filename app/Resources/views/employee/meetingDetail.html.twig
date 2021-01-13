@@ -1,0 +1,53 @@
+{% extends 'baseContent.html.twig' %}
+
+{% set feedback = getFeedbackByUserMeeting(app.user, meeting) %}
+{% set meetingState = getMeetingState(meeting, app.user) %}
+
+{% block content %}
+    <h2>{{ meeting.name }}</h2>
+    <table class="container white-text" >
+        <tbody>
+        <tr>
+            <td>Omschrijving :</td>
+            <td>{{ meeting.description }}</td>
+        </tr>
+        <tr>
+            <td>Datum van vergadering :</td>
+            <td>{{ meeting.dateTime|date("H:i d-m-Y") }}</td>
+        </tr>
+        <tr>
+            <td>Locatie van vergadering :</td>
+            <td>{{ meeting.location }}</td>
+        </tr>
+        <tr>
+            <td>Groep :</td>
+            <td>{{ meeting.group}}</td>
+        </tr>
+        <tr>
+            <td>Acties :</td>
+            <td>
+
+                {% if meetingState == 1 %}
+                    <p>
+                        Geaccepteerd
+                        <i class="material-icons">check</i>
+                    </p>
+                {% elseif meetingState == -1 %}
+                    <p>
+                        Afgewezen
+                        <i class="material-icons">close</i>
+                    </p>
+                {% else %}
+                    <a class="btn" href="{{ path('employee-meeting-accept', {'id':meeting.id}) }}">accepteren</a>
+                    <a class="btn red" href="{{ path('employee-meeting-decline', {'id':meeting.id}) }}">afwijzen</a>
+                {% endif %} |
+                {% if feedback is defined or feedback is not null %}
+                    <a class="btn disabled">Evaluatie Afgerond</a>
+                {% else %}
+                    <a class="btn" href="{{ path('employee-feedback', {'id':meeting.id}) }}">Evaluatie</a>
+                {% endif %}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}

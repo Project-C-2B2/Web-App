@@ -113,11 +113,11 @@ class GuestController extends Controller
 
                 $this->addFlash(
                     'notice',
-                    'Account is created, but the manager needs to enable the account, please wait'
+                    'Account is aangemaakt, maar moet nog geactiveerd worden door een maanger, wacht a.u.b.'
                 );
                 return $this->redirectToRoute('login');
             } else {
-                $msg = 'Account already in use';
+                $msg = 'Account is al ingebruik';
             }
         }
         return $this->render(

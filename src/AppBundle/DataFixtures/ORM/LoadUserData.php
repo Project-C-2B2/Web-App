@@ -46,7 +46,7 @@ class LoadUserData extends Fixture implements DependentFixtureInterface
         $user = new User();
         $user->setEmail('natnaelt@email.com');
         $user->setPlainPassword('natnael');
-        $user->setRoles(['ROLE_MANAGER']);
+        $user->setRoles(['ROLE_COURSELEADER']);
         $user->setEnabled(true);
         $user->addGroupsInUserAssociation(new GroupsInUserAssociation($user, $manager->getRepository(Group::class)->findOneBy(['name'=>'Leraar Groep'])));
         $user->addGroupsInUserAssociation(new GroupsInUserAssociation($user, $manager->getRepository(Group::class)->findOneBy(['name'=>'Locatie: Amsterdam'])));
