@@ -2,16 +2,17 @@
 
 {% block content %}
     <div class="current-page">
-        <h2>Meetings</h2>
+        <h2>Vergaderingen</h2>
     </div>
     <div class="meeting-feedback">
         <table>
             <thead>
             <tr>
-                <th><h4>Meeting</h4></th>
+                <th><h4>Vergadering</h4></th>
                 <th><h4>Datum en Tijd</h4></th>
-                <th><h4>Feedback</h4></th>
-                <th><h4>Actions</h4></th>
+                <th><h4>Evaluatie</h4></th>
+                <th><h4>Acties</h4></th>
+                <th><h4>Status</h4></th>
             </tr>
             </thead>
             <tbody>
@@ -28,26 +29,20 @@
                     </td>
                     <td>
                         {% set meetingState = getMeetingState(meeting, app.user) %}
-                        {% if meetingState is null %}
-                            <a class="btn" href="{{ path('employee-meeting-accept', {'id':meeting.id}) }}">accept</a>
-                            <a class="btn red" href="{{ path('employee-meeting-decline', {'id':meeting.id}) }}">decline</a>
-                        {% else %}
-                            {% if meetingState == 1 %}
-                                <p>
-                                    Meeting Accepted
-
-                                    <i class="material-icons">check</i>
-                                    <a class="btn" href="{{ path('employee-meeting-accept', {'id':meeting.id}) }}">accept</a>
-                                    <a class="btn red" href="{{ path('employee-meeting-decline', {'id':meeting.id}) }}">decline</a>
-                                </p>
-                            {% elseif meetingState == -1 %}
-                                <p>
-                                    Meeting Declined
-                                    <i class="material-icons">close</i>
-                                    <a class="btn" href="{{ path('employee-meeting-accept', {'id':meeting.id}) }}">accept</a>
-                                    <a class="btn red" href="{{ path('employee-meeting-decline', {'id':meeting.id}) }}">decline</a>
-                                </p>
-                            {% endif %}
+                            <a class="btn" href="{{ path('employee-meeting-accept', {'id':meeting.id}) }}">accepteren</a>
+                            <a class="btn red" href="{{ path('employee-meeting-decline', {'id':meeting.id}) }}">afwijzen</a>
+                    </td>
+                    <td>
+                        {% if meetingState == 1 %}
+                            <p>
+                                Geaccepteerd
+                                <i class="material-icons">check</i>
+                            </p>
+                        {% elseif meetingState == -1 %}
+                            <p>
+                                Afgewezen
+                                <i class="material-icons">close</i>
+                            </p>
                         {% endif %}
                     </td>
                 </tr>
