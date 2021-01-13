@@ -204,11 +204,11 @@ class ManagerController extends Controller
         $enable = $this->meetingManager->getUserId($id)->isEnabled();
         if ($enable) {
             $this->meetingManager->getUserId($id)->setEnabled(!$enable);
-            $this->addFlash('succesDIS', 'You have Disabled the user');
+            $this->addFlash('succesDIS', 'Gebruiker staat nu non-actief');
         }
         else {
             $this->meetingManager->getUserId($id)->setEnabled(!$enable);
-            $this->addFlash('succesEN','You have Enabled the user');
+            $this->addFlash('succesEN','Gebruiker staat nu actief');
         }
         $em->flush();
 
@@ -247,7 +247,7 @@ class ManagerController extends Controller
 
         $groupAssociation = new GroupsInUserAssociation($user, $group);
 
-        $this->addFlash('succes', 'You have add User: ' .$user. ' to Group: ' .$groupid);
+        $this->addFlash('succesvol', 'Gebruiker: ' .$user. ' zit in groep: ' .$groupid);
 
         $em->persist($groupAssociation);
         $em->flush();
