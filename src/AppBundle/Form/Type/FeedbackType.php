@@ -34,11 +34,20 @@ class FeedbackType extends AbstractType
                 'label' => 'Feedback',
                 ])
 
-            ->add('rating', RangeType::class, [
-                'attr' => [
-                    'min' => 1,
-                    'max' => 10
-                ]
+            ->add('rating', ChoiceType::class, [
+                'choices' => array(
+                    '1' => 1,
+                    '2' => 2,
+                    '3' => 3,
+                    '4' => 4,
+                    '5' => 5,
+                    '6' => 6,
+                    '7' => 7,
+                    '8' => 8,
+                    '9' => 9,
+                    '10' => 10,
+                ),
+                'expanded' => true,
             ]);
     }
 

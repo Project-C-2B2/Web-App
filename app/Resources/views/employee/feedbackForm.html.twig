@@ -19,8 +19,9 @@
                     {{ form_widget(feedbackForm.attending, {'attr': {'class': 'white col s12'}}) }}
                     <br>
                     {{ form_row(feedbackForm.feedback, {'attr': {'class': 'white-text'}}) }}
-                    {{ form_row(feedbackForm.rating) }}
-                    <button type="submit" class="btn btn-primary">Opslaan</button>
+                    {{ form_label(feedbackForm.rating) }}
+                    {{ form_widget(feedbackForm.rating) }}
+                    <button type="submit" class="btn btn-primary" style="margin-top: 20px">Opslaan</button>
                 {{ form_end(feedbackForm) }}
             </div>
         </div>
