@@ -34,10 +34,13 @@
                     </td>
                     <td>
                         {% set meetingState = getMeetingState(meeting, app.user) %}
+
                             <a class="btn" href="{{ path('employee-meeting-accept', {'id':meeting.id}) }}">accepteren</a>
                             <a class="btn red" href="{{ path('employee-meeting-decline', {'id':meeting.id}) }}">afwijzen</a>
                     </td>
                     <td>
+                        {% set checkMeeting = checkMeetingAvailability(meeting) %}
+
                         {% if meetingState == 1 %}
                             <p>
                                 Geaccepteerd
@@ -48,11 +51,16 @@
                                 Afgewezen
                                 <i class="material-icons">close</i>
                             </p>
+                        {% elseif checkMeeting == false %}
+                            <p>
+                                Meeting full, Capacity reached
+                            </p>
                         {% else %}
                             <p>
                                 Uitgenodigd
                                 <i class="material-icons">email</i>
                             </p>
+
                         {% endif %}
                     </td>
                 </tr>

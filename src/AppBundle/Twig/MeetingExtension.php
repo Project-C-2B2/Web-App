@@ -43,6 +43,7 @@ class MeetingExtension extends AbstractExtension
         }
     }
 
+
     public function getFeedbackByUserMeeting(User $user, Meeting $meeting) {
         return $this->feedbackManager->getFeedbackByUserAndMeeting($user, $meeting);
     }
