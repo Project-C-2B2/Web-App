@@ -108,8 +108,11 @@ class EmployeeController extends Controller
 //        only handles data on POST
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $meetingInUser = $this->meetingManager->getMeetingInUser($this->getUser(), $meeting);
+
             $feedback = $form->getData();
             $feedback->setMeeting($meeting);
+            $feedback->setAttending($meetingInUser->getState());
             $feedback->setUser($this->getUser());
 
             $this->addFlash(
