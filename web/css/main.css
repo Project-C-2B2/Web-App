@@ -3,14 +3,6 @@
     padding: 0;
     font-family: sans-serif;
 }
-.wrapper{
-    height: 100vh;
-    background-image: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.6)),url("../images/4UZAlQ.jpg");
-    background-position: center;
-    background-size: cover;
-    overflow-x: hidden;
-    position: relative;
-}
 .nav-bar{
     display: flex;
     padding: 40px 120px;

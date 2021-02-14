@@ -244,7 +244,7 @@ class ManagerController extends Controller
 
 
         $groupAssociation = new GroupsInUserAssociation($user, $group);
-
+        $this->meetingManager->getAttendeeFromGroupByMeeting($user, $group);
         $this->addFlash('succesvol', 'Gebruiker: ' .$user. ' zit in groep: ' .$groupid);
 
         $em->persist($groupAssociation);

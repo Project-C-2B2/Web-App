@@ -29,7 +29,7 @@ class EmployeeController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('Employee/homepage.html.twig', [
+        return $this->render('employee/homepage.html.twig', [
         ]);
     }
 

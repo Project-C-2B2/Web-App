@@ -94,6 +94,19 @@ class MeetingManager
         }
     }
 
+    public function getAttendeeFromGroupByMeeting(User $user ,Group $group) {
+        $meetings = $this->em->getRepository(Meeting::class)->findBy(array('group' => $group));
+        foreach ($meetings as $meeting) {
+            $meetingInUser = $this->em->getRepository(MeetingsInUserAssociation::class)->findOneBy(['user' => $user, 'meeting' => $meeting]);
+            if (!$meetingInUser)
+                $meetingInUser = new MeetingsInUserAssociation($user, $meeting);
+            $meeting->addMeetingsInUserAssociation($meetingInUser);
+            $this->em->persist($meetingInUser);
+            $this->em->persist($meeting);
+            $this->em->flush();
+        }
+    }
+
     public function updateGroup(Group $group){
         $group->setName($group->getName());
         $group->setDescription($group->getDescription());
